@@ -1,0 +1,44 @@
+deskop
+<div class="text3" style="font-size: calc(12px + 0.3vw); font-weight: 400; padding: 2vw 0;">Our family serving yours for over 40 years!</div>
+<a class="hover-1" style="width: fit-content; border-radius: 35px; background-image: linear-gradient(to right, #163CF7, #27ABE1); text-align: center; font-size: 1vw; padding: 0.5vw 2.2vw; color: #fff;" href="https://madisonmotorsales.goxee.com/?showall=true">View Inventory</a></div>
+
+mobile
+<a class="hover-1" style="position: absolute; top: 81%; left: 50%; transform: translate(-50%, 0); width: fit-content; border-radius: 35px; background: #fff; text-align: center; font-size: 4vw; padding: 1.5vw 5.2vw; color: #27abe1;" href="https://madisonmotorsales.goxee.com/?showall=true">View Inventory</a>
+
+.hover-1:hover {
+  /* background: #163CF7!important; */
+  background: -webkit-linear-gradient(
+    to right,
+    #163cf7 0%,
+    #27abe1 50%
+  ) !important;
+  background: -moz-linear-gradient(
+    to right,
+    #163cf7 0%,
+    #27abe1 50%
+  ) !important;
+  background: linear-gradient(to right, #163cf7 0%, #27abe1 50%) !important;
+  /* background-clip: text!important;
+    -webkit-background-clip: text!important;
+    -webkit-text-fill-color: transparent!important; */
+}
+desktop
+<a class="hover-2" style="width: fit-content; border-radius: 35px; background: #fff; text-align: center; font-size: 1vw; padding: 0.5vw 2.2vw; color: #27abe1;" href="https://www.madisonmotorsale.com/content.php?id=5597">Get Financing</a>
+mobile
+<a class="hover-2" style="position: absolute; top: 85%; left: 50%; transform: translate(-50%, 0); width: fit-content; border-radius: 35px; background: #fff; text-align: center; font-size: 4vw; padding: 1.5vw 5.2vw; color: #27abe1;" href="https://www.madisonmotorsale.com/content.php?id=5597">Get Financing</a></div>
+
+.hover-2:hover {
+  background-image: linear-gradient(to right, #163cf7, #27abe1) !important;
+  color: #fff !important;
+}
+
+desktop
+<a class="hover-3" style="width: fit-content; border-radius: 35px; background: #fff; text-align: center; font-size: 1vw; padding: 0.5vw 3.2vw; color: #27abe1;" href="https://madisonmotorsales.goxee.com/contact.php"> Contact Us</a>
+
+mobile
+<a class="hover-3" style="width: fit-content; border-radius: 35px; background: #fff; text-align: center; font-size: 4vw; padding: 1.5vw 9.2vw; color: #27abe1;" href="https://madisonmotorsales.goxee.com/contact.php">Contact Us</a>
+
+.hover-3:hover {
+  background: #163cf7 !important;
+  color: #fff !important;
+}
