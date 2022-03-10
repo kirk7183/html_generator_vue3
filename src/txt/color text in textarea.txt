@@ -1,0 +1,55 @@
+  test() {
+      // const string =
+      //   "Starting |this should be colored| there may be more |colored too|";
+      const string = this.htmlRaw;
+      const result = string.replace(
+        // eslint-disable-next-line
+        /\>\b([^<]+)\b\</g,
+        '<span class="colored">$1</span>'
+      );
+
+      const container = document.getElementById("source");
+      container.innerHTML = result;
+      console.log(result);
+      console.log(container);
+
+      // eslint-disable-next-line
+      //   const regex = /\>\b([^<]+)\b\</g;
+      //   //   const str = `Starting >dsadsadsadsadds< there may be more >colored too<`;
+      //   const str = this.htmlRaw;
+      //   let m;
+
+      //   while ((m = regex.exec(str)) !== null) {
+      //     // This is necessary to avoid infinite loops with zero-width matches
+      //     if (m.index === regex.lastIndex) {
+      //       regex.lastIndex++;
+      //     }
+
+      //     // The result can be accessed through the `m`-variable.
+      //     m.forEach((match, groupIndex) => {
+      //       console.log(`Found match, group ${groupIndex}: ${match}`);
+      //     });
+      //   }
+    },
+
+
+
+ watch: {
+    htmlRaw() {
+      this.htmlRaw = this.htmlRaw.replace("&lt;", "<");
+      this.htmlRaw = this.htmlRaw.replace("&gt;", ">");
+      //   this.htmlRaw = this.htmlRaw
+      //     .replace(
+      //        /\>\b([^<]+)\b\</g
+      this.test();
+
+      // />\b([^|]+)\b</g,
+
+      // (fullMatch, group1) => {
+      //   console.log(fullMatch);
+      //   console.log(group1);
+      //   //   console.log(value);
+      //   return `<span class="colored">${group1}</span>`;
+      // }
+      // ();
+    },}

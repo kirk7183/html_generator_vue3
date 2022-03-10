@@ -1,5 +1,5 @@
 <template>
-  <!--DESKTOP OBJ1 left text-->
+  <!--DESKTOP OBJ2 center text-->
   <div
     class="gpm-hfm"
     id="DESKTOP_OBJ1_left_text"
@@ -10,10 +10,11 @@
       class="wrapper"
       style="
         position: absolute;
-        top: 40%;
-        left: 12.5%;
-        transform: translate(-12.5%, -28%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         color: #fff;
+        text-align: center;
       "
     >
       <div
@@ -41,8 +42,6 @@
         class="wrapper-text"
         style="
           width: 100%;
-          display: flex;
-          justify-content: space-between;
           margin-bottom: 1vw;
           font-size: calc(8px + 1vw);
           font-family: 'Montserrat', sans-serif;
@@ -57,17 +56,20 @@
           class="buttonMain button-1 hover-1"
           style="
             display: inline-block;
-            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            width: 30%;
             text-align: center;
             font-size: calc(1px + 1vw);
             padding: 0.5vw 0.2vw;
           "
-          >{{ textButton }}
+        >
+          {{ textButton }}
         </span>
       </a>
     </div>
   </div>
-  <!-- /DESKTOP OBJ1-->
+  <!-- /DESKTOP OBJ2-->`,
 </template>
 
 <script>

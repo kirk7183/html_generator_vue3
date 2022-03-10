@@ -6,7 +6,11 @@
         <!--SELECT THEME-->
         <label for="themeSelect">Please select theme by name:</label>
         <br />
-        <select name="themeSelect" @change="themeSelectMethod($event)">
+        <select
+          name="themeSelect"
+          v-model="themeSelected"
+          @change="themeSelectMethod($event)"
+        >
           <option disabled selected>-- Select the theme --</option>
           <option
             v-for="(singleTheme, i) in themes"
@@ -150,7 +154,8 @@
 
     <!--PREVIEW-->
     <div id="preview">
-      <componentHtml
+      <component
+        :is="themeSelected"
         :pictureLink="pictureLink"
         :textWelcome="textWelcome"
         :textTitle="textTitle"
@@ -158,20 +163,33 @@
         :textButton="textButton"
         :buttonLink="buttonLink"
       />
+      <!-- <componentHtml
+        :pictureLink="pictureLink"
+        :textWelcome="textWelcome"
+        :textTitle="textTitle"
+        :textSubtitle="textSubtitle"
+        :textButton="textButton"
+        :buttonLink="buttonLink"
+      /> -->
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import componentHtml from "@/views/themes/theme-1/ComponentHtml.vue";
+import Theme_1 from "@/views/themes/theme-1/Theme-1.vue";
+import Theme_2 from "@/views/themes/theme-1/Theme-2.vue";
+import Theme_3 from "@/views/themes/theme-1/Theme-3.vue";
 export default {
   name: "SingleBanner",
   components: {
-    componentHtml,
+    Theme_1,
+    Theme_2,
+    Theme_3,
   },
   data() {
     return {
+      // component: "Theme_1",
       htmlRaw: "",
       pictureLink:
         "http://benitoscarsalecorp.goxee.com/cloud/data/files/1747/My Files/0912-benitoscarsalecorp/banner1_bg_ver3.png",
@@ -180,7 +198,7 @@ export default {
       textSubtitle: "Dreaming about your NEXT CAR?",
       textButton: "View Inventory",
       buttonLink: "",
-      themeSelected: "",
+      themeSelected: "Theme_1",
       bannerSelected: "",
       picturePositionSelected: "",
       links: [
@@ -225,7 +243,8 @@ export default {
           link: "/contact.php",
         },
       ],
-      themes: ["Theme-1", "Theme-2", "Theme-3"],
+      //NEED TO ADD MORE
+      themes: ["Theme_1", "Theme_2", "Theme_3"],
     };
   },
   mounted() {
@@ -238,27 +257,12 @@ export default {
     // console.log(virtualDoc);
     // this.html = virtualDoc;
     // console.log(new XMLSerializer().serializeToString(asd));
-    this.updateTextArea();
     // console.log(new XMLSerializer().serializeToString(ddd));
   },
   watch: {
     htmlRaw() {
       this.htmlRaw = this.htmlRaw.replace("&lt;", "<");
       this.htmlRaw = this.htmlRaw.replace("&gt;", ">");
-      //   this.htmlRaw = this.htmlRaw
-      //     .replace(
-      //        /\>\b([^<]+)\b\</g
-      this.test();
-
-      // />\b([^|]+)\b</g,
-
-      // (fullMatch, group1) => {
-      //   console.log(fullMatch);
-      //   console.log(group1);
-      //   //   console.log(value);
-      //   return `<span class="colored">${group1}</span>`;
-      // }
-      // ();
     },
     pictureLink(value) {
       this.pictureLink = value;
@@ -286,39 +290,6 @@ export default {
     },
   },
   methods: {
-    test() {
-      const string =
-        "Starting |this should be colored| there may be more |colored too|";
-      const result = string.replace(
-        // eslint-disable-next-line
-        /\>\b([^<]+)\b\</g,
-        '<span class="colored">$1</span>'
-      );
-
-      const container = document.getElementById("container");
-      container.innerHTML = result;
-      console.log(result);
-      console.log(container);
-
-      // eslint-disable-next-line
-      //   const regex = /\>\b([^<]+)\b\</g;
-      //   //   const str = `Starting >dsadsadsadsadds< there may be more >colored too<`;
-      //   const str = this.htmlRaw;
-      //   let m;
-
-      //   while ((m = regex.exec(str)) !== null) {
-      //     // This is necessary to avoid infinite loops with zero-width matches
-      //     if (m.index === regex.lastIndex) {
-      //       regex.lastIndex++;
-      //     }
-
-      //     // The result can be accessed through the `m`-variable.
-      //     m.forEach((match, groupIndex) => {
-      //       console.log(`Found match, group ${groupIndex}: ${match}`);
-      //     });
-      //   }
-    },
-
     updateTextArea() {
       var htmlPreview = document.getElementById("DESKTOP_OBJ1_left_text");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
@@ -329,8 +300,8 @@ export default {
     //   console.log(this.linkSelected);
     // },
     themeSelectMethod(event) {
-      this.themeSelect = event.target.value;
-      console.log(this.themeSelect);
+      this.themeSelected = event.target.value;
+      this.updateTextArea();
     },
   },
 };

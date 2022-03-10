@@ -1,5 +1,5 @@
 # html-generator-v2
-
+Vue v3
 ## Project setup
 ```
 npm install
