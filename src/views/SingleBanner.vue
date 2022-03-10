@@ -43,6 +43,7 @@
           <option disabled selected>-- Select picture position --</option>
         </select>
       </div>
+
       <div class="groupWrapper div2">
         <!--WELCOME TEXT-->
         <label for="textWelcome">Please enter welcome text:</label>
@@ -52,8 +53,16 @@
           name="textWelcome"
           minlength="3"
           maxlength="99"
-          size="50"
+          size="40"
           v-model="textWelcome"
+        />
+        <!--WELCOME TEXT FONT SIZE-->
+        <input
+          class="input-number"
+          type="number"
+          min="1"
+          max="50"
+          v-model="textWelcomeFontSize"
         />
         <br />
 
@@ -65,8 +74,16 @@
           name="textTitle"
           minlength="3"
           maxlength="99"
-          size="50"
+          size="40"
           v-model="textTitle"
+        />
+        <!--TITLE TEXT FONT SIZE-->
+        <input
+          class="input-number"
+          type="number"
+          min="1"
+          max="50"
+          v-model="textTitleFontSize"
         />
         <br />
 
@@ -78,8 +95,17 @@
           name="textSubtitle"
           minlength="3"
           maxlength="99"
-          size="50"
+          size="40"
           v-model="textSubtitle"
+          style="display: inline-block"
+        />
+        <!--SUBTITLE FONT SIZE-->
+        <input
+          class="input-number"
+          type="number"
+          min="1"
+          max="50"
+          v-model="textSubtitleFontSize"
         />
       </div>
 
@@ -142,13 +168,22 @@
       </div>
       <div class="groupWrapper div4">
         <!--BUTTONS-->
-        <button class="button-right" @click="doLivePreview()">
-          Generate CODE
-        </button>
-        <button id="copyAll">Copy Code</button>
+        <div class="button-wrapper">
+          <button class="button-right" @click="doLivePreview()">
+            Generate CODE
+          </button>
+          <button id="copyAll" @click="selectCopy()">Copy Code</button>
+        </div>
         <br />
         <!--TEXTAREA-->
-        <textarea id="source" cols="50" rows="12" v-model="htmlRaw"> </textarea>
+        <textarea
+          id="source"
+          ref="textArea"
+          cols="50"
+          rows="12"
+          v-model="htmlRaw"
+        >
+        </textarea>
       </div>
     </div>
 
@@ -158,19 +193,14 @@
         :is="themeSelected"
         :pictureLink="pictureLink"
         :textWelcome="textWelcome"
+        :textWelcomeFontSize="textWelcomeFontSize"
         :textTitle="textTitle"
+        :textTitleFontSize="textTitleFontSize"
         :textSubtitle="textSubtitle"
+        :textSubtitleFontSize="textSubtitleFontSize"
         :textButton="textButton"
         :buttonLink="buttonLink"
       />
-      <!-- <componentHtml
-        :pictureLink="pictureLink"
-        :textWelcome="textWelcome"
-        :textTitle="textTitle"
-        :textSubtitle="textSubtitle"
-        :textButton="textButton"
-        :buttonLink="buttonLink"
-      /> -->
     </div>
   </div>
 </template>
@@ -192,10 +222,13 @@ export default {
       // component: "Theme_1",
       htmlRaw: "",
       pictureLink:
-        "http://benitoscarsalecorp.goxee.com/cloud/data/files/1747/My Files/0912-benitoscarsalecorp/banner1_bg_ver3.png",
+        "https://zipstarautosales.goxee.com/cloud/data/files/1747/My Files/0919-zipstarautosales/banner1_bg_ver1.png",
       textWelcome: "Welcome to",
+      textWelcomeFontSize: 10,
       textTitle: "BENITOS CAR SALE",
+      textTitleFontSize: 34,
       textSubtitle: "Dreaming about your NEXT CAR?",
+      textSubtitleFontSize: 8,
       textButton: "View Inventory",
       buttonLink: "",
       themeSelected: "Theme_1",
@@ -248,16 +281,7 @@ export default {
     };
   },
   mounted() {
-    // var asd = document.getElementById("home2");
-    // this.html = asd.innerHTML;
-    // const parser = new DOMParser();
-    // const virtualDoc = parser.parseFromString(asd, "text/html");
-    // htmlString.getElementById("someid").value;
-    // virtualDoc.getElementById("home2").value;
-    // console.log(virtualDoc);
-    // this.html = virtualDoc;
-    // console.log(new XMLSerializer().serializeToString(asd));
-    // console.log(new XMLSerializer().serializeToString(ddd));
+    this.updateTextArea();
   },
   watch: {
     htmlRaw() {
@@ -272,12 +296,24 @@ export default {
       this.textWelcome = value;
       this.updateTextArea();
     },
+    textWelcomeFontSize(value) {
+      this.textWelcomeFontSize = value;
+      this.updateTextArea();
+    },
     textTitle(value) {
       this.textTitle = value;
       this.updateTextArea();
     },
+    textTitleFontSize(value) {
+      this.textTitleFontSize = value;
+      this.updateTextArea();
+    },
     textSubtitle(value) {
       this.textSubtitle = value;
+      this.updateTextArea();
+    },
+    textSubtitleFontSize(value) {
+      this.textSubtitleFontSize = value;
       this.updateTextArea();
     },
     textButton(value) {
@@ -291,14 +327,14 @@ export default {
   },
   methods: {
     updateTextArea() {
-      var htmlPreview = document.getElementById("DESKTOP_OBJ1_left_text");
+      var htmlPreview = document.getElementById("theme");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
     },
-    // buttonLinkSelectMethod(event) {
-    //   // console.log(event.target.value);
-    //   this.linkSelected = event.target.value;
-    //   console.log(this.linkSelected);
-    // },
+    selectCopy() {
+      this.$refs.textArea.select();
+      document.execCommand("copy");
+    },
+
     themeSelectMethod(event) {
       this.themeSelected = event.target.value;
       this.updateTextArea();
@@ -314,11 +350,6 @@ export default {
 html {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-}
-
-.wrapper {
-  /* font-weight: 500;
-  padding: 20px; */
 }
 
 .groupWrapper {
@@ -369,7 +400,7 @@ select {
   /* width: 70%; */
   /* margin-left: auto; */
 }
-.colored {
-  color: red;
+.input-number {
+  margin-left: 5px;
 }
 </style>

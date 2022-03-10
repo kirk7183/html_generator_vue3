@@ -2,7 +2,7 @@
   <!--DESKTOP OBJ1 left text-->
   <div
     class="gpm-hfm"
-    id="DESKTOP_OBJ1_left_text"
+    id="theme"
     style="position: relative; font-family: 'Montserrat', sans-serif"
   >
     <img style="display: block; width: 100%" :src="pictureLink" alt="" />
@@ -14,6 +14,7 @@
         left: 12.5%;
         transform: translate(-12.5%, -28%);
         color: #fff;
+        text-align: left;
       "
     >
       <div
@@ -24,6 +25,7 @@
           font-weight: 400;
           text-align: left;
         "
+        :style="WelcomeFontSize"
       >
         {{ textWelcome }}
       </div>
@@ -35,6 +37,7 @@
           font-weight: 900;
           letter-spacing: 2px;
         "
+        :style="TitleFontSize"
       >
         {{ textTitle }}
       </div>
@@ -51,17 +54,17 @@
           font-style: italic;
         "
       >
-        <div class="wr-text1">{{ textSubtitle }}</div>
+        <div class="wr-text1" :style="SubtitleFontSize">{{ textSubtitle }}</div>
       </div>
       <a :href="buttonLink">
         <span
           class="buttonMain button-1 hover-1"
           style="
             display: inline-block;
-            width: 50%;
+            width: fit-content;
             text-align: center;
             font-size: calc(1px + 1vw);
-            padding: 0.5vw 0.2vw;
+            padding: 0.5vw 1.2vw;
           "
           >{{ textButton }}
         </span>
@@ -73,7 +76,7 @@
 
 <script>
 export default {
-  name: "ComponentHTML",
+  name: "Theme-2",
   props: [
     "pictureLink",
     "textWelcome",
@@ -81,15 +84,26 @@ export default {
     "textSubtitle",
     "textButton",
     "buttonLink",
+    "textWelcomeFontSize",
+    "textTitleFontSize",
+    "textSubtitleFontSize",
   ],
   data() {
     return {};
   },
-  mounted() {
-    // var ddd = document.getElementById("ceo");
-    // console.log(new XMLSerializer().serializeToString(ddd));
-  },
+  mounted() {},
   watch: {},
+  computed: {
+    WelcomeFontSize() {
+      return "font-size: calc(" + this.textWelcomeFontSize + "px + 1vw)";
+    },
+    TitleFontSize() {
+      return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
+    },
+    SubtitleFontSize() {
+      return "font-size: calc(" + this.textSubtitleFontSize + "px + 1vw)";
+    },
+  },
   methods: {},
 };
 </script>
