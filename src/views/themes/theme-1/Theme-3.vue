@@ -3,7 +3,11 @@
   <div
     class="gpm-hfm"
     id="theme"
-    style="position: relative; font-family: 'Montserrat', sans-serif"
+    style="
+      width: 99%;
+      position: relative;
+      font-family: 'Montserrat', sans-serif;
+    "
   >
     <img style="display: block; width: 100%" :src="pictureLink" alt="" />
     <div
@@ -72,7 +76,7 @@
       </a>
     </div>
   </div>
-  <!-- /DESKTOP OBJ3-->`
+  <!-- /DESKTOP OBJ3-->
 </template>
 
 <script>
