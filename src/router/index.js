@@ -5,7 +5,10 @@ const routes = [
   {
     path: '/',
     name: 'singleBanner',
-    component: SingleBanner
+    component: SingleBanner,
+    meta: {
+      keepAlive: true // Need to be cached
+    }
   },
   {
     path: '/CompleteWebsite',

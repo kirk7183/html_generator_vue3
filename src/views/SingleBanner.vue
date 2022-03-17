@@ -1,4 +1,3 @@
-/* eslint-disable vue/no-parsing-error */
 <template>
   <div class="home">
     <div class="wrapper flex">
@@ -21,7 +20,7 @@
         <!--SELECT BANNER-->
         <label for="bannerSelect"> Please select banner by name: </label>
         <br />
-        <select name="bannerSelect" @change="bannerSelectMethod($event)">
+        <select name="bannerSelect" v-model="bannerSelected">
           <option disabled selected>-- Select banner type --</option>
         </select>
         <br />
@@ -32,9 +31,8 @@
         </label>
         <br />
         <select
-          id="picturePositionSelect"
           name="picturePositionSelect"
-          onchange="selectedPicturePosition(this.value)"
+          v-model="picturePositionSelected"
         >
           <option disabled selected>-- Select picture position --</option>
         </select>
@@ -199,8 +197,11 @@
 
     <!--PREVIEW-->
     <div id="preview">
+        <!-- :is="themeSelected" -->
+
       <component
         :is="themeSelected"
+        :key="$route.fullPath"
         :pictureLink="pictureLink"
         :textWelcome="textWelcome"
         :textWelcomeFontSize="textWelcomeFontSize"
@@ -211,6 +212,7 @@
         :textButton="textButton"
         :buttonLink="buttonLink"
       />
+
     </div>
   </div>
 </template>
@@ -254,6 +256,8 @@ export default {
     this.$watch(
       (vm) => [
         vm.themeSelected,
+        vm.bannerSelected,
+        vm.picturePositionSelected,
         vm.pictureLink,
         vm.textWelcome,
         vm.textWelcomeFontSize,
@@ -285,11 +289,11 @@ export default {
     },
   },
   methods: {
-    checkFinishedBanner(check) {
-      if (check.target.checked) {
-        this.updateTextArea();
-      }
-    },
+    // checkFinishedBanner(check) {
+    //   if (check.target.checked) {
+    //     this.updateTextArea();
+    //   }
+    // },
     updateTextArea() {
       var htmlPreview = document.getElementById("theme");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
