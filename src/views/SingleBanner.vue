@@ -168,11 +168,25 @@
       </div>
       <div class="groupWrapper div4">
         <!--BUTTONS-->
-        <div class="button-wrapper">
-          <button class="button-right" @click="doLivePreview()">
-            Generate CODE
+        <div
+          class="button-wrapper"
+          style="display: flex; align-items: baseline"
+        >
+          <button disabled class="button-right">Generate CODE</button>
+          <button id="copyAll" @click="selectCopy()" style="margin: 0 5px">
+            Copy Code
           </button>
-          <button id="copyAll" @click="selectCopy()">Copy Code</button>
+          <div class="checker1" style="padding: 0 10px">
+            <input
+              type="checkbox"
+              id="finishedBanner"
+              name="finishedBanner"
+              value="finishedBanner"
+              v-model="finishedBannerCheck"
+              @click="checkFinishedBanner($event)"
+            />
+            <label for="finishedBanner"> Finished</label><br />
+          </div>
         </div>
         <br />
         <!--TEXTAREA-->
@@ -234,6 +248,7 @@ export default {
       themeSelected: "Theme_1",
       bannerSelected: "",
       picturePositionSelected: "",
+      finishedBannerCheck: false,
       links: [
         {
           name: "Inventory",
@@ -281,58 +296,49 @@ export default {
     };
   },
   mounted() {
-    this.updateTextArea();
+    this.$watch(
+      (vm) => [
+        vm.pictureLink,
+        vm.textWelcome,
+        vm.textWelcomeFontSize,
+        vm.textTitle,
+        vm.textTitleFontSize,
+        vm.textSubtitle,
+        vm.textSubtitleFontSize,
+        vm.textButton,
+        vm.buttonLink,
+      ],
+      () => {
+        this.updateTextArea();
+        this.finishedBannerCheck = false;
+      },
+      { immediate: true, deep: true }
+    );
   },
+
   watch: {
     htmlRaw() {
       this.htmlRaw = this.htmlRaw.replace("&lt;", "<");
       this.htmlRaw = this.htmlRaw.replace("&gt;", ">");
     },
-    pictureLink(value) {
-      this.pictureLink = value;
-      this.updateTextArea();
-    },
-    textWelcome(value) {
-      this.textWelcome = value;
-      this.updateTextArea();
-    },
-    textWelcomeFontSize(value) {
-      this.textWelcomeFontSize = value;
-      this.updateTextArea();
-    },
-    textTitle(value) {
-      this.textTitle = value;
-      this.updateTextArea();
-    },
-    textTitleFontSize(value) {
-      this.textTitleFontSize = value;
-      this.updateTextArea();
-    },
-    textSubtitle(value) {
-      this.textSubtitle = value;
-      this.updateTextArea();
-    },
-    textSubtitleFontSize(value) {
-      this.textSubtitleFontSize = value;
-      this.updateTextArea();
-    },
-    textButton(value) {
-      this.textButton = value;
-      this.updateTextArea();
-    },
-    buttonLink(value) {
-      this.buttonLink = value;
-      this.updateTextArea();
-    },
   },
   methods: {
+    checkFinishedBanner(check) {
+      if (check.target.checked) {
+        this.updateTextArea();
+      }
+    },
     updateTextArea() {
       var htmlPreview = document.getElementById("theme");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
     },
     selectCopy() {
-      this.$refs.textArea.select();
-      document.execCommand("copy");
+      if (this.finishedBannerCheck) {
+        this.$refs.textArea.select();
+        document.execCommand("copy");
+      } else {
+        alert('PLEASE CHECK "FINISHED"');
+      }
     },
 
     themeSelectMethod(event) {
@@ -370,6 +376,7 @@ html {
 
 .flex {
   display: flex;
+  justify-content: flex-start;
 }
 
 .gap {
@@ -382,24 +389,6 @@ select {
   padding: 5px 10px;
 }
 
-.low-padding {
-  /* margin-bottom: 3px; */
-}
-
-#source {
-  /* float: left; */
-}
-
-#preview {
-  /* float: left;
-  border: 1px solid #aaa;
-  margin-left: 5px; */
-}
-
-.box-right {
-  /* width: 70%; */
-  /* margin-left: auto; */
-}
 .input-number {
   margin-left: 5px;
 }
