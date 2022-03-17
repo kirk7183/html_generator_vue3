@@ -1,27 +1,14 @@
 <template>
   <nav>
-   
-    <router-link to="/" >Single Banner</router-link> |
+    <router-link to="/">Single Banner</router-link> |
     <router-link to="/CompleteWebsite">Complete Website</router-link>
   </nav>
-  <!-- <keep-alive include="SingleBanner">
-  <router-view />
-  </keep-alive> -->
 
-<router-view v-slot="{ Component }">
-  <keep-alive include="SingleBanner">
-    <component :is="Component" />
-  </keep-alive>
-</router-view>
-
-
-<!-- <router-view v-slot="{ Component }">
-  <keep-alive>
-    <component :is="Component" />
-  </keep-alive>
-</router-view> -->
-
-
+  <router-view v-slot="{ Component }">
+    <keep-alive include="SingleBanner">
+      <component :is="Component" />
+    </keep-alive>
+  </router-view>
 </template>
 
 <style>
@@ -29,7 +16,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
 }
 
