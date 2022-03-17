@@ -6,11 +6,7 @@
         <!--SELECT THEME-->
         <label for="themeSelect">Please select theme by name:</label>
         <br />
-        <select
-          name="themeSelect"
-          v-model="themeSelected"
-          @change="themeSelectMethod($event)"
-        >
+        <select name="themeSelect" v-model="themeSelected">
           <option disabled selected>-- Select the theme --</option>
           <option
             v-for="(singleTheme, i) in themes"
@@ -183,8 +179,8 @@
               name="finishedBanner"
               value="finishedBanner"
               v-model="finishedBannerCheck"
-              @click="checkFinishedBanner($event)"
             />
+
             <label for="finishedBanner"> Finished</label><br />
           </div>
         </div>
@@ -249,48 +245,7 @@ export default {
       bannerSelected: "",
       picturePositionSelected: "",
       finishedBannerCheck: false,
-      links: [
-        {
-          name: "Inventory",
-          link: "/inventory.php",
-        },
-        {
-          name: "Financing",
-          link: "/forms.php?cid=1&t=2",
-        },
-        {
-          name: "TestDrive",
-          link: "/forms.php?cid=1&t=4",
-        },
-        {
-          name: "Offer",
-          link: "/forms.php?cid=1&t=1",
-        },
-        {
-          name: "Trade-In",
-          link: "/forms.php?cid=1&t=5",
-        },
-        {
-          name: "Cash For Your Car",
-          link: "/forms.php?cid=1&t=6",
-        },
-        {
-          name: "Consignment",
-          link: "/forms.php?cid=1&t=3",
-        },
-        {
-          name: "Reviews",
-          link: "/reviews.php",
-        },
-        {
-          name: "About Us",
-          link: "/about.php",
-        },
-        {
-          name: "Contact",
-          link: "/contact.php",
-        },
-      ],
+      links: LINKS_DUMMY_DATA,
       //NEED TO ADD MORE
       themes: ["Theme_1", "Theme_2", "Theme_3"],
     };
@@ -298,6 +253,7 @@ export default {
   mounted() {
     this.$watch(
       (vm) => [
+        vm.themeSelected,
         vm.pictureLink,
         vm.textWelcome,
         vm.textWelcomeFontSize,
@@ -317,6 +273,12 @@ export default {
   },
 
   watch: {
+    //if 'FINISHED' checked is TRUE
+    finishedBannerCheck(value) {
+      if (value) {
+        this.updateTextArea();
+      }
+    },
     htmlRaw() {
       this.htmlRaw = this.htmlRaw.replace("&lt;", "<");
       this.htmlRaw = this.htmlRaw.replace("&gt;", ">");
@@ -337,16 +299,54 @@ export default {
         this.$refs.textArea.select();
         document.execCommand("copy");
       } else {
-        alert('PLEASE CHECK "FINISHED"');
+        alert('PLEASE CHECK "FINISHED" !!!');
       }
-    },
-
-    themeSelectMethod(event) {
-      this.themeSelected = event.target.value;
-      this.updateTextArea();
     },
   },
 };
+
+const LINKS_DUMMY_DATA = [
+  {
+    name: "Inventory",
+    link: "/inventory.php",
+  },
+  {
+    name: "Financing",
+    link: "/forms.php?cid=1&t=2",
+  },
+  {
+    name: "TestDrive",
+    link: "/forms.php?cid=1&t=4",
+  },
+  {
+    name: "Offer",
+    link: "/forms.php?cid=1&t=1",
+  },
+  {
+    name: "Trade-In",
+    link: "/forms.php?cid=1&t=5",
+  },
+  {
+    name: "Cash For Your Car",
+    link: "/forms.php?cid=1&t=6",
+  },
+  {
+    name: "Consignment",
+    link: "/forms.php?cid=1&t=3",
+  },
+  {
+    name: "Reviews",
+    link: "/reviews.php",
+  },
+  {
+    name: "About Us",
+    link: "/about.php",
+  },
+  {
+    name: "Contact",
+    link: "/contact.php",
+  },
+];
 </script>
 
 <style scoped>
