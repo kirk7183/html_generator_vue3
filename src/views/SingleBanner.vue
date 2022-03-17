@@ -30,10 +30,7 @@
           Please select picture position on banner:
         </label>
         <br />
-        <select
-          name="picturePositionSelect"
-          v-model="picturePositionSelected"
-        >
+        <select name="picturePositionSelect" v-model="picturePositionSelected">
           <option disabled selected>-- Select picture position --</option>
         </select>
       </div>
@@ -197,9 +194,19 @@
 
     <!--PREVIEW-->
     <div id="preview">
-        <!-- :is="themeSelected" -->
-
-      <component
+      <dynamic-component
+        :type="themeSelected"
+        :pictureLink="pictureLink"
+        :textWelcome="textWelcome"
+        :textWelcomeFontSize="textWelcomeFontSize"
+        :textTitle="textTitle"
+        :textTitleFontSize="textTitleFontSize"
+        :textSubtitle="textSubtitle"
+        :textSubtitleFontSize="textSubtitleFontSize"
+        :textButton="textButton"
+        :buttonLink="buttonLink"
+      />
+      <!-- <component
         :is="themeSelected"
         :key="$route.fullPath"
         :pictureLink="pictureLink"
@@ -211,27 +218,27 @@
         :textSubtitleFontSize="textSubtitleFontSize"
         :textButton="textButton"
         :buttonLink="buttonLink"
-      />
-
+      /> -->
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Theme_1 from "@/views/themes/theme-1/Theme-1.vue";
-import Theme_2 from "@/views/themes/theme-1/Theme-2.vue";
-import Theme_3 from "@/views/themes/theme-1/Theme-3.vue";
+import dynamicComponent from "@/components/DynamicComponent.vue";
+// import Theme_1 from "@/views/themes/theme-1/Theme-1.vue";
+// import Theme_2 from "@/views/themes/theme-1/Theme-2.vue";
+// import Theme_3 from "@/views/themes/theme-1/Theme-3.vue";
 export default {
   name: "SingleBanner",
   components: {
-    Theme_1,
-    Theme_2,
-    Theme_3,
+    // Theme_1,
+    // Theme_2,
+    // Theme_3,
+    dynamicComponent,
   },
   data() {
     return {
-      // component: "Theme_1",
       htmlRaw: "",
       pictureLink:
         "https://zipstarautosales.goxee.com/cloud/data/files/1747/My Files/0919-zipstarautosales/banner1_bg_ver1.png",

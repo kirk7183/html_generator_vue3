@@ -6,9 +6,9 @@ const routes = [
     path: '/',
     name: 'singleBanner',
     component: SingleBanner,
-    meta: {
-      keepAlive: true // Need to be cached
-    }
+    // meta: {
+    //   keepAlive: true // Need to be cached
+    // }
   },
   {
     path: '/CompleteWebsite',
