@@ -40,6 +40,7 @@
         <label for="textWelcome">Please enter welcome text:</label>
         <br />
         <input
+          autocomplete="off"
           type="text"
           name="textWelcome"
           minlength="3"
@@ -61,6 +62,7 @@
         <label for="textTitle">Please enter title text line 1:</label>
         <br />
         <input
+          autocomplete="off"
           type="text"
           name="textTitle"
           minlength="3"
@@ -82,6 +84,7 @@
         <label for="textSubtitle">Please enter subtitle text:</label>
         <br />
         <input
+          autocomplete="off"
           type="text"
           name="textSubtitle"
           minlength="3"
@@ -97,6 +100,18 @@
           min="1"
           max="50"
           v-model="textSubtitleFontSize"
+        />
+        <br />
+
+        <!--COLOR OF SELECTED TEXT-->
+        <label>Color HEX</label>
+        <br />
+        <input
+          type="text"
+          min="3"
+          max="12"
+          style="width: 55px"
+          v-model="selectedColor"
         />
       </div>
 
@@ -118,6 +133,7 @@
         <label for="textButton">Please enter button text:</label>
         <br />
         <input
+          autocomplete="off"
           type="text"
           minlength="3"
           maxlength="40"
@@ -146,7 +162,7 @@
             </option>
           </select>
           <br />
-          <!--BUTTON LINKCUSTOM ENTER-->
+          <!--BUTTON LINK CUSTOM ENTER-->
           <input
             type="text"
             class="low-padding"
@@ -205,7 +221,9 @@
         :textSubtitleFontSize="textSubtitleFontSize"
         :textButton="textButton"
         :buttonLink="buttonLink"
+        :selectedColor="selectedColor"
       />
+      <!-- :selectedText="selectedText" -->
       <!-- <component
         :is="themeSelected"
         :key="$route.fullPath"
@@ -240,6 +258,7 @@ export default {
   data() {
     return {
       htmlRaw: "",
+      selectedColor: "#000",
       pictureLink:
         "https://zipstarautosales.goxee.com/cloud/data/files/1747/My Files/0919-zipstarautosales/banner1_bg_ver1.png",
       textWelcome: "Welcome to",
@@ -274,6 +293,7 @@ export default {
         vm.textSubtitleFontSize,
         vm.textButton,
         vm.buttonLink,
+        vm.selectedColor,
       ],
       () => {
         this.updateTextArea();
@@ -296,15 +316,11 @@ export default {
     },
   },
   methods: {
-    // checkFinishedBanner(check) {
-    //   if (check.target.checked) {
-    //     this.updateTextArea();
-    //   }
-    // },
     updateTextArea() {
       var htmlPreview = document.getElementById("theme");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
     },
+    //COPY CODE
     selectCopy() {
       if (this.finishedBannerCheck) {
         this.$refs.textArea.select();
@@ -403,4 +419,10 @@ select {
 .input-number {
   margin-left: 5px;
 }
+
+/* .noSpin::-webkit-outer-spin-button,
+.noSpin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
 </style>
