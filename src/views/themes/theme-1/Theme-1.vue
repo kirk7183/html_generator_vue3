@@ -22,7 +22,7 @@
       "
     >
       <div
-        class="text1"
+        class="textWelcome"
         style="
           font-size: calc(10px + 1vw);
           font-family: 'Montserrat', sans-serif;
@@ -30,11 +30,13 @@
           text-align: left;
         "
         :style="WelcomeFontSize"
+        @mouseup="getSelectedText($event)"
       >
         {{ textWelcome }}
       </div>
+      <!-- class="title" -->
       <div
-        class="text2"
+        id="textTitle"
         style="
           font-size: calc(34px + 1vw);
           font-family: 'Montserrat', sans-serif;
@@ -42,10 +44,14 @@
           letter-spacing: 2px;
         "
         :style="TitleFontSize"
+        @mouseup="getSelectedText($event)"
       >
         {{ textTitle }}
       </div>
+      <button @click="highlight">sad</button>
+
       <div
+        id="textSubtitle"
         class="wrapper-text"
         style="
           width: 100%;
@@ -57,8 +63,10 @@
           font-weight: 400;
           font-style: italic;
         "
+        :style="SubtitleFontSize"
       >
-        <div class="wr-text1" :style="SubtitleFontSize">{{ textSubtitle }}</div>
+        {{ textSubtitle }}
+        <!-- <div class="wr-text1" :style="SubtitleFontSize">{{ textSubtitle }}</div> -->
       </div>
       <a :href="buttonLink">
         <span
@@ -70,6 +78,7 @@
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
           "
+          @mouseup="getSelectedText($event)"
           >{{ textButton }}
         </span>
       </a>
@@ -91,12 +100,20 @@ export default {
     "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
+    // "selectedText",
+    "selectedColor",
   ],
   data() {
-    return {};
+    return {
+      selectedText: "",
+    };
   },
   mounted() {},
-  watch: {},
+  watch: {
+    textWelcome() {
+      console.log("change on title");
+    },
+  },
   computed: {
     WelcomeFontSize() {
       return "font-size: calc(" + this.textWelcomeFontSize + "px + 1vw)";
@@ -108,7 +125,74 @@ export default {
       return "font-size: calc(" + this.textSubtitleFontSize + "px + 1vw)";
     },
   },
-  methods: {},
+  methods: {
+    stylize(style, ui, value) {
+      var inui = false;
+      var ivalue = null;
+      if (arguments[1]) {
+        inui = ui;
+      }
+      if (arguments[2]) {
+        ivalue = value;
+      }
+      document.execCommand(style, inui, ivalue);
+    },
+    //get selected text
+    getSelectedText(e) {
+      console.log(e);
+
+      // window.getSelection().toString();
+      // console.log(window.getSelection().getRangeAt(0));
+      let start = window.getSelection().getRangeAt(0).startOffset;
+      let end = window.getSelection().getRangeAt(0).endOffset;
+      this.selectedText = this.selectedText.substring(end, start);
+      this.selectedText = window.getSelection().toString();
+    },
+    highlight() {
+      console.log(this.selectedText);
+      // let keyword = this.selectedText.split("\n");
+      let keyword = this.selectedText;
+      let content = this.textTitle;
+      // console.log(
+      //   "innerTHML highlight",
+      //   document.getElementById("textTitle").innerHTML
+      // );
+      document.getElementById("textTitle").innerHTML = this.transformContent(
+        content,
+        keyword
+      );
+    },
+    transformContent(content, keyword) {
+      // console.log(
+      //   "innerTHML transform",
+      //   document.getElementById("textTitle").innerHTML
+      // );
+      // let temp = content;
+      // console.log(temp, "temp");
+      // keywords.forEach((keyword) => {
+      //   temp = temp.replace(
+      //     keyword,
+      //     `<span style="color:${this.selectedColor}">${keyword}</span>`
+      //   );
+      let temp = document
+        .getElementById("textTitle")
+        .innerHTML.replace(
+          keyword,
+          `<span style="color:${this.selectedColor}">${keyword}</span>`
+        );
+      //   temp = temp.replace(
+      //     new RegExp(keyword, "ig"),
+      //     this.wrapKeywordWithHTML(keyword)
+      //   );
+      // });
+      console.log(document.getElementById("textTitle"));
+      return temp;
+    },
+    // wrapKeywordWithHTML(keyword) {
+    //   return `<span style="color:${this.selectedColor}">${keyword}</span>`;
+    //   // return `<a href="${url}" target="_blank"> <span style="font-weight: bold; color: red; font-size: 30px">  ${keyword}  </span> </a>`;
+    // },
+  },
 };
 </script>
 
