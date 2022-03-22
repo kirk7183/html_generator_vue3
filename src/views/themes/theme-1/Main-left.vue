@@ -32,7 +32,6 @@
         :style="WelcomeFontSize"
         @mouseup="getSelectedText($event)"
       >
-        <button @click="highlight">ds</button>
         {{ textWelcome }}
       </div>
       <!-- class="title" -->
@@ -110,11 +109,7 @@ export default {
     };
   },
   mounted() {},
-  watch: {
-    textWelcome() {
-      console.log("change on title");
-    },
-  },
+  watch: {},
   computed: {
     WelcomeFontSize() {
       return "font-size: calc(" + this.textWelcomeFontSize + "px + 1vw)";
