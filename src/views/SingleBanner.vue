@@ -113,6 +113,14 @@
           style="width: 55px"
           v-model="selectedColor"
         />
+        <!--BUTTON WITH SELECTED COLOR-->
+        <button
+          class="colorButton input-number vertical"
+          :style="{ background: selectedColor }"
+          @click="changeColor"
+        >
+          dd
+        </button>
       </div>
 
       <div class="groupWrapper div3">
@@ -211,6 +219,7 @@
     <!--PREVIEW-->
     <div id="preview">
       <dynamic-component
+        ref="passClick"
         :type="themeSelected"
         :pictureLink="pictureLink"
         :textWelcome="textWelcome"
@@ -316,6 +325,13 @@ export default {
     },
   },
   methods: {
+    changeColor() {
+      // console.log(this.$refs);
+      // console.log(this.$refs.passToChildren);
+      // this.$refs.childRef.childMethod('Hi from parent');
+      console.log(this.$refs.passClick);
+      this.$refs.passClick[0].highlight();
+    },
     updateTextArea() {
       var htmlPreview = document.getElementById("theme");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
@@ -420,6 +436,13 @@ select {
   margin-left: 5px;
 }
 
+.vertical {
+  vertical-align: middle;
+}
+.colorButton {
+  width: 25px;
+  height: 25px;
+}
 /* .noSpin::-webkit-outer-spin-button,
 .noSpin::-webkit-inner-spin-button {
   -webkit-appearance: none;
