@@ -278,13 +278,13 @@ export default {
       textSubtitleFontSize: 8,
       textButton: "View Inventory",
       buttonLink: "",
-      themeSelected: "Theme_1",
+      themeSelected: "Main_left",
       bannerSelected: "",
       picturePositionSelected: "",
       finishedBannerCheck: false,
       links: LINKS_DUMMY_DATA,
       //NEED TO ADD MORE
-      themes: ["Theme_1", "Theme_2", "Theme_3"],
+      themes: ["Main_left", "Main_center", "Main_right"],
     };
   },
   mounted() {
