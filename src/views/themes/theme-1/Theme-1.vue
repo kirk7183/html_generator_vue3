@@ -32,6 +32,7 @@
         :style="WelcomeFontSize"
         @mouseup="getSelectedText($event)"
       >
+        <button @click="highlight">ds</button>
         {{ textWelcome }}
       </div>
       <!-- class="title" -->
@@ -48,7 +49,6 @@
       >
         {{ textTitle }}
       </div>
-      <button @click="highlight">sad</button>
 
       <div
         id="textSubtitle"
@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: "Theme-2",
+  name: "Theme-1",
   props: [
     "pictureLink",
     "textWelcome",
@@ -103,6 +103,7 @@ export default {
     // "selectedText",
     "selectedColor",
   ],
+
   data() {
     return {
       selectedText: "",
@@ -126,17 +127,6 @@ export default {
     },
   },
   methods: {
-    stylize(style, ui, value) {
-      var inui = false;
-      var ivalue = null;
-      if (arguments[1]) {
-        inui = ui;
-      }
-      if (arguments[2]) {
-        ivalue = value;
-      }
-      document.execCommand(style, inui, ivalue);
-    },
     //get selected text
     getSelectedText(e) {
       console.log(e);
