@@ -1,8 +1,8 @@
 <template>
   <!--DESKTOP OBJ2 center text-->
   <div
-    class="gpm-hfm"
     id="theme"
+    class="gpm-hfm"
     style="
       width: 99%;
       position: relative;
@@ -69,6 +69,7 @@
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
           "
+          :style="{ background: colorBackgroundButton }"
         >
           {{ textButton }}
         </span>
@@ -80,7 +81,7 @@
 
 <script>
 export default {
-  name: "Theme-2",
+  name: "main_center",
   props: [
     "pictureLink",
     "textWelcome",
@@ -91,6 +92,7 @@ export default {
     "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
+    "colorBackgroundButton",
   ],
   data() {
     return {};

@@ -1,8 +1,8 @@
 <template>
   <!--DESKTOP OBJ1 left text-->
   <div
-    class="gpm-hfm"
     id="theme"
+    class="gpm-hfm"
     style="
       width: 99%;
       position: relative;
@@ -48,7 +48,7 @@
       >
         {{ textTitle }}
       </div>
-
+      <!-- <button @click="highlight"></button> -->
       <div
         id="textSubtitle"
         class="wrapper-text"
@@ -65,7 +65,6 @@
         :style="SubtitleFontSize"
       >
         {{ textSubtitle }}
-        <!-- <div class="wr-text1" :style="SubtitleFontSize">{{ textSubtitle }}</div> -->
       </div>
       <a :href="buttonLink">
         <span
@@ -77,6 +76,7 @@
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
           "
+          :style="{ background: colorBackgroundButton }"
           @mouseup="getSelectedText($event)"
           >{{ textButton }}
         </span>
@@ -88,7 +88,7 @@
 
 <script>
 export default {
-  name: "Theme-1",
+  name: "main_left",
   props: [
     "pictureLink",
     "textWelcome",
@@ -101,6 +101,7 @@ export default {
     "textSubtitleFontSize",
     // "selectedText",
     "selectedColor",
+    "colorBackgroundButton",
   ],
 
   data() {

@@ -20,7 +20,7 @@
         <!--SELECT BANNER-->
         <label for="bannerSelect"> Please select banner by name: </label>
         <br />
-        <select name="bannerSelect" v-model="bannerSelected">
+        <select disabled name="bannerSelect" v-model="bannerSelected">
           <option disabled selected>-- Select banner type --</option>
         </select>
         <br />
@@ -30,7 +30,11 @@
           Please select picture position on banner:
         </label>
         <br />
-        <select name="picturePositionSelect" v-model="picturePositionSelected">
+        <select
+          disabled
+          name="picturePositionSelect"
+          v-model="picturePositionSelected"
+        >
           <option disabled selected>-- Select picture position --</option>
         </select>
       </div>
@@ -88,7 +92,7 @@
           type="text"
           name="textSubtitle"
           minlength="3"
-          maxlength="99"
+          maxlength="1999"
           size="40"
           v-model="textSubtitle"
           style="display: inline-block"
@@ -104,27 +108,64 @@
         <br />
 
         <!--COLOR OF SELECTED TEXT-->
-        <label>Color HEX</label>
-        <br />
-        <input
-          type="text"
-          min="3"
-          max="12"
-          style="width: 55px"
-          v-model="selectedColor"
-        />
-        <!--BUTTON WITH SELECTED COLOR-->
-        <button
-          class="colorButton input-number vertical"
-          :style="{ background: selectedColor }"
-          @click="changeColor"
-        >
-          dd
-        </button>
+        <div class="inline">
+          <label>Color HEX</label>
+          <br />
+          <input
+            disabled
+            type="text"
+            min="3"
+            max="12"
+            style="width: 55px"
+            v-model="selectedColor"
+          />
+          <!--BUTTON WITH SELECTED COLOR-->
+          <button
+            class="colorButton input-number vertical"
+            :style="{ background: selectedColor }"
+            @click="changeColor"
+          ></button>
+        </div>
+
+        <!--BACKGROUND OF BANNER COLOR-->
+        <div class="inline">
+          <label class="font11">Banner background</label>
+          <br />
+          <input
+            type="text"
+            min="3"
+            max="12"
+            style="width: 55px"
+            v-model="colorBackgroundBanner"
+          />
+          <!--BUTTON WITH SELECTED COLOR-->
+          <button
+            class="colorButton input-number vertical"
+            :style="{ background: colorBackgroundBanner }"
+          ></button>
+        </div>
+
+        <!--BACKGROUND BUTTON AND LINE COLOR-->
+        <div class="inline">
+          <label class="font11">Button background</label>
+          <br />
+          <input
+            type="text"
+            min="3"
+            max="12"
+            style="width: 55px"
+            v-model="colorBackgroundButton"
+          />
+          <!--BUTTON WITH SELECTED COLOR-->
+          <button
+            class="colorButton input-number vertical"
+            :style="{ background: colorBackgroundButton }"
+          ></button>
+        </div>
       </div>
 
       <div class="groupWrapper div3">
-        <!--PICTURE LINK-->
+        <!--PICTURE LINK DESKTOP-->
         <label for="pictureLink">Please enter picture link:</label>
         <br />
         <input
@@ -135,6 +176,19 @@
           maxlength="1000"
           size="50"
           v-model="pictureLink"
+        />
+        <br />
+        <!--PICTURE LINK MOBILE-->
+        <label for="pictureLinkMob">Please enter MOB picture link:</label>
+        <br />
+        <input
+          type="text"
+          style="width: 95%"
+          name="pictureLinkMob"
+          minlength="3"
+          maxlength="1000"
+          size="50"
+          v-model="pictureLinkMob"
         />
         <br />
         <!--BUTTON TEXT-->
@@ -231,21 +285,27 @@
         :textButton="textButton"
         :buttonLink="buttonLink"
         :selectedColor="selectedColor"
+        :colorBackgroundBanner="colorBackgroundBanner"
+        :colorBackgroundButton="colorBackgroundButton"
       />
-      <!-- :selectedText="selectedText" -->
-      <!-- <component
-        :is="themeSelected"
-        :key="$route.fullPath"
-        :pictureLink="pictureLink"
-        :textWelcome="textWelcome"
-        :textWelcomeFontSize="textWelcomeFontSize"
-        :textTitle="textTitle"
-        :textTitleFontSize="textTitleFontSize"
-        :textSubtitle="textSubtitle"
-        :textSubtitleFontSize="textSubtitleFontSize"
-        :textButton="textButton"
-        :buttonLink="buttonLink"
-      /> -->
+      <!--MOBILE PREVIEW display: none-->
+      <div id="mob_preview">
+        <dynamicComponentMob
+          :type="mobTheme"
+          :pictureLink="pictureLink"
+          :pictureLinkMob="pictureLinkMob"
+          :textWelcome="textWelcome"
+          :textWelcomeFontSize="textWelcomeFontSize"
+          :textTitle="textTitle"
+          :textTitleFontSize="textTitleFontSize"
+          :textSubtitle="textSubtitle"
+          :textSubtitleFontSize="textSubtitleFontSize"
+          :textButton="textButton"
+          :buttonLink="buttonLink"
+          :colorBackgroundBanner="colorBackgroundBanner"
+          :colorBackgroundButton="colorBackgroundButton"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -253,23 +313,23 @@
 <script>
 // @ is an alias to /src
 import dynamicComponent from "@/components/DynamicComponent.vue";
-// import Theme_1 from "@/views/themes/theme-1/Theme-1.vue";
-// import Theme_2 from "@/views/themes/theme-1/Theme-2.vue";
-// import Theme_3 from "@/views/themes/theme-1/Theme-3.vue";
+import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
 export default {
   name: "SingleBanner",
   components: {
-    // Theme_1,
-    // Theme_2,
-    // Theme_3,
     dynamicComponent,
+    dynamicComponentMob,
   },
   data() {
     return {
       htmlRaw: "",
       selectedColor: "#000",
+      colorBackgroundBanner: "#fff",
+      colorBackgroundButton: "red",
       pictureLink:
-        "https://zipstarautosales.goxee.com/cloud/data/files/1747/My Files/0919-zipstarautosales/banner1_bg_ver1.png",
+        "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1.png",
+      pictureLinkMob:
+        "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1_mob.png",
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
       textTitle: "BENITOS CAR SALE",
@@ -279,13 +339,22 @@ export default {
       textButton: "View Inventory",
       buttonLink: "",
       themeSelected: "Main_left",
+      // mobTheme: "Main_left_mob",
+      mobTheme: "Main_mob",
       bannerSelected: "",
       picturePositionSelected: "",
       finishedBannerCheck: false,
       links: LINKS_DUMMY_DATA,
       //NEED TO ADD MORE
-      themes: ["Main_left", "Main_center", "Main_right"],
+      themes: [
+        "Main_left",
+        "Main_center",
+        "Main_right",
+        "Img_left",
+        "Img_right",
+      ],
     };
+    // mobTheme: "Main_mob",
   },
   mounted() {
     this.$watch(
@@ -294,6 +363,7 @@ export default {
         vm.bannerSelected,
         vm.picturePositionSelected,
         vm.pictureLink,
+        vm.pictureLinkMob,
         vm.textWelcome,
         vm.textWelcomeFontSize,
         vm.textTitle,
@@ -303,6 +373,8 @@ export default {
         vm.textButton,
         vm.buttonLink,
         vm.selectedColor,
+        vm.colorBackgroundBanner,
+        vm.colorBackgroundButton,
       ],
       () => {
         this.updateTextArea();
@@ -313,6 +385,18 @@ export default {
   },
 
   watch: {
+    themeSelected(value) {
+      //Setup mobile theme (for Main we use only 1 mobile theme, the rest we add "_mob")
+      if (
+        value == "Main_left" ||
+        value == "Main_center" ||
+        value == "Main_right"
+      ) {
+        this.mobTheme = "Main_mob";
+      } else {
+        this.mobTheme = value + "_mob";
+      }
+    },
     //if 'FINISHED' checked is TRUE
     finishedBannerCheck(value) {
       if (value) {
@@ -326,15 +410,18 @@ export default {
   },
   methods: {
     changeColor() {
-      // console.log(this.$refs);
-      // console.log(this.$refs.passToChildren);
-      // this.$refs.childRef.childMethod('Hi from parent');
       console.log(this.$refs.passClick);
       this.$refs.passClick[0].highlight();
     },
     updateTextArea() {
+      //dynamic get id need to be set
+
+      //get by id, then set to String in textArea for desktop
       var htmlPreview = document.getElementById("theme");
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
+      //get by id, then set to String in textArea for mobile
+      var htmlPreviewMob = document.getElementById("mobile");
+      this.htmlRaw += new XMLSerializer().serializeToString(htmlPreviewMob);
     },
     //COPY CODE
     selectCopy() {
@@ -442,6 +529,13 @@ select {
 .colorButton {
   width: 25px;
   height: 25px;
+}
+.inline {
+  display: inline-block;
+  margin-right: 10px;
+}
+.font11 {
+  font-size: 11px;
 }
 /* .noSpin::-webkit-outer-spin-button,
 .noSpin::-webkit-inner-spin-button {
