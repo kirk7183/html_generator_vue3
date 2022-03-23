@@ -5,10 +5,9 @@
     class="gpm-only"
     style="
       font-family: 'Montserrat', sans-serif;
-      background: #fff;
       margin: 8vw 0;
     "
-    :style="{ background: colorBackgroundBanner }"
+    :style="{background: colorBackgroundBanner}"
   >
     <div
       class="wrapper-of-card"
@@ -36,6 +35,7 @@
       <div
         class="box-card-line-middle"
         style="width: 100%; height: 0; margin-left: auto; margin-right: auto"
+        :style="{ 'border-bottom': '3px solid ' + colorBackgroundButton }"
       ></div>
       <div
         class="box-card-text"
@@ -62,7 +62,11 @@
             font-size: calc(10px + 1vw);
             padding: calc(10px + 0.1vw) 2.7vw;
           "
-          :style="{ background: colorBackgroundButton }"
+          :style="{
+            background: colorBackgroundButton,
+            color: colorTextButton,
+            border: '0.1px solid ' + colorBackgroundButton,
+          }"
         >
           {{ textButton }}
         </span>
@@ -71,7 +75,7 @@
     <div class="wrapper-image" style="width: 100%">
       <img
         style="width: 100%; vertical-align: bottom"
-        :src="pictureLinkMob"
+        :src="pictureLink"
         alt=""
       />
     </div>
@@ -81,15 +85,17 @@
 
 <script>
 export default {
-  name: "Img_right_mobile",
+  name: "Img_left_mobile",
   props: [
-    "pictureLinkMob",
+    // "pictureLinkMob",
+    "pictureLink",
     "textTitle",
     "textSubtitle",
     "textButton",
     "buttonLink",
-    "colorBackgroundBanner",
+    "colorTextButton",
     "colorBackgroundButton",
+    "colorBackgroundBanner",
   ],
 };
 </script>

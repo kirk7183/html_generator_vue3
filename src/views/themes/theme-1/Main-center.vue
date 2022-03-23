@@ -69,7 +69,7 @@
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
           "
-          :style="{ background: colorBackgroundButton }"
+          :style="{ background: colorBackgroundButton, color: colorTextButton, border: '0.1px solid ' + colorBackgroundButton, }"
         >
           {{ textButton }}
         </span>
@@ -92,6 +92,7 @@ export default {
     "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
+    "colorTextButton",
     "colorBackgroundButton",
   ],
   data() {

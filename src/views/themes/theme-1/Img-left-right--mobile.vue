@@ -32,7 +32,7 @@
       <div
         class="box-card-line-middle"
         style="width: 100%; height: 0; margin-left: auto; margin-right: auto"
-        :style="{ 'border-bottom': '3px solid '+ colorBackgroundButton }"
+        :style="{ 'border-bottom': '3px solid ' + colorBackgroundButton }"
       ></div>
       <div
         class="box-card-text"
@@ -59,7 +59,11 @@
             font-size: calc(10px + 1vw);
             padding: calc(10px + 0.1vw) 2.7vw;
           "
-          :style="{ background: colorBackgroundButton, border: '0.1px solid '+ colorBackgroundButton }"
+          :style="{
+            background: colorBackgroundButton,
+            color: colorTextButton,
+            border: '0.1px solid ' + colorBackgroundButton,
+          }"
         >
           {{ textButton }}
         </span>
@@ -85,6 +89,7 @@ export default {
     "textSubtitle",
     "textButton",
     "buttonLink",
+    "colorTextButton",
     "colorBackgroundBanner",
     "colorBackgroundButton",
   ],

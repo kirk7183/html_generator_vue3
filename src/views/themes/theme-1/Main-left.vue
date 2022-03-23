@@ -76,7 +76,7 @@
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
           "
-          :style="{ background: colorBackgroundButton }"
+          :style="{ background: colorBackgroundButton, color: colorTextButton , border: '0.1px solid ' + colorBackgroundButton, }"
           @mouseup="getSelectedText($event)"
           >{{ textButton }}
         </span>
@@ -100,7 +100,7 @@ export default {
     "textTitleFontSize",
     "textSubtitleFontSize",
     // "selectedText",
-    "selectedColor",
+    "colorTextButton",
     "colorBackgroundButton",
   ],
 
@@ -164,7 +164,7 @@ export default {
         .getElementById("textTitle")
         .innerHTML.replace(
           keyword,
-          `<span style="color:${this.selectedColor}">${keyword}</span>`
+          `<span style="color:${this.colorTextButton}">${keyword}</span>`
         );
       //   temp = temp.replace(
       //     new RegExp(keyword, "ig"),
