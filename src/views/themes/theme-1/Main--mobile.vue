@@ -74,7 +74,7 @@
             font-size: calc(12px + 1vw);
             padding: calc(10px + 0.1vw) 2.7vw;
           "
-          :style="{ background: colorBackgroundButton }"
+          :style="{ background: colorBackgroundButton, color: colorTextButton, border: '0.1px solid ' + colorBackgroundButton }"
         >
           {{ textButton }}
         </span>
@@ -97,6 +97,7 @@ export default {
     "textSubtitle",
     "textButton",
     "buttonLink",
+    "colorTextButton",
     "colorBackgroundButton",
   ],
 };

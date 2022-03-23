@@ -64,13 +64,21 @@
                 font-size: calc(1px + 1vw);
                 padding: 0.5vw 0.2vw;
               "
-              :style="{ background: colorBackgroundButton, border: '0.1px solid '+ colorBackgroundButton }"
+              :style="{
+                background: colorBackgroundButton,
+                color: colorTextButton,
+                border: '0.1px solid ' + colorBackgroundButton,
+              }"
             >
               {{ textButton }}
             </span>
           </a>
         </div>
-        <div class="box-card-right-two" style="width: 5%" :style="{ 'border-left': '3px solid '+ colorBackgroundButton}"></div>
+        <div
+          class="box-card-right-two"
+          style="width: 5%"
+          :style="{ 'border-left': '3px solid ' + colorBackgroundButton }"
+        ></div>
       </div>
     </div>
   </div>
@@ -90,6 +98,7 @@ export default {
     // "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
+    "colorTextButton",
     "colorBackgroundBanner",
     "colorBackgroundButton",
   ],

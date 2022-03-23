@@ -107,26 +107,6 @@
         />
         <br />
 
-        <!--COLOR OF SELECTED TEXT-->
-        <div class="inline">
-          <label>Color HEX</label>
-          <br />
-          <input
-            disabled
-            type="text"
-            min="3"
-            max="12"
-            style="width: 55px"
-            v-model="selectedColor"
-          />
-          <!--BUTTON WITH SELECTED COLOR-->
-          <button
-            class="colorButton input-number vertical"
-            :style="{ background: selectedColor }"
-            @click="changeColor"
-          ></button>
-        </div>
-
         <!--BACKGROUND OF BANNER COLOR-->
         <div class="inline">
           <label class="font11">Banner background</label>
@@ -162,6 +142,25 @@
             :style="{ background: colorBackgroundButton }"
           ></button>
         </div>
+
+        <!--COLOR OF SELECTED TEXT-->
+        <div class="inline">
+          <label class="font11">Button Text</label>
+          <br />
+          <input
+            type="text"
+            min="3"
+            max="12"
+            style="width: 55px"
+            v-model="colorTextButton"
+          />
+          <!--BUTTON WITH SELECTED COLOR-->
+          <button
+            class="colorButton input-number vertical"
+            :style="{ background: colorTextButton }"
+            @click="changeColor"
+          ></button>
+        </div>
       </div>
 
       <div class="groupWrapper div3">
@@ -179,7 +178,9 @@
         />
         <br />
         <!--PICTURE LINK MOBILE-->
-        <label for="pictureLinkMob">Please enter MOB picture link:</label>
+        <label for="pictureLinkMob"
+          >Please enter MOB / BLANK picture link:</label
+        >
         <br />
         <input
           type="text"
@@ -276,6 +277,7 @@
         ref="passClick"
         :type="themeSelected"
         :pictureLink="pictureLink"
+        :pictureLinkMob="pictureLinkMob"
         :textWelcome="textWelcome"
         :textWelcomeFontSize="textWelcomeFontSize"
         :textTitle="textTitle"
@@ -284,7 +286,7 @@
         :textSubtitleFontSize="textSubtitleFontSize"
         :textButton="textButton"
         :buttonLink="buttonLink"
-        :selectedColor="selectedColor"
+        :colorTextButton="colorTextButton"
         :colorBackgroundBanner="colorBackgroundBanner"
         :colorBackgroundButton="colorBackgroundButton"
       />
@@ -302,6 +304,7 @@
           :textSubtitleFontSize="textSubtitleFontSize"
           :textButton="textButton"
           :buttonLink="buttonLink"
+          :colorTextButton="colorTextButton"
           :colorBackgroundBanner="colorBackgroundBanner"
           :colorBackgroundButton="colorBackgroundButton"
         />
@@ -323,13 +326,13 @@ export default {
   data() {
     return {
       htmlRaw: "",
-      selectedColor: "#000",
+      colorTextButton: "#fff",
       colorBackgroundBanner: "#fff",
       colorBackgroundButton: "red",
-      pictureLink:
-        "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1.png",
-      pictureLinkMob:
-        "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1_mob.png",
+      pictureLink: "",
+        // "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1.png",
+      pictureLinkMob: "",
+        // "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1_mob.png",
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
       textTitle: "BENITOS CAR SALE",
@@ -352,6 +355,7 @@ export default {
         "Main_right",
         "Img_left",
         "Img_right",
+        "Img_bg_full_text_left",
       ],
     };
     // mobTheme: "Main_mob",
@@ -372,7 +376,7 @@ export default {
         vm.textSubtitleFontSize,
         vm.textButton,
         vm.buttonLink,
-        vm.selectedColor,
+        vm.colorTextButton,
         vm.colorBackgroundBanner,
         vm.colorBackgroundButton,
       ],
@@ -393,6 +397,15 @@ export default {
         value == "Main_right"
       ) {
         this.mobTheme = "Main_mob";
+      } else if (value == "Img_left" || value == "Img_right") {
+        console.log(value);
+        this.mobTheme = "Img_left_right_mob";
+      } else if (
+        value == "Img_bg_full_text_left" ||
+        value == "Img_bg_full_text_right"
+      ) {
+        console.log(value);
+        this.mobTheme = "Img_bg_full_mob";
       } else {
         this.mobTheme = value + "_mob";
       }
