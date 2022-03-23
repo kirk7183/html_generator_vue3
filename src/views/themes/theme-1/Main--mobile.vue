@@ -1,34 +1,36 @@
 <template>
-  <!--DESKTOP OBJ3 right text-->
+  <!--MOBILE-->
   <div
-    id="theme"
-    class="gpm-hfm"
+    class="gpm-only"
+    id="mobile"
     style="
-      width: 99%;
       position: relative;
       font-family: 'Montserrat', sans-serif;
+      background-size: 2000px 720px;
+      height: 720px;
     "
+    :style="{ background: `url('${pictureLink}')no-repeat center center` }"
   >
-    <img style="display: block; width: 100%" :src="pictureLink" alt="" />
     <div
       class="wrapper"
       style="
         position: absolute;
         top: 40%;
-        right: 12.5%;
-        transform: translate(12.5%, -28%);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
         color: #fff;
-        text-align: right;
+        text-align: center;
       "
     >
       <div
         class="text1"
         style="
-          font-size: calc(10px + 1vw);
+          font-size: calc(14px + 1vw);
+          margin-top: 2vw;
           font-family: 'Montserrat', sans-serif;
           font-weight: 400;
         "
-        :style="WelcomeFontSize"
       >
         {{ textWelcome }}
       </div>
@@ -40,35 +42,37 @@
           font-weight: 900;
           letter-spacing: 2px;
         "
-        :style="TitleFontSize"
       >
         {{ textTitle }}
       </div>
       <div
         class="wrapper-text"
         style="
-          width: 100%;
           display: flex;
-          justify-content: right;
+          justify-content: center;
+          gap: 2vw;
           margin-bottom: 1vw;
-          font-size: calc(8px + 1vw);
+          font-size: calc(12px + 1vw);
           font-family: 'Montserrat', sans-serif;
           font-weight: 400;
           font-style: italic;
         "
       >
-        <div class="wr-text1" :style="SubtitleFontSize">{{ textSubtitle }}</div>
+        <div class="wr-text1">{{ textSubtitle }}</div>
       </div>
-      <a :href="buttonLink">
+      <a class="hover-1" :href="buttonLink">
         <span
-          class="buttonMain button-1 hover-1"
+          class="buttonMain"
           style="
+            margin-top: calc(20px + 3vw);
+            background: #000;
             display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
             width: fit-content;
             text-align: center;
-            font-size: calc(1px + 1vw);
-            padding: 0.5vw 1.2vw;
-            margin-left: auto;
+            font-size: calc(12px + 1vw);
+            padding: calc(10px + 0.1vw) 2.7vw;
           "
           :style="{ background: colorBackgroundButton }"
         >
@@ -76,13 +80,16 @@
         </span>
       </a>
     </div>
+    <div class="gradient" style="height: 100%">
+      <img style="width: 100%; height: 100%" src="" alt="" />
+    </div>
   </div>
-  <!-- /DESKTOP OBJ3-->
+  <!-- /MOBILE-->
 </template>
 
 <script>
 export default {
-  name: "main_right",
+  name: "main_mobile",
   props: [
     "pictureLink",
     "textWelcome",
@@ -90,29 +97,10 @@ export default {
     "textSubtitle",
     "textButton",
     "buttonLink",
-    "textWelcomeFontSize",
-    "textTitleFontSize",
-    "textSubtitleFontSize",
     "colorBackgroundButton",
   ],
-  data() {
-    return {};
-  },
-  mounted() {},
-  watch: {},
-  computed: {
-    WelcomeFontSize() {
-      return "font-size: calc(" + this.textWelcomeFontSize + "px + 1vw)";
-    },
-    TitleFontSize() {
-      return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
-    },
-    SubtitleFontSize() {
-      return "font-size: calc(" + this.textSubtitleFontSize + "px + 1vw)";
-    },
-  },
-  methods: {},
 };
 </script>
 
-<style></style>
+<style>
+</style>
