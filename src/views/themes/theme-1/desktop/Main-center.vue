@@ -1,10 +1,10 @@
 <template>
-  <!--DESKTOP OBJ3 right text-->
+  <!--DESKTOP OBJ2 center text-->
   <div
     id="theme"
     class="gpm-hfm"
     style="
-      width: 99%;
+      width: 100%;
       position: relative;
       font-family: 'Montserrat', sans-serif;
     "
@@ -14,11 +14,11 @@
       class="wrapper"
       style="
         position: absolute;
-        top: 40%;
-        right: 12.5%;
-        transform: translate(12.5%, -28%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         color: #fff;
-        text-align: right;
+        text-align: center;
       "
     >
       <div
@@ -48,8 +48,6 @@
         class="wrapper-text"
         style="
           width: 100%;
-          display: flex;
-          justify-content: right;
           margin-bottom: 1vw;
           font-size: calc(8px + 1vw);
           font-family: 'Montserrat', sans-serif;
@@ -64,31 +62,40 @@
           class="buttonMain button-1 hover-1"
           style="
             display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
             width: fit-content;
             text-align: center;
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
-            margin-left: auto;
           "
-          :style="{ background: colorBackgroundButton, color: colorTextButton, border: '0.1px solid ' + colorBackgroundButton }"
+          :style="[
+            btnStyle,
+            {
+              background: colorBackgroundButton,
+              color: colorTextButton,
+              border: '0.1px solid ' + colorBackgroundButton,
+            },
+          ]"
         >
           {{ textButton }}
         </span>
       </a>
     </div>
   </div>
-  <!-- /DESKTOP OBJ3-->
+  <!-- /DESKTOP OBJ2-->
 </template>
 
 <script>
 export default {
-  name: "main_right",
+  name: "main_center",
   props: [
     "pictureLink",
     "textWelcome",
     "textTitle",
     "textSubtitle",
     "textButton",
+    "btnStyle",
     "buttonLink",
     "textWelcomeFontSize",
     "textTitleFontSize",

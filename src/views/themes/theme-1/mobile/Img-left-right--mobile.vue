@@ -3,11 +3,8 @@
   <div
     id="mobile"
     class="gpm-only"
-    style="
-      font-family: 'Montserrat', sans-serif;
-      margin: 8vw 0;
-    "
-    :style="{background: colorBackgroundBanner}"
+    style="font-family: 'Montserrat', sans-serif; margin: 8vw 0"
+    :style="{ background: colorBackgroundBanner }"
   >
     <div
       class="wrapper-of-card"
@@ -62,11 +59,14 @@
             font-size: calc(10px + 1vw);
             padding: calc(10px + 0.1vw) 2.7vw;
           "
-          :style="{
-            background: colorBackgroundButton,
-            color: colorTextButton,
-            border: '0.1px solid ' + colorBackgroundButton,
-          }"
+          :style="[
+            btnStyle,
+            {
+              background: colorBackgroundButton,
+              color: colorTextButton,
+              border: '0.1px solid ' + colorBackgroundButton,
+            },
+          ]"
         >
           {{ textButton }}
         </span>
@@ -75,7 +75,7 @@
     <div class="wrapper-image" style="width: 100%">
       <img
         style="width: 100%; vertical-align: bottom"
-        :src="pictureLink"
+        :src="pictureLinkMob"
         alt=""
       />
     </div>
@@ -87,15 +87,15 @@
 export default {
   name: "Img_left_mobile",
   props: [
-    // "pictureLinkMob",
-    "pictureLink",
+    "pictureLinkMob",
     "textTitle",
     "textSubtitle",
     "textButton",
+    "btnStyle",
     "buttonLink",
     "colorTextButton",
-    "colorBackgroundButton",
     "colorBackgroundBanner",
+    "colorBackgroundButton",
   ],
 };
 </script>

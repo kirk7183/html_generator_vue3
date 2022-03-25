@@ -4,7 +4,7 @@
     id="theme"
     class="gpm-hfm"
     style="
-      width: 99%;
+      width: 100%;
       position: relative;
       font-family: 'Montserrat', sans-serif;
     "
@@ -76,7 +76,14 @@
             font-size: calc(1px + 1vw);
             padding: 0.5vw 1.2vw;
           "
-          :style="{ background: colorBackgroundButton, color: colorTextButton , border: '0.1px solid ' + colorBackgroundButton, }"
+          :style="[
+            btnStyle,
+            {
+              background: colorBackgroundButton,
+              color: colorTextButton,
+              border: '0.1px solid ' + colorBackgroundButton,
+            },
+          ]"
           @mouseup="getSelectedText($event)"
           >{{ textButton }}
         </span>
@@ -95,6 +102,7 @@ export default {
     "textTitle",
     "textSubtitle",
     "textButton",
+    "btnStyle",
     "buttonLink",
     "textWelcomeFontSize",
     "textTitleFontSize",

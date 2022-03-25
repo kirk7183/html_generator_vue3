@@ -5,21 +5,15 @@
     class="gpm-hfm"
     style="
       font-family: 'Montserrat', sans-serif;
-
+      background: #fff;
       margin: 2vw 8.8vw;
+      background-size: cover;
     "
-    :style="{ background: colorBackgroundBanner }"
+    :style="{ backgroundImage: 'url(\'' + pictureLink + '\')' }"
   >
     <div class="wrapper-of-card" style="display: flex; gap: 3vw">
-      <div class="box-card-left" style="width: 40%">
-        <img
-          style="width: 100%; vertical-align: bottom"
-          :src="pictureLink"
-          alt=""
-        />
-      </div>
       <div
-        class="box-card-right"
+        class="box-card-left"
         style="
           width: 60%;
           display: flex;
@@ -28,7 +22,8 @@
           gap: 1vw;
         "
       >
-        <div class="box-card-right-one" style="width: 90%; text-align: right">
+        <div class="box-card-left-one" style="width: 5%"></div>
+        <div class="box-card-left-two" style="width: 90%; text-align: left">
           <div
             class="box-card-title"
             style="
@@ -47,7 +42,7 @@
               font-size: calc(8px + 0.5vw);
               font-family: 'Montserrat', sans-serif;
               font-weight: 400;
-              padding: 1vw 0 1vw 5vw;
+              padding: 1vw 5vw 1vw 0;
             "
             :style="SubtitleFontSize"
           >
@@ -58,27 +53,32 @@
               class="buttonMain"
               style="
                 display: inline-block;
-                margin-left: auto;
+                margin-right: auto;
                 width: 30%;
                 text-align: center;
                 font-size: calc(1px + 1vw);
                 padding: 0.5vw 0.2vw;
               "
-              :style="{
-                background: colorBackgroundButton,
-                color: colorTextButton,
-                border: '0.1px solid ' + colorBackgroundButton,
-              }"
+              :style="[
+                btnStyle,
+                {
+                  background: colorBackgroundButton,
+                  color: colorTextButton,
+                  border: '0.1px solid ' + colorBackgroundButton,
+                },
+              ]"
             >
               {{ textButton }}
             </span>
           </a>
         </div>
-        <div
-          class="box-card-right-two"
-          style="width: 5%"
-          :style="{ 'border-left': '3px solid ' + colorBackgroundButton }"
-        ></div>
+      </div>
+      <div class="box-card-right" style="width: 40%">
+        <img
+          style="width: 100%; vertical-align: bottom"
+          :src="pictureLinkMob"
+          alt=""
+        />
       </div>
     </div>
   </div>
@@ -87,13 +87,15 @@
 
 <script>
 export default {
-  name: "img_left",
+  name: "img_bg_full_text-left",
   props: [
     "pictureLink",
+    "pictureLinkMob",
     // "textWelcome",
     "textTitle",
     "textSubtitle",
     "textButton",
+    "btnStyle",
     "buttonLink",
     // "textWelcomeFontSize",
     "textTitleFontSize",
@@ -102,6 +104,7 @@ export default {
     "colorBackgroundBanner",
     "colorBackgroundButton",
   ],
+
   computed: {
     TitleFontSize() {
       return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";

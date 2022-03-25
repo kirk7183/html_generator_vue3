@@ -1,9 +1,12 @@
 <template>
   <!--MOBILE-->
   <div
-    id="mobile"
     class="gpm-only"
-    style="font-family: 'Montserrat', sans-serif; margin: 8vw 0"
+    style="
+      font-family: 'Montserrat', sans-serif;
+      background: #000;
+      margin: 8vw 0;
+    "
     :style="{ background: colorBackgroundBanner }"
   >
     <div
@@ -59,11 +62,14 @@
             font-size: calc(10px + 1vw);
             padding: calc(10px + 0.1vw) 2.7vw;
           "
-          :style="{
-            background: colorBackgroundButton,
-            color: colorTextButton,
-            border: '0.1px solid ' + colorBackgroundButton,
-          }"
+          :style="[
+            btnStyle,
+            {
+              background: colorBackgroundButton,
+              color: colorTextButton,
+              border: '0.1px solid ' + colorBackgroundButton,
+            },
+          ]"
         >
           {{ textButton }}
         </span>
@@ -82,12 +88,13 @@
 
 <script>
 export default {
-  name: "Img_left_mobile",
+  name: "Img_left_reverse_mobile",
   props: [
     "pictureLinkMob",
     "textTitle",
     "textSubtitle",
     "textButton",
+    "btnStyle",
     "buttonLink",
     "colorTextButton",
     "colorBackgroundBanner",
