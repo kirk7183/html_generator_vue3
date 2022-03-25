@@ -13,5 +13,10 @@ export default {
   props: {
     type: { type: String, required: true },
   },
+  // watch: {
+  //   type(value) {
+  //     console.log(value);
+  //   },
+  // },
 };
 </script>

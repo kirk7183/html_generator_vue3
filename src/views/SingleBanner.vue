@@ -1,14 +1,17 @@
 <template>
   <div class="home">
+    <p :style="{ color: messageColor }" style="text-align: center; margin: 0">
+      {{ message }}
+    </p>
     <div class="wrapper flex">
       <div class="groupWrapper div1">
         <!--SELECT THEME-->
         <label for="themeSelect">Please select theme by name:</label>
         <br />
-        <select name="themeSelect" v-model="themeSelected">
+        <select name="themeSelect" v-model="bannerSelected">
           <option disabled selected>-- Select the theme --</option>
           <option
-            v-for="(singleTheme, i) in themes"
+            v-for="(singleTheme, i) in banners"
             :key="i"
             :value="singleTheme"
           >
@@ -30,11 +33,7 @@
           Please select picture position on banner:
         </label>
         <br />
-        <select
-          disabled
-          name="picturePositionSelect"
-          v-model="picturePositionSelected"
-        >
+        <select disabled name="picturePositionSelect">
           <option disabled selected>-- Select picture position --</option>
         </select>
       </div>
@@ -182,6 +181,7 @@
           >Please enter MOB / BLANK picture link:</label
         >
         <br />
+        <!-- :disabled="disabled" -->
         <input
           type="text"
           style="width: 95%"
@@ -193,16 +193,35 @@
         />
         <br />
         <!--BUTTON TEXT-->
-        <label for="textButton">Please enter button text:</label>
-        <br />
-        <input
-          autocomplete="off"
-          type="text"
-          minlength="3"
-          maxlength="40"
-          size="20"
-          v-model="textButton"
-        />
+        <div class="inline">
+          <label for="textButton">Enter button text:</label>
+          <br />
+          <input
+            autocomplete="off"
+            type="text"
+            minlength="3"
+            maxlength="40"
+            size="20"
+            v-model="textButton"
+          />
+        </div>
+
+        <!--BUTTON VISUAL LOOK-->
+        <div class="inline">
+          <label for="visualButton">Select button look:</label>
+          <div class="">
+            <select id="buttonVisuaLook" v-model="btnVisualLook">
+              <option disabled selected>-- Select button look --</option>
+              <option
+                v-for="(singleBtnVisualLook, i) in buttonVisualLook"
+                :key="i"
+                :value="singleBtnVisualLook.name"
+              >
+                {{ singleBtnVisualLook.name }}
+              </option>
+            </select>
+          </div>
+        </div>
         <br />
         <!-- BUTTON LINK SELECT FROM LIST-->
         <label for="buttonLinkText"
@@ -275,7 +294,7 @@
     <div id="preview">
       <dynamic-component
         ref="passClick"
-        :type="themeSelected"
+        :type="bannerSelected"
         :pictureLink="pictureLink"
         :pictureLinkMob="pictureLinkMob"
         :textWelcome="textWelcome"
@@ -285,6 +304,7 @@
         :textSubtitle="textSubtitle"
         :textSubtitleFontSize="textSubtitleFontSize"
         :textButton="textButton"
+        :btnStyle="btnStyle"
         :buttonLink="buttonLink"
         :colorTextButton="colorTextButton"
         :colorBackgroundBanner="colorBackgroundBanner"
@@ -293,7 +313,7 @@
       <!--MOBILE PREVIEW display: none-->
       <div id="mob_preview">
         <dynamicComponentMob
-          :type="mobTheme"
+          :type="mobBanner"
           :pictureLink="pictureLink"
           :pictureLinkMob="pictureLinkMob"
           :textWelcome="textWelcome"
@@ -303,6 +323,7 @@
           :textSubtitle="textSubtitle"
           :textSubtitleFontSize="textSubtitleFontSize"
           :textButton="textButton"
+          :btnStyle="btnStyle"
           :buttonLink="buttonLink"
           :colorTextButton="colorTextButton"
           :colorBackgroundBanner="colorBackgroundBanner"
@@ -317,6 +338,8 @@
 // @ is an alias to /src
 import dynamicComponent from "@/components/DynamicComponent.vue";
 import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
+import { btnStyle } from "@/functions/buttonFn";
+import { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK } from "@/functions/lists";
 export default {
   name: "SingleBanner",
   components: {
@@ -330,9 +353,9 @@ export default {
       colorBackgroundBanner: "#fff",
       colorBackgroundButton: "red",
       pictureLink: "",
-        // "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1.png",
+      // "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1.png",
       pictureLinkMob: "",
-        // "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1_mob.png",
+      // "https://ridermotorsinc.goxee.com/cloud/data/files/1747/My Files/0698-ridermotorsinc/banner2_pic1_ver1_mob.png",
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
       textTitle: "BENITOS CAR SALE",
@@ -340,30 +363,24 @@ export default {
       textSubtitle: "Dreaming about your NEXT CAR?",
       textSubtitleFontSize: 8,
       textButton: "View Inventory",
+      btnVisualLook: "Square",
+      btnStyle: "",
       buttonLink: "",
-      themeSelected: "Main_left",
-      // mobTheme: "Main_left_mob",
-      mobTheme: "Main_mob",
-      bannerSelected: "",
-      picturePositionSelected: "",
+      bannerSelected: "Main_left",
+      mobBanner: "Main_mob",
       finishedBannerCheck: false,
+      message: "",
+      messageColor: "",
       links: LINKS_DUMMY_DATA,
+      buttonVisualLook: BUTTON_LOOK,
       //NEED TO ADD MORE
-      themes: [
-        "Main_left",
-        "Main_center",
-        "Main_right",
-        "Img_left",
-        "Img_right",
-        "Img_bg_full_text_left",
-      ],
+      banners: BANNERS,
     };
-    // mobTheme: "Main_mob",
   },
   mounted() {
     this.$watch(
       (vm) => [
-        vm.themeSelected,
+        vm.bannerSelected,
         vm.bannerSelected,
         vm.picturePositionSelected,
         vm.pictureLink,
@@ -375,6 +392,7 @@ export default {
         vm.textSubtitle,
         vm.textSubtitleFontSize,
         vm.textButton,
+        vm.btnVisualLook,
         vm.buttonLink,
         vm.colorTextButton,
         vm.colorBackgroundBanner,
@@ -389,27 +407,39 @@ export default {
   },
 
   watch: {
-    themeSelected(value) {
+    bannerSelected(value) {
       //Setup mobile theme (for Main we use only 1 mobile theme, the rest we add "_mob")
       if (
         value == "Main_left" ||
         value == "Main_center" ||
         value == "Main_right"
       ) {
-        this.mobTheme = "Main_mob";
+        this.mobBanner = "Main_mob";
+        this.message = null;
       } else if (value == "Img_left" || value == "Img_right") {
-        console.log(value);
-        this.mobTheme = "Img_left_right_mob";
+        this.mobBanner = "Img_left_right_mob";
+        this.message = null;
       } else if (
         value == "Img_bg_full_text_left" ||
+        value == "Img_bg_full_text_center" ||
         value == "Img_bg_full_text_right"
       ) {
-        console.log(value);
-        this.mobTheme = "Img_bg_full_mob";
+        this.mobBanner = "Img_bg_full_mob";
+        this.message =
+          'Dont forget to upload "bank-page.png" file in "MOB / BLANK" line';
+        this.messageColor = "red";
+      } else if (value == "Img_left_reverse" || value == "Img_right_reverse") {
+        this.mobBanner = "Img_left_right_reverse_mob";
+        this.message = null;
       } else {
-        this.mobTheme = value + "_mob";
+        this.mobBanner = value + "_mob";
       }
     },
+    btnVisualLook(value) {
+      //sending data to function "btnStyle" in buttonFn.js, and then return data and setup to this.btnStyle
+      this.btnStyle = btnStyle(value);
+    },
+
     //if 'FINISHED' checked is TRUE
     finishedBannerCheck(value) {
       if (value) {
@@ -421,19 +451,18 @@ export default {
       this.htmlRaw = this.htmlRaw.replace("&gt;", ">");
     },
   },
+
   methods: {
     changeColor() {
       console.log(this.$refs.passClick);
       this.$refs.passClick[0].highlight();
     },
     updateTextArea() {
-      //dynamic get id need to be set
-
       //get by id, then set to String in textArea for desktop
-      var htmlPreview = document.getElementById("theme");
+      var htmlPreview = document.getElementsByClassName("gpm-hfm")[0];
       this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
       //get by id, then set to String in textArea for mobile
-      var htmlPreviewMob = document.getElementById("mobile");
+      var htmlPreviewMob = document.getElementsByClassName("gpm-only")[0];
       this.htmlRaw += new XMLSerializer().serializeToString(htmlPreviewMob);
     },
     //COPY CODE
@@ -447,49 +476,6 @@ export default {
     },
   },
 };
-
-const LINKS_DUMMY_DATA = [
-  {
-    name: "Inventory",
-    link: "/inventory.php",
-  },
-  {
-    name: "Financing",
-    link: "/forms.php?cid=1&t=2",
-  },
-  {
-    name: "TestDrive",
-    link: "/forms.php?cid=1&t=4",
-  },
-  {
-    name: "Offer",
-    link: "/forms.php?cid=1&t=1",
-  },
-  {
-    name: "Trade-In",
-    link: "/forms.php?cid=1&t=5",
-  },
-  {
-    name: "Cash For Your Car",
-    link: "/forms.php?cid=1&t=6",
-  },
-  {
-    name: "Consignment",
-    link: "/forms.php?cid=1&t=3",
-  },
-  {
-    name: "Reviews",
-    link: "/reviews.php",
-  },
-  {
-    name: "About Us",
-    link: "/about.php",
-  },
-  {
-    name: "Contact",
-    link: "/contact.php",
-  },
-];
 </script>
 
 <style scoped>
