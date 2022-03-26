@@ -22,7 +22,11 @@
           gap: 1vw;
         "
       >
-        <div class="box-card-left-one" style="width: 5%"></div>
+        <div
+          class="box-card-left-one"
+          style="width: 5%"
+          :style="{ 'border-right': '3px solid ' + colorBackgroundButton }"
+        ></div>
         <div class="box-card-left-two" style="width: 90%; text-align: left">
           <div
             class="box-card-title"
@@ -116,5 +120,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
