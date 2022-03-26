@@ -1,15 +1,66 @@
 <template>
-  <nav>
-    <router-link to="/">Single Banner</router-link> |
-    <router-link to="/CompleteWebsite">Complete Website</router-link>
-  </nav>
+  <div style="display: flex; align-items: center; justify-content: flex-end">
+    <nav>
+      <router-link to="/">Single Banner</router-link> |
+      <router-link to="/CompleteWebsite">Complete Website</router-link>
+    </nav>
+    <div
+      class="button-wrapper"
+      style="
+        width: 40%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: baseline;
+      "
+    >
+      <div class="checker1" style="padding: 0 10px">
+        <input
+          type="checkbox"
+          id="finishedBanner"
+          name="finishedBanner"
+          value="finishedBanner"
+          v-model="finishedBannerCheck"
+        />
+
+        <label for="finishedBanner"> Finished</label><br />
+      </div>
+      <button
+        id="copyAll"
+        @click="selectCopyClick = !selectCopyClick"
+        style="margin: 0 5px"
+      >
+        Copy Code
+      </button>
+    </div>
+  </div>
 
   <router-view v-slot="{ Component }">
     <keep-alive include="SingleBanner">
-      <component :is="Component" />
+      <component
+        :is="Component"
+        :finishChecker="finishedBannerCheck"
+        :selectCopyClick="selectCopyClick"
+        @isItFinished="checkFinished"
+      />
     </keep-alive>
   </router-view>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      finishedBannerCheck: false,
+      selectCopyClick: false,
+    };
+  },
+  methods: {
+    checkFinished(value) {
+      this.finishedBannerCheck = value;
+    },
+  },
+};
+</script>
 
 <style>
 #app {

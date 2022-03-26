@@ -62,6 +62,7 @@
         <div
           class="box-card-line-middle"
           style="width: 100%; margin-left: auto; margin-right: auto"
+          :style="{ 'border-bottom': '3px solid ' + colorBackgroundButton }"
         ></div>
         <div class="bottom">
           <div
@@ -137,5 +138,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

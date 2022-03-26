@@ -257,11 +257,11 @@
       </div>
       <div class="groupWrapper div4">
         <!--BUTTONS-->
-        <div
+        <!-- <div
           class="button-wrapper"
           style="display: flex; align-items: baseline"
         >
-          <button disabled class="button-right">Generate CODE</button>
+         
           <button id="copyAll" @click="selectCopy()" style="margin: 0 5px">
             Copy Code
           </button>
@@ -276,7 +276,7 @@
 
             <label for="finishedBanner"> Finished</label><br />
           </div>
-        </div>
+        </div> -->
         <br />
         <!--TEXTAREA-->
         <textarea
@@ -342,6 +342,7 @@ import { btnStyle } from "@/functions/buttonFn";
 import { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK } from "@/functions/lists";
 export default {
   name: "SingleBanner",
+  props: ["finishChecker", "selectCopyClick"],
   components: {
     dynamicComponent,
     dynamicComponentMob,
@@ -378,6 +379,7 @@ export default {
     };
   },
   mounted() {
+    this.finishedBannerCheck = this.finishChecker;
     this.$watch(
       (vm) => [
         vm.bannerSelected,
@@ -401,12 +403,19 @@ export default {
       () => {
         this.updateTextArea();
         this.finishedBannerCheck = false;
+        this.$emit("isItFinished", this.finishedBannerCheck);
       },
       { immediate: true, deep: true }
     );
   },
 
   watch: {
+    selectCopyClick() {
+      this.selectCopy();
+    },
+    finishChecker(value) {
+      this.finishedBannerCheck = value;
+    },
     bannerSelected(value) {
       //Setup mobile theme (for Main we use only 1 mobile theme, the rest we add "_mob")
       if (
@@ -442,6 +451,7 @@ export default {
 
     //if 'FINISHED' checked is TRUE
     finishedBannerCheck(value) {
+      console.log(this.finishedBannerCheck);
       if (value) {
         this.updateTextArea();
       }
