@@ -160,6 +160,16 @@
             @click="changeColor"
           ></button>
         </div>
+        <br />
+        <div class="inline">
+          <label class="font11">Show Line</label>
+          <br />
+          <input
+            type="checkbox"
+            :checked="lineCheck"
+            @click="lineCheck = !lineCheck"
+          />
+        </div>
       </div>
 
       <div class="groupWrapper div3">
@@ -309,27 +319,29 @@
         :colorTextButton="colorTextButton"
         :colorBackgroundBanner="colorBackgroundBanner"
         :colorBackgroundButton="colorBackgroundButton"
+        :lineCheck="lineCheck"
       />
-      <!--MOBILE PREVIEW display: none-->
-      <div id="mob_preview">
-        <dynamicComponentMob
-          :type="mobBanner"
-          :pictureLink="pictureLink"
-          :pictureLinkMob="pictureLinkMob"
-          :textWelcome="textWelcome"
-          :textWelcomeFontSize="textWelcomeFontSize"
-          :textTitle="textTitle"
-          :textTitleFontSize="textTitleFontSize"
-          :textSubtitle="textSubtitle"
-          :textSubtitleFontSize="textSubtitleFontSize"
-          :textButton="textButton"
-          :btnStyle="btnStyle"
-          :buttonLink="buttonLink"
-          :colorTextButton="colorTextButton"
-          :colorBackgroundBanner="colorBackgroundBanner"
-          :colorBackgroundButton="colorBackgroundButton"
-        />
-      </div>
+    </div>
+    <!--MOBILE PREVIEW-->
+    <div id="mob_preview">
+      <dynamicComponentMob
+        :type="mobBanner"
+        :pictureLink="pictureLink"
+        :pictureLinkMob="pictureLinkMob"
+        :textWelcome="textWelcome"
+        :textWelcomeFontSize="textWelcomeFontSize"
+        :textTitle="textTitle"
+        :textTitleFontSize="textTitleFontSize"
+        :textSubtitle="textSubtitle"
+        :textSubtitleFontSize="textSubtitleFontSize"
+        :textButton="textButton"
+        :btnStyle="btnStyle"
+        :buttonLink="buttonLink"
+        :colorTextButton="colorTextButton"
+        :colorBackgroundBanner="colorBackgroundBanner"
+        :colorBackgroundButton="colorBackgroundButton"
+        :lineCheck="lineCheck"
+      />
     </div>
   </div>
 </template>
@@ -361,7 +373,7 @@ export default {
       textWelcomeFontSize: 10,
       textTitle: "BENITOS CAR SALE",
       textTitleFontSize: 34,
-      textSubtitle: "Dreaming about your NEXT CAR?",
+      textSubtitle: "Dont dream it, DRIVE IT!",
       textSubtitleFontSize: 8,
       textButton: "View Inventory",
       btnVisualLook: "Square",
@@ -369,12 +381,12 @@ export default {
       buttonLink: "",
       bannerSelected: "Main_left",
       mobBanner: "Main_mob",
+      lineCheck: false,
       finishedBannerCheck: false,
       message: "",
       messageColor: "",
       links: LINKS_DUMMY_DATA,
       buttonVisualLook: BUTTON_LOOK,
-      //NEED TO ADD MORE
       banners: BANNERS,
     };
   },
@@ -399,6 +411,7 @@ export default {
         vm.colorTextButton,
         vm.colorBackgroundBanner,
         vm.colorBackgroundButton,
+        vm.lineCheck,
       ],
       () => {
         this.updateTextArea();
@@ -431,16 +444,22 @@ export default {
       } else if (
         value == "Img_bg_full_text_left" ||
         value == "Img_bg_full_text_center" ||
-        value == "Img_bg_full_text_right"
+        value == "Img_bg_full_text_right" ||
+        value == "Img_bg_no_text_center"
       ) {
         this.mobBanner = "Img_bg_full_mob";
-        this.message =
-          'Dont forget to upload "bank-page.png" file in "MOB / BLANK" line';
+        // this.message =
+        //   'Dont forget to upload "bank-page.png" file in "MOB / BLANK" line';
+        this.message = null;
         this.messageColor = "red";
       } else if (value == "Img_left_reverse" || value == "Img_right_reverse") {
         this.mobBanner = "Img_left_right_reverse_mob";
         this.message = null;
+      } else if (value == "Mini_banner_1") {
+        this.mobBanner = "Mini_banner_1_mob";
+        this.message = null;
       } else {
+        console.log(value);
         this.mobBanner = value + "_mob";
       }
     },
@@ -451,7 +470,6 @@ export default {
 
     //if 'FINISHED' checked is TRUE
     finishedBannerCheck(value) {
-      console.log(this.finishedBannerCheck);
       if (value) {
         this.updateTextArea();
       }
@@ -545,6 +563,9 @@ select {
 }
 .font11 {
   font-size: 11px;
+}
+input[type="checkbox"] {
+  transform: scale(1.2);
 }
 /* .noSpin::-webkit-outer-spin-button,
 .noSpin::-webkit-inner-spin-button {

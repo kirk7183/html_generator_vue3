@@ -8,6 +8,9 @@ const BANNERS = [
     "Img_right",
     "Img_bg_full_text_left",
     "Img_bg_full_text_center",
+    "Img_bg_full_text_right",
+    "Img_bg_no_text_center",
+    "Mini_banner_1"
 ];
 
 const LINKS_DUMMY_DATA = [

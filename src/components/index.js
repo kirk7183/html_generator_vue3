@@ -12,7 +12,13 @@ export { default as Img_bg_full_text_left }
     from '@/views/themes/theme-1/desktop/Img-bg-full-text-left.vue'
 export { default as Img_bg_full_text_center }
     from '@/views/themes/theme-1/desktop/Img-bg-full-text-center.vue'
+export { default as Img_bg_full_text_right }
+    from '@/views/themes/theme-1/desktop/Img-bg-full-text-right.vue'
+export { default as Img_bg_no_text_center }
+    from '@/views/themes/theme-1/desktop/Img-bg-no-text-center.vue'
 export { default as Img_left_reverse }
     from '@/views/themes/theme-1/desktop/Img-left-reverse.vue'
 export { default as Img_right_reverse }
     from '@/views/themes/theme-1/desktop/Img-right-reverse.vue'
+export { default as Mini_banner_1 }
+    from '@/views/themes/theme-1/desktop/Mini-banner1.vue'

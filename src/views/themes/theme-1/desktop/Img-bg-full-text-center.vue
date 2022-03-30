@@ -42,6 +42,7 @@
           flex-direction: column;
           justify-content: space-between;
           align-items: center;
+          gap: 1vw;
           padding: 2vw 0;
         "
       >
@@ -62,7 +63,7 @@
         <div
           class="box-card-line-middle"
           style="width: 100%; margin-left: auto; margin-right: auto"
-          :style="{ 'border-bottom': '3px solid ' + colorBackgroundButton }"
+          :style="{ 'border-bottom': '3px solid ' + ShowLine }"
         ></div>
         <div class="bottom">
           <div
@@ -113,21 +114,29 @@ export default {
   props: [
     "pictureLink",
     "pictureLinkMob",
-    // "textWelcome",
     "textTitle",
     "textSubtitle",
     "textButton",
     "btnStyle",
     "buttonLink",
-    // "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
     "colorTextButton",
     "colorBackgroundBanner",
     "colorBackgroundButton",
+    "lineCheck",
   ],
 
   computed: {
+    ShowLine() {
+      var color;
+      if (this.lineCheck) {
+        color = this.colorBackgroundButton;
+      } else {
+        color = "transparent";
+      }
+      return color;
+    },
     TitleFontSize() {
       return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
     },

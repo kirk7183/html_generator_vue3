@@ -1,21 +1,40 @@
 <template>
-  <!--DESKTOP-->
+  <!--with image DESKTOP - image relative-->
   <div
-    id="theme"
     class="gpm-hfm"
     style="
+      position: relative;
       font-family: 'Montserrat', sans-serif;
       background: #fff;
       margin: 2vw 8.8vw;
-      background-size: cover;
     "
-    :style="{ backgroundImage: 'url(\'' + pictureLink + '\')' }"
   >
-    <div class="wrapper-of-card" style="display: flex; gap: 3vw">
+    <div class="box-card-bg-img" style="width: 100%">
+      <img
+        style="
+          width: 100%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        "
+        :src="pictureLink"
+        alt=""
+      />
+    </div>
+
+    <div
+      class="wrapper-of-card"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        width: 60%;
+      "
+    >
       <div
         class="box-card-left"
         style="
-          width: 60%;
           display: flex;
           justify-content: space-between;
           align-self: center;
@@ -25,7 +44,7 @@
         <div
           class="box-card-left-one"
           style="width: 5%"
-          :style="{ 'border-right': '3px solid ' + colorBackgroundButton }"
+          :style="{ 'border-right': '3px solid ' + ShowLine }"
         ></div>
         <div class="box-card-left-two" style="width: 90%; text-align: left">
           <div
@@ -77,16 +96,12 @@
           </a>
         </div>
       </div>
-      <div class="box-card-right" style="width: 40%">
-        <img
-          style="width: 100%; vertical-align: bottom"
-          :src="pictureLinkMob"
-          alt=""
-        />
-      </div>
+      <!-- <div class="box-card-right" style="width: 40%; ">
+                <img style="width: 100%; vertical-align: bottom;" src="********BLANK PAGE**********" alt="">
+            </div> -->
     </div>
   </div>
-  <!-- /DESKTOP-->
+  <!-- /with image DESKTOP - image relative-->
 </template>
 
 <script>
@@ -95,21 +110,29 @@ export default {
   props: [
     "pictureLink",
     "pictureLinkMob",
-    // "textWelcome",
     "textTitle",
     "textSubtitle",
     "textButton",
     "btnStyle",
     "buttonLink",
-    // "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
     "colorTextButton",
     "colorBackgroundBanner",
     "colorBackgroundButton",
+    "lineCheck",
   ],
 
   computed: {
+    ShowLine() {
+      var color;
+      if (this.lineCheck) {
+        color = this.colorBackgroundButton;
+      } else {
+        color = "transparent";
+      }
+      return color;
+    },
     TitleFontSize() {
       return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
     },

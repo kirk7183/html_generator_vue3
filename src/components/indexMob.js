@@ -6,3 +6,5 @@ export { default as Img_bg_full_mob }
     from '@/views/themes/theme-1/mobile/Img-bg-full--mobile.vue'
 export { default as Img_left_right_reverse_mob }
     from '@/views/themes/theme-1/mobile/Img-left-right-reverse--mobile.vue'
+export { default as Mini_banner_1_mob }
+    from '@/views/themes/theme-1/mobile/Mini-banner1--mobile.vue'

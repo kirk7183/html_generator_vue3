@@ -20,7 +20,7 @@
         <div
           class="box-card-left-one"
           style="width: 5%"
-          :style="{ 'border-right': '3px solid ' + colorBackgroundButton }"
+          :style="{ 'border-right': '3px solid ' + ShowLine }"
         ></div>
         <div class="box-card-left-two" style="width: 90%; text-align: left">
           <div
@@ -89,20 +89,28 @@ export default {
   name: "img_right",
   props: [
     "pictureLink",
-    // "textWelcome",
     "textTitle",
     "textSubtitle",
     "textButton",
     "btnStyle",
     "buttonLink",
-    // "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
     "colorTextButton",
     "colorBackgroundBanner",
     "colorBackgroundButton",
+    "lineCheck",
   ],
   computed: {
+    ShowLine() {
+      var color;
+      if (this.lineCheck) {
+        color = this.colorBackgroundButton;
+      } else {
+        color = "transparent";
+      }
+      return color;
+    },
     TitleFontSize() {
       return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
     },
