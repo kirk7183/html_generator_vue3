@@ -68,7 +68,7 @@
       </div>
       <a :href="buttonLink">
         <span
-          class="buttonMain button-1 hover-1"
+          class="buttonMain"
           style="
             display: inline-block;
             width: fit-content;
@@ -117,7 +117,9 @@ export default {
       selectedText: "",
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this.colorBackgroundButton);
+  },
   watch: {},
   computed: {
     WelcomeFontSize() {

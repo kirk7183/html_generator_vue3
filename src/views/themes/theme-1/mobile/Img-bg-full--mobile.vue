@@ -32,7 +32,7 @@
       <div
         class="box-card-line-middle"
         style="width: 100%; height: 0; margin-left: auto; margin-right: auto"
-        :style="{ 'border-bottom': '3px solid ' + colorBackgroundButton }"
+        :style="{ 'border-bottom': '3px solid ' + ShowLine }"
       ></div>
       <div
         class="box-card-text"
@@ -75,7 +75,7 @@
     <div class="wrapper-image" style="width: 100%">
       <img
         style="width: 100%; vertical-align: bottom"
-        :src="pictureLink"
+        :src="pictureLinkMob"
         alt=""
       />
     </div>
@@ -87,7 +87,7 @@
 export default {
   name: "Img_left_mobile",
   props: [
-    // "pictureLinkMob",
+    "pictureLinkMob",
     "pictureLink",
     "textTitle",
     "textSubtitle",
@@ -97,7 +97,19 @@ export default {
     "colorTextButton",
     "colorBackgroundButton",
     "colorBackgroundBanner",
+    "lineCheck",
   ],
+  computed: {
+    ShowLine() {
+      var color;
+      if (this.lineCheck) {
+        color = this.colorBackgroundButton;
+      } else {
+        color = "transparent";
+      }
+      return color;
+    },
+  },
 };
 </script>
 

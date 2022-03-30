@@ -1,32 +1,32 @@
 <template>
-  <!--DESKTOP-->
+  <!--without image DESKTOP-->
   <div
     class="gpm-hfm"
-    style="
-      font-family: 'Montserrat', sans-serif;
-      background: #000;
-      margin: 2vw 8.8vw;
-    "
+    style="font-family: 'Montserrat', sans-serif; margin: 2vw 8.8vw"
     :style="{ background: colorBackgroundBanner }"
   >
-    <div class="wrapper-of-card" style="display: flex; gap: 3vw">
+    <div
+      class="box-card-about-us"
+      style="
+        width: 50%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      "
+    >
       <div
-        class="box-card-left"
+        class="box-card-center"
         style="
-          width: 60%;
+          width: 100%;
           display: flex;
+          flex-direction: column;
           justify-content: space-between;
-          align-self: center;
-          flex-direction: row-reverse;
+          align-items: center;
           gap: 1vw;
+          padding: 2vw 0;
         "
       >
-        <div
-          class="box-card-left-one"
-          style="width: 5%"
-          :style="{ 'border-right': '3px solid ' + ShowLine }"
-        ></div>
-        <div class="box-card-left-two" style="width: 90%; text-align: right">
+        <div class="top">
           <div
             class="box-card-title"
             style="
@@ -39,13 +39,20 @@
           >
             {{ textTitle }}
           </div>
+        </div>
+        <div
+          class="box-card-line-middle"
+          style="width: 100%; margin-left: auto; margin-right: auto"
+          :style="{ 'border-bottom': '3px solid ' + ShowLine }"
+        ></div>
+        <div class="bottom">
           <div
             class="box-card-text"
             style="
               font-size: calc(8px + 0.5vw);
               font-family: 'Montserrat', sans-serif;
               font-weight: 400;
-              padding: 1vw 0 1vw 5vw;
+              padding: 1vw 0 1vw 0;
             "
             :style="SubtitleFontSize"
           >
@@ -56,11 +63,11 @@
               class="buttonMain"
               style="
                 display: inline-block;
+                margin-left: auto;
                 margin-right: auto;
-                width: 30%;
                 text-align: center;
                 font-size: calc(1px + 1vw);
-                padding: 0.5vw 0.2vw;
+                padding: 0.5vw 1.2vw;
               "
               :style="[
                 btnStyle,
@@ -76,23 +83,17 @@
           </a>
         </div>
       </div>
-      <div class="box-card-right" style="width: 40%">
-        <img
-          style="width: 100%; vertical-align: bottom"
-          :src="pictureLink"
-          alt=""
-        />
-      </div>
     </div>
   </div>
-  <!-- /DESKTOP-->
+  <!-- /without image DESKTOP-->
 </template>
 
 <script>
 export default {
-  name: "img_right_reverse",
+  name: "img_bg_no_text-center",
   props: [
     "pictureLink",
+    "pictureLinkMob",
     "textTitle",
     "textSubtitle",
     "textButton",
@@ -105,6 +106,7 @@ export default {
     "colorBackgroundButton",
     "lineCheck",
   ],
+
   computed: {
     ShowLine() {
       var color;

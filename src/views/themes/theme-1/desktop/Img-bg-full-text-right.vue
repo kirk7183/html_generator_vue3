@@ -1,32 +1,47 @@
 <template>
-  <!--DESKTOP-->
+  <!--with image DESKTOP - image relative-->
   <div
     class="gpm-hfm"
     style="
+      position: relative;
       font-family: 'Montserrat', sans-serif;
-      background: #000;
+      background: #fff;
       margin: 2vw 8.8vw;
     "
-    :style="{ background: colorBackgroundBanner }"
   >
-    <div class="wrapper-of-card" style="display: flex; gap: 3vw">
+    <div class="box-card-bg-img" style="width: 100%">
+      <img
+        style="
+          width: 100%;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        "
+        :src="pictureLink"
+        alt=""
+      />
+    </div>
+
+    <div
+      class="wrapper-of-card"
+      style="
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%);
+        width: 60%;
+      "
+    >
       <div
         class="box-card-left"
         style="
-          width: 60%;
           display: flex;
           justify-content: space-between;
           align-self: center;
-          flex-direction: row-reverse;
           gap: 1vw;
         "
       >
-        <div
-          class="box-card-left-one"
-          style="width: 5%"
-          :style="{ 'border-right': '3px solid ' + ShowLine }"
-        ></div>
-        <div class="box-card-left-two" style="width: 90%; text-align: right">
+        <div class="box-card-left-one" style="width: 90%; text-align: right">
           <div
             class="box-card-title"
             style="
@@ -75,24 +90,26 @@
             </span>
           </a>
         </div>
+        <div
+          class="box-card-left-two"
+          style="width: 5%"
+          :style="{ 'border-left': '3px solid ' + ShowLine }"
+        ></div>
       </div>
-      <div class="box-card-right" style="width: 40%">
-        <img
-          style="width: 100%; vertical-align: bottom"
-          :src="pictureLink"
-          alt=""
-        />
-      </div>
+      <!-- <div class="box-card-right" style="width: 40%; ">
+                <img style="width: 100%; vertical-align: bottom;" src="********BLANK PAGE**********" alt="">
+            </div> -->
     </div>
   </div>
-  <!-- /DESKTOP-->
+  <!-- /with image DESKTOP - image relative-->
 </template>
 
 <script>
 export default {
-  name: "img_right_reverse",
+  name: "img_bg_full_text-left",
   props: [
     "pictureLink",
+    "pictureLinkMob",
     "textTitle",
     "textSubtitle",
     "textButton",
@@ -105,6 +122,7 @@ export default {
     "colorBackgroundButton",
     "lineCheck",
   ],
+
   computed: {
     ShowLine() {
       var color;
@@ -125,5 +143,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -3,11 +3,7 @@
   <div
     id="theme"
     class="gpm-hfm"
-    style="
-      font-family: 'Montserrat', sans-serif;
-
-      margin: 2vw 8.8vw;
-    "
+    style="font-family: 'Montserrat', sans-serif; margin: 2vw 8.8vw"
     :style="{ background: colorBackgroundBanner }"
   >
     <div class="wrapper-of-card" style="display: flex; gap: 3vw">
@@ -80,7 +76,7 @@
         <div
           class="box-card-right-two"
           style="width: 5%"
-          :style="{ 'border-left': '3px solid ' + colorBackgroundButton }"
+          :style="{ 'border-left': '3px solid ' + ShowLine }"
         ></div>
       </div>
     </div>
@@ -93,20 +89,28 @@ export default {
   name: "img_left",
   props: [
     "pictureLink",
-    // "textWelcome",
     "textTitle",
     "textSubtitle",
     "textButton",
     "btnStyle",
     "buttonLink",
-    // "textWelcomeFontSize",
     "textTitleFontSize",
     "textSubtitleFontSize",
     "colorTextButton",
     "colorBackgroundBanner",
     "colorBackgroundButton",
+    "lineCheck",
   ],
   computed: {
+    ShowLine() {
+      var color;
+      if (this.lineCheck) {
+        color = this.colorBackgroundButton;
+      } else {
+        color = "transparent";
+      }
+      return color;
+    },
     TitleFontSize() {
       return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
     },
