@@ -1,7 +1,8 @@
 <template>
   <div style="display: flex; align-items: center; justify-content: flex-end">
     <nav>
-      <router-link to="/">Single Banner</router-link> |
+      <router-link to="/">Main Page</router-link> |
+      <router-link to="/SingleBanner">Single Banner</router-link> |
       <router-link to="/CompleteWebsite">Complete Website</router-link>
     </nav>
     <div
@@ -35,7 +36,7 @@
   </div>
 
   <router-view v-slot="{ Component }">
-    <keep-alive include="SingleBanner">
+    <keep-alive include="[SingleBanner, MainPage]">
       <component
         :is="Component"
         :finishChecker="finishedBannerCheck"
@@ -63,6 +64,9 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -71,7 +75,7 @@ export default {
 }
 
 nav {
-  padding: 30px;
+  padding: 20px 30px;
   text-align: center;
 }
 

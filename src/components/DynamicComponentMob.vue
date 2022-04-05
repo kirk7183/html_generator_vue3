@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import * as components from "./indexMob";
+import * as components from "./dynamicComponentMob.js";
 
 export default {
   components: {
