@@ -118,7 +118,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.colorBackgroundButton);
+    // console.log(this.colorBackgroundButton);
   },
   watch: {},
   computed: {

@@ -1,0 +1,1 @@
+export { default as BannersAndPictures } from '@/views/options/BannersAndPictures.vue'

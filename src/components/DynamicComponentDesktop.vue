@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import * as components from "./index";
+import * as components from "./dynamicComponentDesktop.js";
 
 export default {
   components: {

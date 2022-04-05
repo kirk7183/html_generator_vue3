@@ -348,7 +348,7 @@
 
 <script>
 // @ is an alias to /src
-import dynamicComponent from "@/components/DynamicComponent.vue";
+import dynamicComponent from "@/components/DynamicComponentDesktop.vue";
 import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
 import { btnStyle } from "@/functions/buttonFn";
 import { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK } from "@/functions/lists";
@@ -395,7 +395,7 @@ export default {
     this.$watch(
       (vm) => [
         vm.bannerSelected,
-        vm.bannerSelected,
+        // vm.bannerSelected,
         vm.picturePositionSelected,
         vm.pictureLink,
         vm.pictureLinkMob,
