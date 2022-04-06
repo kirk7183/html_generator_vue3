@@ -1,41 +1,44 @@
 <template>
-  <main id="app">
-    <header>
-      <nav>
-        <ul>
-          <li v-for="(tab, tabName) in tabs" :key="tabName">
-            <button
-              class="tab"
-              @click="setTabActive(tabName)"
-              :class="{ active: tabName === activeTab }"
-            >
-              <span class="tab-copy">{{ tabName }}</span>
-              <span class="tab-background">
-                <span class="tab-rounding left"></span>
-                <span class="tab-rounding right"></span>
-              </span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <article>
-      <div class="container">
-        <banner-options :tab_type="tab_type" />
-      </div>
-    </article>
-  </main>
-  <!--PREVIEW-->
-  <div id="preview">
-    <dynamic-component
-      :type="bannerSelected"
-      :textWelcome="textWelcome"
-      :textWelcomeFontSize="textWelcomeFontSize"
-      :textTitle="textTitle"
-      :textTitleFontSize="textTitleFontSize"
-      :textSubtitle="textSubtitle"
-      :textSubtitleFontSize="textSubtitleFontSize"
-    />
+  <div>
+    <main>
+      <header>
+        <nav>
+          <ul>
+            <li v-for="(tabData, tabName) in tabs" :key="tabName">
+              <button
+                class="tab"
+                @click="setTabActive(tabName, tabData)"
+                :class="{ active: tabName === activeTab }"
+              >
+                <span class="tab-copy">{{ tabName }}</span>
+                <span class="tab-background">
+                  <span class="tab-rounding left"></span>
+                  <span class="tab-rounding right"></span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <article>
+        <div class="container">
+          <banner-options :tab_type="tab_type" />
+        </div>
+      </article>
+    </main>
+    <!--PREVIEW-->
+    <div id="preview">
+      <dynamic-component
+        style="border: 1px solid red; overflow: hidden"
+        :type="bannerSelected"
+        :textWelcome="textWelcome"
+        :textWelcomeFontSize="textWelcomeFontSize"
+        :textTitle="textTitle"
+        :textTitleFontSize="textTitleFontSize"
+        :textSubtitle="textSubtitle"
+        :textSubtitleFontSize="textSubtitleFontSize"
+      />
+    </div>
   </div>
 </template>
 
@@ -43,17 +46,11 @@
 import dynamicComponent from "@/components/DynamicComponentDesktop.vue";
 import bannerOptions from "@/components/BannerOptions.vue";
 export default {
-  name: "mainPage",
+  name: "MainPage",
   props: ["finishChecker", "selectCopyClick"],
   components: {
     dynamicComponent,
     bannerOptions,
-    // bannersAndPictures,
-    // TabContent: {
-    //   props: {
-    //     data: Object,
-    //   },
-    // },
   },
 
   data() {
@@ -71,18 +68,32 @@ export default {
       message: "Hello",
       tabs: {
         "Banners & pictures": {
+          tab_type: "BannersAndPictures",
           title: "Awesome123 Title",
           body: "123Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
         },
         "Text & Fonts": {
+          tab_type: "TextAndFonts",
           title: "This is great",
           body: "Lorem ipsasdfasdfasd alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
         },
-        "Buttons & links": {
+        "Buttons & Links": {
+          tab_type: "ButtonsAndLinks",
           title: "Look I'm a title!",
           body: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam aliasdfasdfaas architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
         },
         Additionals: {
+          tab_type: "Additionals",
+          title: "banners",
+          body: "SSSSLorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
+        },
+        Theme: {
+          tab_type: "Additionals",
+          title: "banners",
+          body: "SSSSLorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
+        },
+        "Mobile Version": {
+          tab_type: "Additionals",
           title: "banners",
           body: "SSSSLorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
         },
@@ -93,23 +104,52 @@ export default {
   mounted() {
     this.finishedBannerCheck = this.finishChecker;
     this.$watch(
-      (vm) => [vm.bannerSelected],
+      (vm) => [
+        vm.bannerSelected,
+        // vm.bannerSelected,
+        // vm.picturePositionSelected,
+        // vm.pictureLink,
+        // vm.pictureLinkMob,
+        // vm.textWelcome,
+        // vm.textWelcomeFontSize,
+        // vm.textTitle,
+        // vm.textTitleFontSize,
+        // vm.textSubtitle,
+        // vm.textSubtitleFontSize,
+        // vm.textButton,
+        // vm.btnVisualLook,
+        // vm.buttonLink,
+        // vm.colorTextButton,
+        // vm.colorBackgroundBanner,
+        // vm.colorBackgroundButton,
+        // vm.lineCheck,
+      ],
       () => {
+        // this.updateTextArea();
         this.finishedBannerCheck = false;
         this.$emit("isItFinished", this.finishedBannerCheck);
-        console.log(this.finishedBannerCheck);
       },
       { immediate: true, deep: true }
     );
   },
-  computed: {
-    tabContent() {
-      return this.tabs[this.activeTab];
+  watch: {
+    selectCopyClick() {
+      // this.selectCopy();
+      console.log("select copy click");
+    },
+    finishChecker(value) {
+      this.finishedBannerCheck = value;
     },
   },
+  // computed: {
+  //   tabContent() {
+  //     return this.tabs[this.activeTab];
+  //   },
+  // },
   methods: {
-    setTabActive(tab) {
-      this.activeTab = tab;
+    setTabActive(tabName, tabData) {
+      this.tab_type = tabData.tab_type;
+      this.activeTab = tabName;
     },
   },
 };
@@ -225,7 +265,7 @@ article .container {
   /* max-width: 1524px; */
   box-sizing: border-box;
   margin: 0 auto;
-  height: 200px;
+  /* height: 200px; */
 }
 article h1 {
   font-weight: bold;

@@ -5,7 +5,7 @@ import MainPage from '../views/MainPage.vue';
 const routes = [
   {
     path: '/',
-    name: 'mainPage',
+    name: 'MainPage',
     component: MainPage,
     // meta: {
     //   keepAlive: true // Need to be cached
