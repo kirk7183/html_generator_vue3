@@ -1,17 +1,33 @@
-const BANNERS = [
-    "Main_left",
-    "Main_center",
-    "Main_right",
-    "Img_left",
-    "Img_left_reverse",
-    "Img_right_reverse",
-    "Img_right",
-    "Img_bg_full_text_left",
-    "Img_bg_full_text_center",
-    "Img_bg_full_text_right",
-    "Img_bg_no_text_center",
-    "Mini_banner_1"
-];
+const BANNERS =
+    [
+        { name: "Main_left", disabled: ["pictureLink", "pictureLinkMob"] },
+        { name: "Main_center", disabled: ["pictureLink"] },
+        { name: "Main_right", disabled: ["pictureLinkMob1"] },
+        { name: "Img_left", disabled: [] },
+        { name: "Img_right", disabled: [] },
+        { name: "Img_left_reverse", disabled: [] },
+        { name: "Img_right_reverse", disabled: [] },
+        { name: "Img_bg_full_text_left", disabled: [] },
+        { name: "Img_bg_full_text_center", disabled: [] },
+        { name: "Img_bg_full_text_right", disabled: [] },
+        { name: "Img_bg_no_text_center", disabled: [] },
+        { name: "Mini_banner_1", disabled: [] },
+
+    ]
+// [
+//     "Main_left",
+//     "Main_center",
+//     "Main_right",
+//     "Img_left",
+//     "Img_left_reverse",
+//     "Img_right_reverse",
+//     "Img_right",
+//     "Img_bg_full_text_left",
+//     "Img_bg_full_text_center",
+//     "Img_bg_full_text_right",
+//     "Img_bg_no_text_center",
+//     "Mini_banner_1"
+// ];
 
 const LINKS_DUMMY_DATA = [
     {
@@ -64,4 +80,34 @@ const BUTTON_LOOK = [
     { name: "Diagonal", class: "diagonalBtn" },
 ];
 
-export { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK }
+const TABS = [
+    { title: "Banners & pictures", tab_type: "BannersAndPictures" },
+    { title: "Text & Fonts", tab_type: "TextAndFonts" },
+    { title: "Buttons & Links", tab_type: "ButtonsAndLinks" },
+    { title: "More Options ", tab_type: "MoreOptions" },
+    { title: "Web Theme", tab_type: "WebTheme" },
+    { title: "Mobile Version", tab_type: "MobileVersion" },
+];
+
+export { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK, TABS }
+
+
+
+// "Banners & pictures": {
+//     tab_type: "BannersAndPictures",
+//   },
+//   "Text & Fonts": {
+//     tab_type: "TextAndFonts",
+//   },
+//   "Buttons & Links": {
+//     tab_type: "ButtonsAndLinks",
+//   },
+//   "More Options ": {
+//     tab_type: "MoreOptions",
+//   },
+//   "Web Theme": {
+//     tab_type: "WebTheme",
+//   },
+//   "Mobile Version": {
+//     tab_type: "MobileVersion",
+//   },

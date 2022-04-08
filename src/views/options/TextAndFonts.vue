@@ -71,6 +71,7 @@
 
 <script>
 export default {
+  name: "textAndFonts",
   data() {
     return {
       textWelcome: "Welcome to",

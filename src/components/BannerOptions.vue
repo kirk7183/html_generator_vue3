@@ -1,5 +1,6 @@
 <template>
-  <component :is="tab_type"> </component>
+  <component :is="tab_type" :bannerList="bannerList" :disabled="disabled">
+  </component>
 </template>
 
 <script>
@@ -10,12 +11,11 @@ export default {
   },
   props: {
     tab_type: { type: String, required: true },
+    bannerList: { type: Array },
+    disabled: { type: Object },
   },
   data() {
     return {};
-  },
-  mounted() {
-    console.log(this.tab_type);
   },
 };
 </script>

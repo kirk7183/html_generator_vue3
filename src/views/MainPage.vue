@@ -4,13 +4,13 @@
       <header>
         <nav>
           <ul>
-            <li v-for="(tabData, tabName) in tabs" :key="tabName">
+            <li v-for="(tabData, tabIndex) in tabs" :key="tabIndex">
               <button
                 class="tab"
-                @click="setTabActive(tabName, tabData)"
-                :class="{ active: tabName === activeTab }"
+                @click="setTabActive(tabData, tabIndex)"
+                :class="{ active: tabData.title === activeTab }"
               >
-                <span class="tab-copy">{{ tabName }}</span>
+                <span class="tab-copy">{{ tabData.title }}</span>
                 <span class="tab-background">
                   <span class="tab-rounding left"></span>
                   <span class="tab-rounding right"></span>
@@ -21,16 +21,41 @@
         </nav>
       </header>
       <article>
-        <div class="container">
-          <banner-options :tab_type="tab_type" />
+        <div class="container" style="border-bottom: 1px solid red">
+          <!-- SHOW TAB OPTIONS -->
+          <banner-options
+            :tab_type="tab_type"
+            :bannerList="bannerList"
+            :disabled="disabledInputs"
+            @dataBannersAndPictures="dataBannersAndPictures"
+          />
+          <!-- :disabled="disabledPictureLinkMob" -->
         </div>
       </article>
     </main>
     <!--PREVIEW-->
     <div id="preview">
       <dynamic-component
-        style="border: 1px solid red; overflow: hidden"
+        v-if="bannerSelected"
         :type="bannerSelected"
+        :pictureLink="pictureLink"
+        :pictureLinkMob="pictureLinkMob"
+        :textWelcome="textWelcome"
+        :textWelcomeFontSize="textWelcomeFontSize"
+        :textTitle="textTitle"
+        :textTitleFontSize="textTitleFontSize"
+        :textSubtitle="textSubtitle"
+        :textSubtitleFontSize="textSubtitleFontSize"
+        style="overflow: hidden"
+      />
+    </div>
+    <!--MOBILE PREVIEW-->
+    <div id="mob_preview">
+      <dynamicComponentMob
+        v-if="bannerSelected"
+        :type="'Img_left_right_mob'"
+        :pictureLink="pictureLink"
+        :pictureLinkMob="pictureLinkMob"
         :textWelcome="textWelcome"
         :textWelcomeFontSize="textWelcomeFontSize"
         :textTitle="textTitle"
@@ -44,72 +69,52 @@
 
 <script>
 import dynamicComponent from "@/components/DynamicComponentDesktop.vue";
+import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
 import bannerOptions from "@/components/BannerOptions.vue";
+import { BANNERS } from "@/functions/lists";
+import { TABS } from "@/functions/lists";
 export default {
   name: "MainPage",
   props: ["finishChecker", "selectCopyClick"],
   components: {
     dynamicComponent,
+    dynamicComponentMob,
     bannerOptions,
   },
 
   data() {
     return {
+      // disabledPictureLinkMob: true,
       finishedBannerCheck: false,
+      disabledInputs: [], //inputs that are disabled when select specific banner
+      bannerList: [],
+      bannerSelected: "",
+      pictureLink: "",
+      pictureLinkMob: "",
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
       textTitle: "BENITOS CAR SALE",
       textTitleFontSize: 34,
       textSubtitle: "Dont dream it, DRIVE IT!",
       textSubtitleFontSize: 8,
-      textButton: "View Inventory",
-      bannerSelected: "Main_left",
+      tabs: TABS,
       tab_type: "BannersAndPictures",
-      message: "Hello",
-      tabs: {
-        "Banners & pictures": {
-          tab_type: "BannersAndPictures",
-          title: "Awesome123 Title",
-          body: "123Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
-        },
-        "Text & Fonts": {
-          tab_type: "TextAndFonts",
-          title: "This is great",
-          body: "Lorem ipsasdfasdfasd alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
-        },
-        "Buttons & Links": {
-          tab_type: "ButtonsAndLinks",
-          title: "Look I'm a title!",
-          body: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam aliasdfasdfaas architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
-        },
-        Additionals: {
-          tab_type: "Additionals",
-          title: "banners",
-          body: "SSSSLorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
-        },
-        Theme: {
-          tab_type: "Additionals",
-          title: "banners",
-          body: "SSSSLorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
-        },
-        "Mobile Version": {
-          tab_type: "Additionals",
-          title: "banners",
-          body: "SSSSLorem ipsum, dolor sit amet consectetur adipisicing elit. Ab nam alias architecto officia, dolores animi qui debitis incidunt eius temporibus nostrum nihil soluta commodi molestiae necessitatibus ducimus amet. Suscipit, saepe!",
-        },
-      },
       activeTab: "Banners & pictures",
     };
   },
   mounted() {
+    BANNERS.forEach((item) => {
+      this.bannerList.push(item.name);
+    });
+
     this.finishedBannerCheck = this.finishChecker;
     this.$watch(
       (vm) => [
         vm.bannerSelected,
         // vm.bannerSelected,
         // vm.picturePositionSelected,
-        // vm.pictureLink,
-        // vm.pictureLinkMob,
+        vm.pictureLink,
+        vm.pictureLinkMob,
         // vm.textWelcome,
         // vm.textWelcomeFontSize,
         // vm.textTitle,
@@ -133,6 +138,32 @@ export default {
     );
   },
   watch: {
+    bannerSelected(selectedValue) {
+      BANNERS.forEach((item) => {
+        if (selectedValue === item.name) {
+          this.disabledInputs = []; //clear array if there is list from banner that is selected before
+          item.disabled.forEach((singleDisabled) => {
+            this.disabledInputs.push({ [singleDisabled + "Disabled"]: true });
+
+            // Object.assign(this.$data, {
+            //     [singleDisabledInput + "Disabled"]: true,
+            //     // this.disabledInputs.push(singleDisabledInput);
+          });
+        }
+      });
+      //   if (value === value) {
+      //     this.disabledInputs = []; //clear array if there is list from banner that is selected before
+      //     value.disabled.forEach((singleDisabledInput) => {
+      //       // console.log(singleDisabledInput);
+      //       Object.assign(this.$data, {
+      //         [singleDisabledInput + "Disabled"]: true,
+      //       });
+      //       // this.disabledInputs.push(singleDisabledInput);
+      //       // pictureLinkMobDisabled: true;
+      //     });
+      //   }
+    },
+
     selectCopyClick() {
       // this.selectCopy();
       console.log("select copy click");
@@ -147,9 +178,12 @@ export default {
   //   },
   // },
   methods: {
-    setTabActive(tabName, tabData) {
-      this.tab_type = tabData.tab_type;
-      this.activeTab = tabName;
+    setTabActive(tabData) {
+      this.tab_type = tabData.tab_type; // for import component what data to show in specific "tab"
+      this.activeTab = tabData.title; // setup active "tab"
+    },
+    dataBannersAndPictures(value) {
+      Object.assign(this.$data, value); //getting object from "BannersAndPictures" and setup in $data with "key" and "value"
     },
   },
 };
