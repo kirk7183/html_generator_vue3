@@ -35,7 +35,7 @@
   </div>
 
   <router-view v-slot="{ Component }">
-    <keep-alive include="[MainPage, SingleBanner]">
+    <keep-alive include="[MainPage, SingleBanner, BannersAndPictures]">
       <component
         :is="Component"
         :finishChecker="finishedBannerCheck"
@@ -54,15 +54,9 @@ export default {
       selectCopyClick: false,
     };
   },
-  // watch: {
-  //   finishedBannerCheck(value) {
-  //     console.log("in App.vue finishedBannerCheck ", value);
-  //   },
-  // },
   methods: {
     checkFinished(value) {
       this.finishedBannerCheck = value;
-      console.log("checkFinished in App.vue", value);
     },
   },
 };

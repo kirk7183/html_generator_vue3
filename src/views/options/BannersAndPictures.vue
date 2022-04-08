@@ -7,7 +7,7 @@
       <select name="themeSelect" v-model="bannerSelected">
         <option disabled selected>-- Select the theme --</option>
         <option
-          v-for="(singleTheme, i) in banners"
+          v-for="(singleTheme, i) in bannerList"
           :key="i"
           :value="singleTheme"
         >
@@ -37,6 +37,7 @@
       <!--PICTURE LINK DESKTOP-->
       <label for="pictureLink">Please enter picture link:</label>
       <br />
+      <!-- :disabled="disabledInputs.pictureLinkDisabled" -->
       <input
         type="text"
         style="width: 95%"
@@ -52,6 +53,7 @@
       <br />
       <!-- :disabled="disabled" -->
       <input
+        :disabled="isDisabled('false')"
         type="text"
         style="width: 95%"
         name="pictureLinkMob"
@@ -65,16 +67,89 @@
 </template>
 
 <script>
-import { BANNERS } from "@/functions/lists";
+// import { BANNERS } from "@/functions/lists";
 export default {
-  name: "bannersAndPictures",
+  name: "BannersAndPictures",
+  props: ["bannerList", "disabled"],
   data() {
     return {
-      banners: BANNERS,
-      bannerSelected: "Main_left",
+      disabledInputs: [],
+      bannerSelected: "",
       pictureLink: "",
       pictureLinkMob: "",
     };
+  },
+  mounted() {
+    // BANNERS.forEach((item) => {
+    //   this.banners.push(item.name); // add banner list to array "banners"
+
+    //   // this.disabled1.push(item.disabledInput);
+    //   // item.disabled.forEach((arrayItem) => {
+    //   //   this.disabledInputs.push(arrayItem);
+    //   //   Object.assign(this.$data, arrayItem);
+    //   //   console.log(arrayItem);
+    //   // });
+    //   // console.log(item.disabled);
+    //   // console.log(item.disabled[index]);
+    //   // Object.assign(this.$data, item.disabled[item]);
+    // });
+    // console.log(this.BANNERS.name);
+
+    this.$watch(
+      (vm) => [vm.bannerSelected, vm.pictureLink, vm.pictureLinkMob],
+      () => {
+        this.$emit("dataBannersAndPictures", {
+          bannerSelected: this.bannerSelected,
+          pictureLink: this.pictureLink,
+          pictureLinkMob: this.pictureLinkMob,
+          // disabledInputs: this.disabledInputs,
+          // disabledPictureLinkMob: false,
+        });
+      }
+    );
+  },
+  // watch: {
+  // disabled(value) {
+  // value.forEach((singleInput, index) => {
+  //   // console.log(singleInput, index);
+  //   // Object.assign(this.disabledInputs, { a: "singleInput" });
+  //   this.disabledInputs.push(value[index]);
+  //   console.log(value[index]);
+  // });
+  // },
+  //Update "disabledInputs"
+  // bannerSelected(value) {
+  //   BANNERS.forEach((singleBanner) => {
+  //     if (singleBanner.name === value) {
+  //       this.disabledInputs = []; //clear array if there is list from banner that is selected before
+  //       singleBanner.disabled.forEach((singleDisabledInput) => {
+  //         console.log(singleDisabledInput);
+  //         // Vue.set(this.disabledInputs, "property", singleDisabledInput);
+  //         var asd = Object.assign(this.$data, {
+  //           [singleDisabledInput + "Disabled"]: true,
+  //           // this.disabledInputs.push(singleDisabledInput);
+  //         });
+  //         // this.disabledInputs.push(singleDisabledInput);
+  //         // pictureLinkMobDisabled: true;
+  //         this.disabledInputs.push(asd);
+  //       });
+  //     }
+  //   });
+  // },
+  // disabled(value) {
+  //   console.log(value);
+  // },
+  // },
+  computed: {
+    isDisabled(value) {
+      // var isBoolean = false;
+      // this.disabled.forEach((element) => {
+      // console.log(element);
+      console.log(value);
+      //   // if (value === element) returnBoolean = true;
+      // });
+      return false;
+    },
   },
   // watch: {
   //   bannerSelected(value) {
