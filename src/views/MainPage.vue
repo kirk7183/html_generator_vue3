@@ -26,16 +26,24 @@
           <banner-options
             :tab_type="tab_type"
             :bannerList="bannerList"
-            :disabled="disabledInputs"
+            :disabledInputs="disabledInputs"
             @dataBannersAndPictures="dataBannersAndPictures"
           />
-          <!-- :disabled="disabledPictureLinkMob" -->
+          <!--TEXTAREA-->
+          <textarea
+            id="source"
+            ref="textArea"
+            cols="50"
+            rows="12"
+            v-model="htmlRaw"
+          >
+          </textarea>
         </div>
       </article>
     </main>
     <!--PREVIEW-->
     <div id="preview">
-      <dynamic-component
+      <dynamic-component-desktop
         v-if="bannerSelected"
         :type="bannerSelected"
         :pictureLink="pictureLink"
@@ -68,7 +76,7 @@
 </template>
 
 <script>
-import dynamicComponent from "@/components/DynamicComponentDesktop.vue";
+import dynamicComponentDesktop from "@/components/DynamicComponentDesktop.vue";
 import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
 import bannerOptions from "@/components/BannerOptions.vue";
 import { BANNERS } from "@/functions/lists";
@@ -77,13 +85,14 @@ export default {
   name: "MainPage",
   props: ["finishChecker", "selectCopyClick"],
   components: {
-    dynamicComponent,
+    dynamicComponentDesktop,
     dynamicComponentMob,
     bannerOptions,
   },
 
   data() {
     return {
+      htmlRaw: "",
       // disabledPictureLinkMob: true,
       finishedBannerCheck: false,
       disabledInputs: [], //inputs that are disabled when select specific banner
@@ -143,47 +152,51 @@ export default {
         if (selectedValue === item.name) {
           this.disabledInputs = []; //clear array if there is list from banner that is selected before
           item.disabled.forEach((singleDisabled) => {
-            this.disabledInputs.push({ [singleDisabled + "Disabled"]: true });
-
-            // Object.assign(this.$data, {
-            //     [singleDisabledInput + "Disabled"]: true,
-            //     // this.disabledInputs.push(singleDisabledInput);
+            this.disabledInputs.push([singleDisabled + "Disabled"]);
           });
         }
       });
-      //   if (value === value) {
-      //     this.disabledInputs = []; //clear array if there is list from banner that is selected before
-      //     value.disabled.forEach((singleDisabledInput) => {
-      //       // console.log(singleDisabledInput);
-      //       Object.assign(this.$data, {
-      //         [singleDisabledInput + "Disabled"]: true,
-      //       });
-      //       // this.disabledInputs.push(singleDisabledInput);
-      //       // pictureLinkMobDisabled: true;
-      //     });
-      //   }
     },
-
+    //COPY CODE
     selectCopyClick() {
-      // this.selectCopy();
-      console.log("select copy click");
+      if (this.finishedBannerCheck) {
+        this.$refs.textArea.select();
+        document.execCommand("copy");
+      } else {
+        alert('PLEASE CHECK "FINISHED" !!!');
+      }
     },
     finishChecker(value) {
       this.finishedBannerCheck = value;
     },
+    //if 'FINISHED' checked is TRUE
+    finishedBannerCheck(value) {
+      if (value) {
+        this.updateTextArea();
+      }
+    },
+    htmlRaw() {
+      this.htmlRaw = this.htmlRaw.replace("&lt;", "<");
+      this.htmlRaw = this.htmlRaw.replace("&gt;", ">");
+    },
   },
-  // computed: {
-  //   tabContent() {
-  //     return this.tabs[this.activeTab];
-  //   },
-  // },
   methods: {
+    updateTextArea() {
+      //get by id, then set to String in textArea for desktop
+      var htmlPreview = document.getElementsByClassName("gpm-hfm")[0];
+      this.htmlRaw = new XMLSerializer().serializeToString(htmlPreview);
+      //get by id, then set to String in textArea for mobile
+      var htmlPreviewMob = document.getElementsByClassName("gpm-only")[0];
+      this.htmlRaw += new XMLSerializer().serializeToString(htmlPreviewMob);
+    },
+    //SETUP TABS
     setTabActive(tabData) {
       this.tab_type = tabData.tab_type; // for import component what data to show in specific "tab"
       this.activeTab = tabData.title; // setup active "tab"
     },
+
     dataBannersAndPictures(value) {
-      Object.assign(this.$data, value); //getting object from "BannersAndPictures" and setup in $data with "key" and "value"
+      Object.assign(this.$data, value); //getting object from "BannersAndPictures".VUE   and setup in $data with "key" and "value"
     },
   },
 };

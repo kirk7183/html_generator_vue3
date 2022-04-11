@@ -1,8 +1,8 @@
 const BANNERS =
     [
-        { name: "Main_left", disabled: ["pictureLink", "pictureLinkMob"] },
-        { name: "Main_center", disabled: ["pictureLink"] },
-        { name: "Main_right", disabled: ["pictureLinkMob1"] },
+        { name: "Main_left", disabled: ["pictureLinkMob"] },
+        { name: "Main_center", disabled: ["pictureLinkMob", "textWelcome"] },
+        { name: "Main_right", disabled: ["pictureLinkMob", "pictureLink", "textTitle"] },
         { name: "Img_left", disabled: [] },
         { name: "Img_right", disabled: [] },
         { name: "Img_left_reverse", disabled: [] },

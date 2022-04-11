@@ -1,5 +1,9 @@
 <template>
-  <component :is="tab_type" :bannerList="bannerList" :disabled="disabled">
+  <component
+    :is="tab_type"
+    :bannerList="bannerList"
+    :disabledInputs="disabledInputs"
+  >
   </component>
 </template>
 
@@ -12,7 +16,7 @@ export default {
   props: {
     tab_type: { type: String, required: true },
     bannerList: { type: Array },
-    disabled: { type: Object },
+    disabledInputs: { type: Object },
   },
   data() {
     return {};

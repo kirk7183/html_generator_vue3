@@ -4,6 +4,7 @@
     <label for="textWelcome">Please enter welcome text:</label>
     <br />
     <input
+      :disabled="isDisabled('textWelcomeDisabled')"
       autocomplete="off"
       type="text"
       name="textWelcome"
@@ -26,6 +27,7 @@
     <label for="textTitle">Please enter title text line 1:</label>
     <br />
     <input
+      :disabled="isDisabled('textTitleDisabled')"
       autocomplete="off"
       type="text"
       name="textTitle"
@@ -72,6 +74,7 @@
 <script>
 export default {
   name: "textAndFonts",
+  props: ["disabledInputs"],
   data() {
     return {
       textWelcome: "Welcome to",
@@ -81,6 +84,17 @@ export default {
       textSubtitle: "Dont dream it, DRIVE IT!",
       textSubtitleFontSize: 8,
     };
+  },
+  methods: {
+    //DISABLE INPUT BANNERS
+    isDisabled(value) {
+      let exists = this.disabledInputs.find((p) => p == value);
+      if (exists) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
 };
 </script>
