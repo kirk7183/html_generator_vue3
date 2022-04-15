@@ -27,20 +27,22 @@
             :tab_type="tab_type"
             :bannerList="bannerList"
             :disabledInputs="disabledInputs"
-            @dataBannersAndPictures="dataBannersAndPictures"
+            @componentDataChanged="dataLS"
           />
+
           <!--TEXTAREA-->
-          <textarea
+          <!-- <textarea
             id="source"
             ref="textArea"
             cols="50"
             rows="12"
             v-model="htmlRaw"
           >
-          </textarea>
+          </textarea> -->
         </div>
       </article>
     </main>
+
     <!--PREVIEW-->
     <div id="preview">
       <dynamic-component-desktop
@@ -60,8 +62,8 @@
     <!--MOBILE PREVIEW-->
     <div id="mob_preview">
       <dynamicComponentMob
-        v-if="bannerSelected"
-        :type="'Img_left_right_mob'"
+        v-if="bannerSelected && pictureLink"
+        :type="bannerSelectedMob"
         :pictureLink="pictureLink"
         :pictureLinkMob="pictureLinkMob"
         :textWelcome="textWelcome"
@@ -98,6 +100,7 @@ export default {
       disabledInputs: [], //inputs that are disabled when select specific banner
       bannerList: [],
       bannerSelected: "",
+      bannerSelectedMob: "",
       pictureLink: "",
       pictureLinkMob: "",
       textWelcome: "Welcome to",
@@ -115,8 +118,8 @@ export default {
     BANNERS.forEach((item) => {
       this.bannerList.push(item.name);
     });
+    // this.finishedBannerCheck = this.finishChecker;
 
-    this.finishedBannerCheck = this.finishChecker;
     this.$watch(
       (vm) => [
         vm.bannerSelected,
@@ -141,7 +144,11 @@ export default {
       () => {
         // this.updateTextArea();
         this.finishedBannerCheck = false;
-        this.$emit("isItFinished", this.finishedBannerCheck);
+        this.$emit("isItFinished", {
+          finishedBannerCheck: this.finishedBannerCheck,
+          bannerSelected: this.bannerSelected,
+          pictureLink: this.pictureLink,
+        });
       },
       { immediate: true, deep: true }
     );
@@ -151,6 +158,7 @@ export default {
       BANNERS.forEach((item) => {
         if (selectedValue === item.name) {
           this.disabledInputs = []; //clear array if there is list from banner that is selected before
+          this.bannerSelectedMob = item.mobileVer;
           item.disabled.forEach((singleDisabled) => {
             this.disabledInputs.push([singleDisabled + "Disabled"]);
           });
@@ -195,8 +203,20 @@ export default {
       this.activeTab = tabData.title; // setup active "tab"
     },
 
-    dataBannersAndPictures(value) {
-      Object.assign(this.$data, value); //getting object from "BannersAndPictures".VUE   and setup in $data with "key" and "value"
+    dataLS() {
+      let readLS = localStorage.getItem("webGenerator");
+      Object.assign(this.$data, JSON.parse(readLS)); //getting object from "BannersAndPictures".VUE i mean..from localStorage   and setup in $data with "key" and "value"
+      // let readLocalStorage = JSON.parse(localStorage.webGenerator.pictureLink);
+      // for (var i = 0, len = localStorage.length; i < len; ++i) {
+      //   console.log(localStorage.getItem(localStorage.key(i)));
+      // }
+
+      // console.log({ ...localStorage });
+      // let asd = JSON.parse(localStorage.getItem("webGenerator"));
+      // console.log(asd.pictureLink);
+      // asd.pictureLink = "workingUpdateObject";
+      // localStorage.setItem("webGenerator", JSON.stringify(asd));
+      // console.log(asd.pictureLink);
     },
   },
 };

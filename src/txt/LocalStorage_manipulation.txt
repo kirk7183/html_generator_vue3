@@ -1,0 +1,23 @@
+
+
+
+
+//setup local storage with object// 
+localStorage.setItem("webGenerator", JSON.stringify({
+          bannerSelected: this.bannerSelected,
+          pictureLink: this.pictureLink,
+          pictureLinkMob: this.pictureLinkMob,
+})
+
+
+//add new KEY and VALUE to existing object//
+let asd = JSON.parse(localStorage.getItem("webGenerator"));
+asd.pictureLink = "New value";
+localStorage.setItem("webGenerator", JSON.stringify(asd));
+
+
+//read from localStorage and push in new array//
+let t = [];
+for (let i = 0; i < localStorage.length; i++) {
+  t.push(localStorage.key(i));
+}

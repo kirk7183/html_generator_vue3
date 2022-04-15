@@ -1,17 +1,17 @@
 const BANNERS =
     [
-        { name: "Main_left", disabled: ["pictureLinkMob"] },
-        { name: "Main_center", disabled: ["pictureLinkMob", "textWelcome"] },
-        { name: "Main_right", disabled: ["pictureLinkMob", "pictureLink", "textTitle"] },
-        { name: "Img_left", disabled: [] },
-        { name: "Img_right", disabled: [] },
-        { name: "Img_left_reverse", disabled: [] },
-        { name: "Img_right_reverse", disabled: [] },
-        { name: "Img_bg_full_text_left", disabled: [] },
-        { name: "Img_bg_full_text_center", disabled: [] },
-        { name: "Img_bg_full_text_right", disabled: [] },
-        { name: "Img_bg_no_text_center", disabled: [] },
-        { name: "Mini_banner_1", disabled: [] },
+        { name: "Main_left", disabled: ["pictureLinkMob"], mobileVer: "Main_mob" },
+        { name: "Main_center", disabled: ["pictureLinkMob", "textWelcome"], mobileVer: "Main_mob" },
+        { name: "Main_right", disabled: ["pictureLinkMob", "pictureLink", "textTitle"], mobileVer: "Main_mob" },
+        { name: "Img_left", disabled: [], mobileVer: "Img_left_right_mob" },
+        { name: "Img_right", disabled: [], mobileVer: "Img_left_right_mob" },
+        { name: "Img_left_reverse", disabled: [], mobileVer: "Img_left_right_reverse_mob" },
+        { name: "Img_right_reverse", disabled: [], mobileVer: "Img_left_right_reverse_mob" },
+        { name: "Img_bg_full_text_left", disabled: [], mobileVer: "Img_bg_full_mob" },
+        { name: "Img_bg_full_text_center", disabled: [], mobileVer: "Img_bg_full_mob" },
+        { name: "Img_bg_full_text_right", disabled: [], mobileVer: "Img_bg_full_mob" },
+        { name: "Img_bg_no_text_center", disabled: [], mobileVer: "Img_bg_full_mob" },
+        { name: "Mini_banner_1", disabled: [], mobileVer: "Mini_banner_1_mob" },
 
     ]
 // [
@@ -87,6 +87,7 @@ const TABS = [
     { title: "More Options ", tab_type: "MoreOptions" },
     { title: "Web Theme", tab_type: "WebTheme" },
     { title: "Mobile Version", tab_type: "MobileVersion" },
+    { title: "Save & Delete", tab_type: "SaveAndDelete" }
 ];
 
 export { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK, TABS }

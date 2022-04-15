@@ -50,6 +50,7 @@
     <label for="textSubtitle">Please enter subtitle text:</label>
     <br />
     <input
+      :disabled="isDisabled('textTitleDisabled')"
       autocomplete="off"
       type="text"
       name="textSubtitle"
@@ -73,7 +74,7 @@
 
 <script>
 export default {
-  name: "textAndFonts",
+  name: "TextAndFonts",
   props: ["disabledInputs"],
   data() {
     return {
@@ -84,6 +85,36 @@ export default {
       textSubtitle: "Dont dream it, DRIVE IT!",
       textSubtitleFontSize: 8,
     };
+  },
+  mounted() {
+    let readLS = JSON.parse(localStorage.getItem("webGenerator"));
+    Object.assign(this.$data, readLS);
+    this.$watch(
+      (vm) => [
+        vm.textWelcome,
+        vm.textWelcomeFontSize,
+        vm.textTitle,
+        vm.textTitleFontSize,
+        vm.textSubtitle,
+        vm.textSubtitleFontSize,
+      ],
+      () => {
+        localStorage.setItem(
+          "webGenerator",
+
+          JSON.stringify({
+            ...readLS,
+            textWelcome: this.textWelcome,
+            textWelcomeFontSize: this.textWelcomeFontSize,
+            textTitle: this.textTitle,
+            textTitleFontSize: this.textTitleFontSize,
+            textSubtitle: this.textSubtitle,
+            textSubtitleFontSize: this.textSubtitleFontSize,
+          })
+        );
+        this.$emit("componentDataChanged"); //send information to MainPage that there can be set in data
+      }
+    );
   },
   methods: {
     //DISABLE INPUT BANNERS

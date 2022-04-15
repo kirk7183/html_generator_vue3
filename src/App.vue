@@ -14,8 +14,10 @@
         align-items: baseline;
       "
     >
-      <div class="checker1" style="padding: 0 10px">
+      <div class="checkerFinished" style="padding: 0 10px">
+        <!--DISABLE INPUT if bannerSelected is not selected OR pictureLink is empty-->
         <input
+          :disabled="!bannerSelected || pictureLink === ''"
           type="checkbox"
           id="finishedBanner"
           name="finishedBanner"
@@ -27,15 +29,15 @@
       <button
         id="copyAll"
         @click="selectCopyClick = !selectCopyClick"
-        style="margin: 0 5px"
+        style="margin: 0 25px 5px"
       >
         Copy Code
       </button>
     </div>
   </div>
-
+  <!-- <keep-alive :include="['/', 'SingleBanner', 'BannersAndPictures']"> -->
   <router-view v-slot="{ Component }">
-    <keep-alive include="[MainPage, SingleBanner, BannersAndPictures]">
+    <keep-alive>
       <component
         :is="Component"
         :finishChecker="finishedBannerCheck"
@@ -52,11 +54,15 @@ export default {
     return {
       finishedBannerCheck: false,
       selectCopyClick: false,
+      bannerSelected: "",
+      pictureLink: "",
     };
   },
   methods: {
-    checkFinished(value) {
-      this.finishedBannerCheck = value;
+    checkFinished(MainPageobject) {
+      this.finishedBannerCheck = MainPageobject.finishedBannerCheck;
+      this.bannerSelected = MainPageobject.bannerSelected;
+      this.pictureLink = MainPageobject.pictureLink;
     },
   },
 };
