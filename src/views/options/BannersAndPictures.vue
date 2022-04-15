@@ -79,18 +79,30 @@ export default {
     };
   },
   mounted() {
+    let readLS = JSON.parse(localStorage.getItem("webGenerator"));
+    Object.assign(this.$data, readLS); //getting object from LocalStorage and setup in $data with "key" and "value". So it will show values at mounted page
     this.$watch(
       (vm) => [vm.bannerSelected, vm.pictureLink, vm.pictureLinkMob],
       () => {
-        this.$emit("dataBannersAndPictures", {
-          bannerSelected: this.bannerSelected,
-          pictureLink: this.pictureLink,
-          pictureLinkMob: this.pictureLinkMob,
-          // disabledInputs: this.disabledInputs,
-          // disabledPictureLinkMob: false,
-        });
+        localStorage.setItem(
+          "webGenerator",
+          JSON.stringify({
+            ...readLS,
+            bannerSelected: this.bannerSelected,
+            pictureLink: this.pictureLink,
+            pictureLinkMob: this.pictureLinkMob,
+          })
+        );
+        this.$emit("componentDataChanged"); //send information to MainPage that there can be set in data
       }
     );
+    // {
+    // bannerSelected: this.bannerSelected,
+    // pictureLink: this.pictureLink,
+    // pictureLinkMob: this.pictureLinkMob,
+    // disabledInputs: this.disabledInputs,
+    // disabledPictureLinkMob: false,
+    // }
   },
   methods: {
     //DISABLE INPUT BANNERS
@@ -103,43 +115,6 @@ export default {
       }
     },
   },
-
-  // watch: {
-  //   bannerSelected(value) {
-  //     //Setup mobile theme (for Main we use only 1 mobile theme, the rest we add "_mob")
-  //     if (
-  //       value == "Main_left" ||
-  //       value == "Main_center" ||
-  //       value == "Main_right"
-  //     ) {
-  //       this.mobBanner = "Main_mob";
-  //       this.message = null;
-  //     } else if (value == "Img_left" || value == "Img_right") {
-  //       this.mobBanner = "Img_left_right_mob";
-  //       this.message = null;
-  //     } else if (
-  //       value == "Img_bg_full_text_left" ||
-  //       value == "Img_bg_full_text_center" ||
-  //       value == "Img_bg_full_text_right" ||
-  //       value == "Img_bg_no_text_center"
-  //     ) {
-  //       this.mobBanner = "Img_bg_full_mob";
-  //       // this.message =
-  //       //   'Dont forget to upload "bank-page.png" file in "MOB / BLANK" line';
-  //       this.message = null;
-  //       this.messageColor = "red";
-  //     } else if (value == "Img_left_reverse" || value == "Img_right_reverse") {
-  //       this.mobBanner = "Img_left_right_reverse_mob";
-  //       this.message = null;
-  //     } else if (value == "Mini_banner_1") {
-  //       this.mobBanner = "Mini_banner_1_mob";
-  //       this.message = null;
-  //     } else {
-  //       console.log(value);
-  //       this.mobBanner = value + "_mob";
-  //     }
-  //   },
-  // },
 };
 </script>
 
