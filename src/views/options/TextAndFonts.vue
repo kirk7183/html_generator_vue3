@@ -1,7 +1,7 @@
 <template>
   <div class="groupWrapper div2">
     <!--WELCOME TEXT-->
-    <label for="textWelcome">Please enter welcome text:</label>
+    <label class="font14">Please enter welcome text:</label>
     <br />
     <input
       :disabled="isDisabled('textWelcomeDisabled')"
@@ -24,7 +24,7 @@
     <br />
 
     <!--TITLE TEXT-->
-    <label for="textTitle">Please enter title text line 1:</label>
+    <label class="font14">Please enter title text line 1:</label>
     <br />
     <input
       :disabled="isDisabled('textTitleDisabled')"
@@ -47,7 +47,7 @@
     <br />
 
     <!--SUBTITLE TEXT-->
-    <label for="textSubtitle">Please enter subtitle text:</label>
+    <label class="font14">Please enter subtitle text:</label>
     <br />
     <input
       :disabled="isDisabled('textTitleDisabled')"

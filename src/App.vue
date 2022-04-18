@@ -18,13 +18,20 @@
         <!--DISABLE INPUT if bannerSelected is not selected OR pictureLink is empty-->
         <input
           :disabled="!bannerSelected || pictureLink === ''"
+          class="checkbox"
           type="checkbox"
           id="finishedBanner"
           name="finishedBanner"
           value="finishedBanner"
           v-model="finishedBannerCheck"
         />
-        <label for="finishedBanner"> Finished</label><br />
+        <label
+          class="checkbox"
+          for="finishedBanner"
+          onselectstart="return false"
+        >
+          Finished</label
+        ><br />
       </div>
       <button
         id="copyAll"
