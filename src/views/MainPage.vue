@@ -27,18 +27,21 @@
             :tab_type="tab_type"
             :bannerList="bannerList"
             :disabledInputs="disabledInputs"
+            :colorBackgroundButton="colorBackgroundButton"
             @componentDataChanged="dataLS"
+            @completeReset="resetData"
           />
 
           <!--TEXTAREA-->
-          <!-- <textarea
+          <textarea
+            style="float: right"
             id="source"
             ref="textArea"
-            cols="50"
-            rows="12"
+            cols="1"
+            rows="1"
             v-model="htmlRaw"
           >
-          </textarea> -->
+          </textarea>
         </div>
       </article>
     </main>
@@ -56,6 +59,14 @@
         :textTitleFontSize="textTitleFontSize"
         :textSubtitle="textSubtitle"
         :textSubtitleFontSize="textSubtitleFontSize"
+        :textButton="textButton"
+        :btnStyle="btnStyle"
+        :buttonLink="buttonLink"
+        :colorBackgroundBanner="colorBackgroundBanner"
+        :colorTextButton="colorTextButton"
+        :colorBackgroundButton="colorBackgroundButton"
+        :lineCheck="lineCheck"
+        :colorLine="colorLine"
         style="overflow: hidden"
       />
     </div>
@@ -72,6 +83,14 @@
         :textTitleFontSize="textTitleFontSize"
         :textSubtitle="textSubtitle"
         :textSubtitleFontSize="textSubtitleFontSize"
+        :textButton="textButton"
+        :btnStyle="btnStyle"
+        :buttonLink="buttonLink"
+        :colorBackgroundBanner="colorBackgroundBanner"
+        :colorTextButton="colorTextButton"
+        :colorBackgroundButton="colorBackgroundButton"
+        :lineCheck="lineCheck"
+        :colorLine="colorLine"
       />
     </div>
   </div>
@@ -109,15 +128,22 @@ export default {
       textTitleFontSize: 34,
       textSubtitle: "Dont dream it, DRIVE IT!",
       textSubtitleFontSize: 8,
+      textButton: "View Inventory",
+      btnVisualLook: "Square",
+      btnStyle: "",
+      buttonLink: "",
+      colorBackgroundBanner: "",
+      colorTextButton: "",
+      colorBackgroundButton: "",
+      lineCheck: false,
+      colorLine: "",
       tabs: TABS,
       tab_type: "BannersAndPictures",
       activeTab: "Banners & pictures",
     };
   },
   mounted() {
-    BANNERS.forEach((item) => {
-      this.bannerList.push(item.name);
-    });
+    this.fillBannerList();
     // this.finishedBannerCheck = this.finishChecker;
 
     this.$watch(
@@ -127,19 +153,20 @@ export default {
         // vm.picturePositionSelected,
         vm.pictureLink,
         vm.pictureLinkMob,
-        // vm.textWelcome,
-        // vm.textWelcomeFontSize,
-        // vm.textTitle,
-        // vm.textTitleFontSize,
-        // vm.textSubtitle,
-        // vm.textSubtitleFontSize,
-        // vm.textButton,
-        // vm.btnVisualLook,
-        // vm.buttonLink,
-        // vm.colorTextButton,
-        // vm.colorBackgroundBanner,
-        // vm.colorBackgroundButton,
-        // vm.lineCheck,
+        vm.textWelcome,
+        vm.textWelcomeFontSize,
+        vm.textTitle,
+        vm.textTitleFontSize,
+        vm.textSubtitle,
+        vm.textSubtitleFontSize,
+        vm.textButton,
+        vm.btnVisualLook,
+        vm.buttonLink,
+        vm.colorBackgroundBanner,
+        vm.colorTextButton,
+        vm.colorBackgroundButton,
+        vm.lineCheck,
+        vm.colorLine,
       ],
       () => {
         // this.updateTextArea();
@@ -189,6 +216,11 @@ export default {
     },
   },
   methods: {
+    fillBannerList() {
+      BANNERS.forEach((item) => {
+        this.bannerList.push(item.name);
+      });
+    },
     updateTextArea() {
       //get by id, then set to String in textArea for desktop
       var htmlPreview = document.getElementsByClassName("gpm-hfm")[0];
@@ -217,6 +249,10 @@ export default {
       // asd.pictureLink = "workingUpdateObject";
       // localStorage.setItem("webGenerator", JSON.stringify(asd));
       // console.log(asd.pictureLink);
+    },
+    resetData() {
+      Object.assign(this.$data, this.$options.data());
+      this.fillBannerList();
     },
   },
 };

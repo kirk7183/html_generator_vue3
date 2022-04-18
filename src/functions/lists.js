@@ -1,8 +1,8 @@
 const BANNERS =
     [
-        { name: "Main_left", disabled: ["pictureLinkMob"], mobileVer: "Main_mob" },
-        { name: "Main_center", disabled: ["pictureLinkMob", "textWelcome"], mobileVer: "Main_mob" },
-        { name: "Main_right", disabled: ["pictureLinkMob", "pictureLink", "textTitle"], mobileVer: "Main_mob" },
+        { name: "Main_left", disabled: ["pictureLinkMob", "colorBackgroundBanner", "lineCheck"], mobileVer: "Main_mob" },
+        { name: "Main_center", disabled: ["pictureLinkMob", "colorBackgroundBanner", "lineCheck"], mobileVer: "Main_mob" },
+        { name: "Main_right", disabled: ["pictureLinkMob", "colorBackgroundBanner", "lineCheck"], mobileVer: "Main_mob" },
         { name: "Img_left", disabled: [], mobileVer: "Img_left_right_mob" },
         { name: "Img_right", disabled: [], mobileVer: "Img_left_right_mob" },
         { name: "Img_left_reverse", disabled: [], mobileVer: "Img_left_right_reverse_mob" },
@@ -12,7 +12,6 @@ const BANNERS =
         { name: "Img_bg_full_text_right", disabled: [], mobileVer: "Img_bg_full_mob" },
         { name: "Img_bg_no_text_center", disabled: [], mobileVer: "Img_bg_full_mob" },
         { name: "Mini_banner_1", disabled: [], mobileVer: "Mini_banner_1_mob" },
-
     ]
 // [
 //     "Main_left",

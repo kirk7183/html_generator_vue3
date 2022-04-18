@@ -98,12 +98,13 @@ export default {
     "colorBackgroundButton",
     "colorBackgroundBanner",
     "lineCheck",
+    "colorLine",
   ],
   computed: {
     ShowLine() {
       var color;
       if (this.lineCheck) {
-        color = this.colorBackgroundButton;
+        color = this.colorLine;
       } else {
         color = "transparent";
       }

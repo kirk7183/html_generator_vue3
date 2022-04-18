@@ -1,2 +1,5 @@
 export { default as BannersAndPictures } from '@/views/options/BannersAndPictures.vue'
 export { default as TextAndFonts } from '@/views/options/TextAndFonts.vue'
+export { default as SaveAndDelete } from '@/views/options/SaveAndDelete.vue'
+export { default as ButtonsAndLinks } from '@/views/options/ButtonsAndLinks.vue'
+export { default as MoreOptions } from '@/views/options/MoreOptions.vue'
