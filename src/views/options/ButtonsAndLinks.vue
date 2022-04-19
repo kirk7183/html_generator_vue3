@@ -5,6 +5,7 @@
       <label class="font14">Enter button text:</label>
       <br />
       <input
+        :disabled="isDisabled('textButtonDisabled')"
         autocomplete="off"
         type="text"
         minlength="3"
@@ -17,8 +18,12 @@
     <!--BUTTON VISUAL LOOK-->
     <div class="inline">
       <label class="font14">Select button look:</label>
-      <div class="">
-        <select id="buttonVisuaLook" v-model="btnVisualLook">
+      <div>
+        <select
+          id="buttonVisuaLook"
+          :disabled="isDisabled('btnStyleDisabled')"
+          v-model="btnVisualLook"
+        >
           <option disabled selected>-- Select button look --</option>
           <option
             v-for="(singleBtnVisualLook, i) in buttonVisualLook"
@@ -37,7 +42,12 @@
     </label>
     <br />
     <div class="flex gap5">
-      <select class="low-padding" name="buttonLinkSelect" v-model="buttonLink">
+      <select
+        class="low-padding"
+        name="buttonLinkSelect"
+        :disabled="isDisabled('buttonLinkDisabled')"
+        v-model="buttonLink"
+      >
         <option disabled selected>-- Select picture position --</option>
         <option
           v-for="(singleLink, i) in links"
@@ -50,6 +60,7 @@
       <br />
       <!--BUTTON LINK CUSTOM ENTER-->
       <input
+        :disabled="isDisabled('buttonLinkDisabled')"
         type="text"
         class="low-padding"
         minlength="3"
@@ -63,6 +74,7 @@
       <label class="font12">Button background</label>
       <br />
       <input
+        :disabled="isDisabled('colorBackgroundButtonDisabled')"
         type="text"
         min="3"
         max="12"
@@ -81,6 +93,7 @@
       <label class="font12">Button Text</label>
       <br />
       <input
+        :disabled="isDisabled('colorTextButtonDisabled')"
         type="text"
         min="3"
         max="12"
@@ -103,7 +116,7 @@ import { btnStyle } from "@/functions/buttonFn";
 import { LINKS_DUMMY_DATA, BUTTON_LOOK } from "@/functions/lists";
 export default {
   name: "ButtonsAndLinks",
-
+  props: ["disabledInputs"],
   data() {
     return {
       textButton: "View Inventory",
@@ -148,6 +161,20 @@ export default {
     btnVisualLook(value) {
       //sending data to function "btnStyle" in buttonFn.js, and then return data and setup to this.btnStyle
       this.btnStyle = btnStyle(value);
+    },
+  },
+  methods: {
+    //DISABLE INPUT BANNERS
+    isDisabled(value) {
+      let exists = this.disabledInputs.find((p) => p == value);
+      if (exists) {
+        if (value == "colorBackgroundBannerDisabled") {
+          this.colorBackgroundBanner = "#fff";
+        }
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

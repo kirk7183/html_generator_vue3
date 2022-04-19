@@ -459,7 +459,6 @@ export default {
         this.mobBanner = "Mini_banner_1_mob";
         this.message = null;
       } else {
-        console.log(value);
         this.mobBanner = value + "_mob";
       }
     },
@@ -482,7 +481,6 @@ export default {
 
   methods: {
     changeColor() {
-      console.log(this.$refs.passClick);
       this.$refs.passClick[0].highlight();
     },
     updateTextArea() {

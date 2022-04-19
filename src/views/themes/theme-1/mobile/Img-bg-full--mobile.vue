@@ -75,7 +75,7 @@
     <div class="wrapper-image" style="width: 100%">
       <img
         style="width: 100%; vertical-align: bottom"
-        :src="pictureLinkMob"
+        :src="showMobLink"
         alt=""
       />
     </div>
@@ -87,6 +87,7 @@
 export default {
   name: "Img_left_mobile",
   props: [
+    "bannerSelected",
     "pictureLinkMob",
     "pictureLink",
     "textTitle",
@@ -100,6 +101,12 @@ export default {
     "lineCheck",
     "colorLine",
   ],
+  data() {
+    return {
+      // pictureLinkMobIF: this.showImage(),
+    };
+  },
+
   computed: {
     ShowLine() {
       var color;
@@ -109,6 +116,15 @@ export default {
         color = "transparent";
       }
       return color;
+    },
+    showMobLink() {
+      var mobLink;
+      if (this.bannerSelected == "Img_bg_no_text_center") {
+        mobLink = "";
+      } else {
+        mobLink = this.pictureLinkMob;
+      }
+      return mobLink;
     },
   },
 };

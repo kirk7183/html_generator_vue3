@@ -75,6 +75,7 @@
       <dynamicComponentMob
         v-if="bannerSelected && pictureLink"
         :type="bannerSelectedMob"
+        :bannerSelected="bannerSelected"
         :pictureLink="pictureLink"
         :pictureLinkMob="pictureLinkMob"
         :textWelcome="textWelcome"
@@ -143,9 +144,12 @@ export default {
     };
   },
   mounted() {
-    this.fillBannerList();
+    this.fillBannerList(); //fill up select banner dropdown menu
+    let readLS = JSON.parse(localStorage.getItem("webGenerator"));
     // this.finishedBannerCheck = this.finishChecker;
-
+    if (readLS.bannerSelected) {
+      this.dataLS(); //call data from localStorage and set to data(). This is when page is refresh to keep old data
+    }
     this.$watch(
       (vm) => [
         vm.bannerSelected,
