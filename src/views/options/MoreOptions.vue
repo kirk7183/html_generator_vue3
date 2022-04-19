@@ -17,6 +17,7 @@
       <label class="font12">Line Color</label>
       <br />
       <input
+        :disabled="isDisabled('colorLineDisabled')"
         type="text"
         min="3"
         max="12"

@@ -15,6 +15,7 @@
     />
     <!--WELCOME TEXT FONT SIZE-->
     <input
+      :disabled="isDisabled('textWelcomeFontSizeDisabled')"
       class="input-number"
       type="number"
       min="1"
@@ -38,6 +39,7 @@
     />
     <!--TITLE TEXT FONT SIZE-->
     <input
+      :disabled="isDisabled('textTitleFontSizeDisabled')"
       class="input-number"
       type="number"
       min="1"
@@ -50,7 +52,7 @@
     <label class="font14">Please enter subtitle text:</label>
     <br />
     <input
-      :disabled="isDisabled('textTitleDisabled')"
+      :disabled="isDisabled('textSubtitleDisabled')"
       autocomplete="off"
       type="text"
       name="textSubtitle"
@@ -62,6 +64,7 @@
     />
     <!--SUBTITLE FONT SIZE-->
     <input
+      :disabled="isDisabled('textSubtitleFontSizeDisabled')"
       class="input-number"
       type="number"
       min="1"

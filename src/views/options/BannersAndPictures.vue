@@ -121,14 +121,23 @@ export default {
       }
     );
   },
+  watch: {
+    // bannerSelected(value) {
+    //   if (value === "Mini_banner_1") {
+    //     this.colorBackgroundBanner = "gray";
+    //   } else {
+    //     this.colorBackgroundBanner = "blue";
+    //   }
+    // },
+  },
   methods: {
     //DISABLE INPUT BANNERS
     isDisabled(value) {
       let exists = this.disabledInputs.find((p) => p == value);
       if (exists) {
-        // if (value == "colorBackgroundBannerDisabled") {
-        //   this.colorBackgroundBanner = "no color";
-        // }
+        if (value == "colorBackgroundBannerDisabled") {
+          this.colorBackgroundBanner = "#fff";
+        }
         return true;
       } else {
         return false;
