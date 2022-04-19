@@ -75,7 +75,7 @@
     <div class="wrapper-image" style="width: 100%">
       <img
         style="width: 100%; vertical-align: bottom"
-        :src="pictureLinkMobIF"
+        :src="showMobLink"
         alt=""
       />
     </div>
@@ -103,20 +103,10 @@ export default {
   ],
   data() {
     return {
-      pictureLinkMobIF: this.showImage(),
+      // pictureLinkMobIF: this.showImage(),
     };
   },
-  mounted() {
-    // if (this.bannerSelected == "Img_bg_no_text_center") {
-    //   this.pictureLinkMobIF = "";
-    // }
-    this.showImage();
-  },
-  watch: {
-    bannerSelected() {
-      this.showImage();
-    },
-  },
+
   computed: {
     ShowLine() {
       var color;
@@ -127,14 +117,14 @@ export default {
       }
       return color;
     },
-  },
-  methods: {
-    showImage() {
+    showMobLink() {
+      var mobLink;
       if (this.bannerSelected == "Img_bg_no_text_center") {
-        this.pictureLinkMobIF = "";
+        mobLink = "";
       } else {
-        this.pictureLinkMobIF = this.pictureLinkMob;
+        mobLink = this.pictureLinkMob;
       }
+      return mobLink;
     },
   },
 };

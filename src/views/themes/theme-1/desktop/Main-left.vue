@@ -134,9 +134,7 @@ export default {
   },
   methods: {
     //get selected text
-    getSelectedText(e) {
-      console.log(e);
-
+    getSelectedText() {
       // window.getSelection().toString();
       // console.log(window.getSelection().getRangeAt(0));
       let start = window.getSelection().getRangeAt(0).startOffset;
@@ -145,7 +143,6 @@ export default {
       this.selectedText = window.getSelection().toString();
     },
     highlight() {
-      console.log(this.selectedText);
       // let keyword = this.selectedText.split("\n");
       let keyword = this.selectedText;
       let content = this.textTitle;
@@ -181,7 +178,7 @@ export default {
       //     this.wrapKeywordWithHTML(keyword)
       //   );
       // });
-      console.log(document.getElementById("textTitle"));
+
       return temp;
     },
     // wrapKeywordWithHTML(keyword) {
