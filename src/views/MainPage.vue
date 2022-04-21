@@ -125,12 +125,12 @@ export default {
       pictureLinkMob: "",
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
-      textTitle: "BENITOS CAR SALE",
+      textTitle: "",
       textTitleFontSize: 34,
-      textSubtitle: "Dont dream it, DRIVE IT!",
+      textSubtitle: "",
       textSubtitleFontSize: 8,
-      textButton: "View Inventory",
-      btnVisualLook: "Square",
+      textButton: "",
+      btnVisualLook: "",
       btnStyle: "",
       buttonLink: "",
       colorBackgroundBanner: "",
@@ -147,7 +147,9 @@ export default {
     this.fillBannerList(); //fill up select banner dropdown menu
     let readLS = JSON.parse(localStorage.getItem("webGenerator"));
     // this.finishedBannerCheck = this.finishChecker;
-    if (readLS.bannerSelected) {
+
+    //wont read readLS.bannerSelected if its null and break app with error, so we need to check is it null
+    if (readLS != null && readLS.bannerSelected != null) {
       this.dataLS(); //call data from localStorage and set to data(). This is when page is refresh to keep old data
     }
     this.$watch(

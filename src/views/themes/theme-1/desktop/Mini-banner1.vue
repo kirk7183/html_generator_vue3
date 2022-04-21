@@ -25,7 +25,7 @@
       </div>
     </div>
     <img
-      src="https://geardarizona.goxee.com/cloud/data/files/536/My Files/shadow-up1.png"
+      src="https://manage.goxee.com/cloud/data/files/1747/My Files/XXX-Igor 764/shadow-up1.png"
       alt=""
     />
   </div>

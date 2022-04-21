@@ -65,6 +65,9 @@ export default {
       pictureLink: "",
     };
   },
+  mounted() {
+    document.title = "Web Generator 2.0";
+  },
   methods: {
     checkFinished(MainPageobject) {
       this.finishedBannerCheck = MainPageobject.finishedBannerCheck;
