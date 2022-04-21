@@ -12,6 +12,7 @@ const BANNERS =
         { name: "Img_bg_full_text_right", disabled: ["colorBackgroundBanner", "textWelcome", "textWelcomeFontSize"], mobileVer: "Img_bg_full_mob" },
         { name: "Img_bg_no_text_center", disabled: ["pictureLinkMob", "textWelcome", "textWelcomeFontSize"], mobileVer: "Img_bg_full_mob" },
         { name: "Mini_banner_1", disabled: ["pictureLink", "pictureLinkMob", "textWelcome", "textWelcomeFontSize", "textSubtitle", "textSubtitleFontSize", "textButton", "btnStyle", "buttonLink", "colorTextButton", "colorBackgroundButton", "lineCheck", "colorLine"], mobileVer: "Mini_banner_1_mob" },
+        { name: "Img_x2_text_center", disabled: ["textWelcome", "textWelcomeFontSize"], mobileVer: "Img_x2_text_center_mob" },
     ]
 // [
 //     "Main_left",

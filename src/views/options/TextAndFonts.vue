@@ -18,7 +18,7 @@
       :disabled="isDisabled('textWelcomeFontSizeDisabled')"
       class="input-number"
       type="number"
-      min="1"
+      min="-50"
       max="50"
       v-model="textWelcomeFontSize"
     />
@@ -42,14 +42,41 @@
       :disabled="isDisabled('textTitleFontSizeDisabled')"
       class="input-number"
       type="number"
-      min="1"
+      min="-50"
       max="50"
       v-model="textTitleFontSize"
     />
     <br />
 
+    <!-- ZA DUPLE BANNERE-->
+    <!--TITLE TEXT-->
+    <!-- <label class="font14">Please enter title text line 2:</label>
+    <br />
+    <input
+      :disabled="isDisabled('textTitleDisabled')"
+      autocomplete="off"
+      type="text"
+      name="textTitle"
+      minlength="3"
+      maxlength="99"
+      size="40"
+      v-model="textTitle"
+    /> -->
+    <!--TITLE TEXT FONT SIZE-->
+    <!-- <input
+      :disabled="isDisabled('textTitleFontSizeDisabled')"
+      class="input-number"
+      type="number"
+      min="-50"
+      max="50"
+      v-model="textTitleFontSize"
+    />
+    <br /> -->
+
+    <!-- /ZA DUPLE BANNERE -->
+
     <!--SUBTITLE TEXT-->
-    <label class="font14">Please enter subtitle text:</label>
+    <label class="font14">Please enter subtitle text 1:</label>
     <br />
     <input
       :disabled="isDisabled('textSubtitleDisabled')"
@@ -67,13 +94,14 @@
       :disabled="isDisabled('textSubtitleFontSizeDisabled')"
       class="input-number"
       type="number"
-      min="1"
       max="50"
+      min="-50"
       v-model="textSubtitleFontSize"
     />
     <br />
   </div>
 </template>
+
 
 <script>
 export default {
@@ -83,7 +111,7 @@ export default {
     return {
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
-      textTitle: "BENITOS CAR SALE",
+      textTitle: "DEALER NAME",
       textTitleFontSize: 34,
       textSubtitle: "Dont dream it, DRIVE IT!",
       textSubtitleFontSize: 8,
