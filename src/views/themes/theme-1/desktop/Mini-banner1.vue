@@ -9,7 +9,7 @@
         <h1>
           <span
             style="
-              color: #ffffff;
+              color: #000;
               font-family: arial, helvetica, sans-serif;
               font-size: calc(12px + 1vw);
             "

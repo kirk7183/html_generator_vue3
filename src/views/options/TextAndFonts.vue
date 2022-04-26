@@ -48,33 +48,6 @@
     />
     <br />
 
-    <!-- ZA DUPLE BANNERE-->
-    <!--TITLE TEXT-->
-    <!-- <label class="font14">Please enter title text line 2:</label>
-    <br />
-    <input
-      :disabled="isDisabled('textTitleDisabled')"
-      autocomplete="off"
-      type="text"
-      name="textTitle"
-      minlength="3"
-      maxlength="99"
-      size="40"
-      v-model="textTitle"
-    /> -->
-    <!--TITLE TEXT FONT SIZE-->
-    <!-- <input
-      :disabled="isDisabled('textTitleFontSizeDisabled')"
-      class="input-number"
-      type="number"
-      min="-50"
-      max="50"
-      v-model="textTitleFontSize"
-    />
-    <br /> -->
-
-    <!-- /ZA DUPLE BANNERE -->
-
     <!--SUBTITLE TEXT-->
     <label class="font14">Please enter subtitle text 1:</label>
     <br />

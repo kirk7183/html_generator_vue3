@@ -30,8 +30,8 @@
           text-align: left;
         "
         :style="WelcomeFontSize"
-        @mouseup="getSelectedText($event)"
       >
+        <!-- @mouseup="getSelectedText($event)" -->
         {{ textWelcome }}
       </div>
       <!-- class="title" -->
@@ -44,8 +44,8 @@
           letter-spacing: 2px;
         "
         :style="TitleFontSize"
-        @mouseup="getSelectedText($event)"
       >
+        <!-- @mouseup="getSelectedText($event)" -->
         {{ textTitle }}
       </div>
       <!-- <button @click="highlight"></button> -->
@@ -84,8 +84,8 @@
               border: '0.1px solid ' + colorBackgroundButton,
             },
           ]"
-          @mouseup="getSelectedText($event)"
           >{{ textButton }}
+          <!-- @mouseup="getSelectedText($event)" -->
         </span>
       </a>
     </div>
@@ -142,19 +142,19 @@ export default {
       this.selectedText = this.selectedText.substring(end, start);
       this.selectedText = window.getSelection().toString();
     },
-    highlight() {
-      // let keyword = this.selectedText.split("\n");
-      let keyword = this.selectedText;
-      let content = this.textTitle;
-      // console.log(
-      //   "innerTHML highlight",
-      //   document.getElementById("textTitle").innerHTML
-      // );
-      document.getElementById("textTitle").innerHTML = this.transformContent(
-        content,
-        keyword
-      );
-    },
+    // highlight() {
+    //   // let keyword = this.selectedText.split("\n");
+    //   let keyword = this.selectedText;
+    //   let content = this.textTitle;
+    //   // console.log(
+    //   //   "innerTHML highlight",
+    //   //   document.getElementById("textTitle").innerHTML
+    //   // );
+    //   document.getElementById("textTitle").innerHTML = this.transformContent(
+    //     content,
+    //     keyword
+    //   );
+    // },
     transformContent(content, keyword) {
       // console.log(
       //   "innerTHML transform",

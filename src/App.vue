@@ -42,6 +42,7 @@
       </button>
     </div>
   </div>
+  
   <!-- <keep-alive :include="['/', 'SingleBanner', 'BannersAndPictures']"> -->
   <router-view v-slot="{ Component }">
     <keep-alive>

@@ -240,21 +240,9 @@ export default {
       this.tab_type = tabData.tab_type; // for import component what data to show in specific "tab"
       this.activeTab = tabData.title; // setup active "tab"
     },
-
     dataLS() {
       let readLS = localStorage.getItem("webGenerator");
       Object.assign(this.$data, JSON.parse(readLS)); //getting object from "BannersAndPictures".VUE i mean..from localStorage   and setup in $data with "key" and "value"
-      // let readLocalStorage = JSON.parse(localStorage.webGenerator.pictureLink);
-      // for (var i = 0, len = localStorage.length; i < len; ++i) {
-      //   console.log(localStorage.getItem(localStorage.key(i)));
-      // }
-
-      // console.log({ ...localStorage });
-      // let asd = JSON.parse(localStorage.getItem("webGenerator"));
-      // console.log(asd.pictureLink);
-      // asd.pictureLink = "workingUpdateObject";
-      // localStorage.setItem("webGenerator", JSON.stringify(asd));
-      // console.log(asd.pictureLink);
     },
     resetData() {
       Object.assign(this.$data, this.$options.data());
