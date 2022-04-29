@@ -1,7 +1,7 @@
 <template>
   <div class="flex gap40">
     <div class="bannerSelect groupWrapper div1">
-      <!--SELECT THEME-->
+      <!--SELECT BANNER-->
       <label class="font14">Please select theme by name:</label>
       <br />
       <select name="themeSelect" v-model="bannerSelected">
@@ -15,8 +15,9 @@
         </option>
       </select>
       <br />
+      <!-- /SELECT BANNER-->
 
-      <!--SELECT BANNER-->
+      <!--SELECT THEME-->
       <!-- <label class="font14"> Please select banner by name: </label>
       <br />
       <select disabled name="bannerSelect" v-model="bannerSelected">
@@ -44,13 +45,30 @@
           style="width: 55px"
           v-model="colorBackgroundBanner"
         />
-        <!--BUTTON WITH SELECTED COLOR-->
         <button
           class="colorButton input-number vertical"
           :style="{ background: colorBackgroundBanner }"
         ></button>
       </div>
+      <!--BUTTON WITH SELECTED COLOR-->
     </div>
+
+    <!-- FONT SELECT -->
+    <div class="fontSelect groupWrapper div2">
+      <label>Font 1</label>
+      <br />
+      <select name="FontSelect" v-model="fontSelected">
+        <option disabled selected>-- Select Font 1 --</option>
+        <option
+          v-for="(singleFont, i) in fontList"
+          :key="i"
+          :value="singleFont"
+        >
+          {{ singleFont }}
+        </option>
+      </select>
+    </div>
+    <!-- /FONT SELECT -->
 
     <div class="pictureLinks groupWrapper div3">
       <!--PICTURE LINK DESKTOP-->
@@ -87,21 +105,23 @@
 <script>
 export default {
   name: "BannersAndPictures",
-  props: ["bannerList", "disabledInputs"],
+  props: ["bannerList", "disabledInputs", "fontList"],
   data() {
     return {
       bannerSelected: "",
+      fontSelected: "",
       pictureLink: "",
       pictureLinkMob: "",
       colorBackgroundBanner: "#fff",
     };
   },
   mounted() {
-    let readLS = JSON.parse(localStorage.getItem("webGenerator"));
-    Object.assign(this.$data, readLS); //getting object from LocalStorage and setup in $data with "key" and "value". So it will show values at mounted page
+    let readLS = JSON.parse(localStorage.getItem("webGenerator")); //getting object from LocalStorage
+    Object.assign(this.$data, readLS); // and setup in $data with "key" and "value". So it will show values at mounted page
     this.$watch(
       (vm) => [
         vm.bannerSelected,
+        vm.fontSelected,
         vm.pictureLink,
         vm.pictureLinkMob,
         vm.colorBackgroundBanner,
@@ -110,8 +130,9 @@ export default {
         localStorage.setItem(
           "webGenerator",
           JSON.stringify({
-            ...readLS,
+            ...readLS, //read existing data in Local Storage
             bannerSelected: this.bannerSelected,
+            fontSelected: this.fontSelected,
             pictureLink: this.pictureLink,
             pictureLinkMob: this.pictureLinkMob,
             colorBackgroundBanner: this.colorBackgroundBanner,
@@ -122,6 +143,27 @@ export default {
     );
   },
   watch: {
+    fontSelected() {
+      let apiKey =
+        "www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyC49QaGZqVe_c21s6ADzvRWxTUksXCLlBM";
+      console.log(apiKey);
+      let fami = "anonymous Pro";
+      var apiUrl = [];
+      apiUrl.push("https://fonts.googleapis.com/css?family=");
+      apiUrl.push(fami.replace(/ /g, "+"));
+      // if (contains("italic", anonymousPro.variants)) {
+      // apiUrl.push(":");
+      // apiUrl.push("italic");
+      // }
+      // if (contains("greek", anonymousPro.subsets)) {
+      //   apiUrl.push("&subset=");
+      //   apiUrl.push("greek");
+      // }
+
+      // url: 'https://fonts.googleapis.com/css?family=Anonymous+Pro:italic&subset=greek'
+      var url = apiUrl.join("");
+      console.log(url);
+    },
     // bannerSelected(value) {
     //   if (value === "Mini_banner_1") {
     //     this.colorBackgroundBanner = "gray";

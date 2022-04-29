@@ -1,5 +1,8 @@
 # html-generator-v2
 framework - Vue v3
+icons - fontawesome
+router
+
 ## Project setup
 ```
 npm install

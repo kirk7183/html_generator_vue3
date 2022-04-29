@@ -37,7 +37,7 @@
       <div
         class="text2"
         style="
-          font-size: calc(34px + 1vw);
+          font-size: calc(28px + 1vw);
           font-family: 'Montserrat', sans-serif;
           font-weight: 900;
           letter-spacing: 2px;
