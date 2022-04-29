@@ -11,6 +11,7 @@
   >
     <img style="display: block; width: 100%" :src="pictureLink" alt="" />
     <div
+      contenteditable="true"
       class="wrapper"
       style="
         position: absolute;
@@ -55,7 +56,6 @@
         style="
           width: 100%;
           display: flex;
-          justify-content: space-between;
           margin-bottom: 1vw;
           font-size: calc(8px + 1vw);
           font-family: 'Montserrat', sans-serif;

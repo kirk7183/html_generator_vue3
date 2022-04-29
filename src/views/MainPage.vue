@@ -20,12 +20,15 @@
           </ul>
         </nav>
       </header>
+      <additional-options />
       <article>
         <div class="container" style="border-bottom: 1px solid red">
+          <i class="fad fa-laugh-wink"></i>
           <!-- SHOW TAB OPTIONS -->
           <banner-options
             :tab_type="tab_type"
             :bannerList="bannerList"
+            :fontList="fontList"
             :disabledInputs="disabledInputs"
             :colorBackgroundButton="colorBackgroundButton"
             @componentDataChanged="dataLS"
@@ -49,7 +52,9 @@
     <!--PREVIEW-->
     <div id="preview">
       <dynamic-component-desktop
-        v-if="bannerSelected"
+        v-if="
+          (bannerSelected && pictureLink) || bannerSelected === 'Mini_banner_1'
+        "
         :type="bannerSelected"
         :pictureLink="pictureLink"
         :pictureLinkMob="pictureLinkMob"
@@ -72,8 +77,10 @@
     </div>
     <!--MOBILE PREVIEW-->
     <div id="mob_preview">
-      <dynamicComponentMob
-        v-if="bannerSelected && pictureLink"
+      <dynamic-component-mob
+        v-if="
+          (bannerSelected && pictureLink) || bannerSelected === 'Mini_banner_1'
+        "
         :type="bannerSelectedMob"
         :bannerSelected="bannerSelected"
         :pictureLink="pictureLink"
@@ -101,8 +108,10 @@
 import dynamicComponentDesktop from "@/components/DynamicComponentDesktop.vue";
 import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
 import bannerOptions from "@/components/BannerOptions.vue";
-import { BANNERS } from "@/functions/lists";
-import { TABS } from "@/functions/lists";
+import additionalOptions from "@/components/AdditionalOptions.vue";
+import { BANNERS, FONTS } from "@/functions/lists.js";
+// import { FONTS } from "@/functions/lists.js";
+import { TABS } from "@/functions/lists.js";
 export default {
   name: "MainPage",
   props: ["finishChecker", "selectCopyClick"],
@@ -110,6 +119,7 @@ export default {
     dynamicComponentDesktop,
     dynamicComponentMob,
     bannerOptions,
+    additionalOptions,
   },
 
   data() {
@@ -118,6 +128,7 @@ export default {
       // disabledPictureLinkMob: true,
       finishedBannerCheck: false,
       disabledInputs: [], //inputs that are disabled when select specific banner
+      fontList: [],
       bannerList: [],
       bannerSelected: "",
       bannerSelectedMob: "",
@@ -125,17 +136,17 @@ export default {
       pictureLinkMob: "",
       textWelcome: "Welcome to",
       textWelcomeFontSize: 10,
-      textTitle: "",
+      textTitle: "Enter Title Text",
       textTitleFontSize: 34,
-      textSubtitle: "",
+      textSubtitle: "Enter Subtitle Text",
       textSubtitleFontSize: 8,
-      textButton: "",
+      textButton: "Enter Button Text",
       btnVisualLook: "",
       btnStyle: "",
-      buttonLink: "",
+      buttonLink: "Square",
       colorBackgroundBanner: "",
-      colorTextButton: "",
-      colorBackgroundButton: "",
+      colorTextButton: "#fff",
+      colorBackgroundButton: "#ed1c24",
       lineCheck: false,
       colorLine: "",
       tabs: TABS,
@@ -145,6 +156,7 @@ export default {
   },
   mounted() {
     this.fillBannerList(); //fill up select banner dropdown menu
+    this.fillFontList(); //fill up select font1st dropdown menu
     let readLS = JSON.parse(localStorage.getItem("webGenerator"));
     // this.finishedBannerCheck = this.finishChecker;
 
@@ -155,6 +167,7 @@ export default {
     this.$watch(
       (vm) => [
         vm.bannerSelected,
+        vm.fontSelected,
         // vm.bannerSelected,
         // vm.picturePositionSelected,
         vm.pictureLink,
@@ -198,6 +211,12 @@ export default {
         }
       });
     },
+    // fontSelected(selectedValue){
+    //       FONTS.forEach((item) => {
+    //     if (selectedValue === item.font1st) {
+
+    //     }
+    // },
     //COPY CODE
     selectCopyClick() {
       if (this.finishedBannerCheck) {
@@ -227,6 +246,11 @@ export default {
         this.bannerList.push(item.name);
       });
     },
+    fillFontList() {
+      FONTS.forEach((item) => {
+        this.fontList.push(item.font1st);
+      });
+    },
     updateTextArea() {
       //get by id, then set to String in textArea for desktop
       var htmlPreview = document.getElementsByClassName("gpm-hfm")[0];
@@ -247,6 +271,7 @@ export default {
     resetData() {
       Object.assign(this.$data, this.$options.data());
       this.fillBannerList();
+      this.fillFontList();
     },
   },
 };
@@ -358,7 +383,7 @@ header nav .tab-rounding.right:before {
 
 article .container {
   width: 100%;
-  padding: 40px;
+  padding: 40px 60px;
   /* max-width: 1524px; */
   box-sizing: border-box;
   margin: 0 auto;

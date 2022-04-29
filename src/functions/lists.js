@@ -14,62 +14,18 @@ const BANNERS =
         { name: "Mini_banner_1", disabled: ["pictureLink", "pictureLinkMob", "textWelcome", "textWelcomeFontSize", "textSubtitle", "textSubtitleFontSize", "textButton", "btnStyle", "buttonLink", "colorTextButton", "colorBackgroundButton", "lineCheck", "colorLine"], mobileVer: "Mini_banner_1_mob" },
         { name: "Img_x2_text_center", disabled: ["textWelcome", "textWelcomeFontSize"], mobileVer: "Img_x2_text_center_mob" },
     ]
-// [
-//     "Main_left",
-//     "Main_center",
-//     "Main_right",
-//     "Img_left",
-//     "Img_left_reverse",
-//     "Img_right_reverse",
-//     "Img_right",
-//     "Img_bg_full_text_left",
-//     "Img_bg_full_text_center",
-//     "Img_bg_full_text_right",
-//     "Img_bg_no_text_center",
-//     "Mini_banner_1"
-// ];
 
 const LINKS_DUMMY_DATA = [
-    {
-        name: "Inventory",
-        link: "/inventory.php",
-    },
-    {
-        name: "Financing",
-        link: "/forms.php?cid=1&t=2",
-    },
-    {
-        name: "TestDrive",
-        link: "/forms.php?cid=1&t=4",
-    },
-    {
-        name: "Offer",
-        link: "/forms.php?cid=1&t=1",
-    },
-    {
-        name: "Trade-In",
-        link: "/forms.php?cid=1&t=5",
-    },
-    {
-        name: "Cash For Your Car",
-        link: "/forms.php?cid=1&t=6",
-    },
-    {
-        name: "Consignment",
-        link: "/forms.php?cid=1&t=3",
-    },
-    {
-        name: "Reviews",
-        link: "/reviews.php",
-    },
-    {
-        name: "About Us",
-        link: "/about.php",
-    },
-    {
-        name: "Contact",
-        link: "/contact.php",
-    },
+    { name: "Inventory", link: "/inventory.php" },
+    { name: "Financing", link: "/forms.php?cid=1&t=2" },
+    { name: "TestDrive", link: "/forms.php?cid=1&t=4" },
+    { name: "Offer", link: "/forms.php?cid=1&t=1" },
+    { name: "Trade-In", link: "/forms.php?cid=1&t=5" },
+    { name: "Cash For Your Car", link: "/forms.php?cid=1&t=6" },
+    { name: "Consignment", link: "/forms.php?cid=1&t=3" },
+    { name: "Reviews", link: "/reviews.php" },
+    { name: "About Us", link: "/about.php" },
+    { name: "Contact", link: "/contact.php" },
 ];
 
 const BUTTON_LOOK = [
@@ -90,7 +46,13 @@ const TABS = [
     { title: "Save & Delete", tab_type: "SaveAndDelete" }
 ];
 
-export { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK, TABS }
+const FONTS = [
+    { font1st: "Playfair Display", font1st_Link: "", font2nd: "Chivo", font2nd_Link: "", font3rd: "Cica Glisha", font3rd_Link: "" },
+    { font1st: "Montserrat", font1st_Link: "", font2nd: "Aztec", font2nd_Link: "", font3rd: "Cica Glisha", font3rd_Link: "" },
+    { font1st: "Chivo", font1st_Link: "", font2nd: "Aztec", font2nd_Link: "", font3rd: "Cica Glisha", font3rd_Link: "" }
+]
+
+export { BANNERS, LINKS_DUMMY_DATA, BUTTON_LOOK, TABS, FONTS }
 
 
 

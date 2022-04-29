@@ -11,6 +11,7 @@
   >
     <img style="display: block; width: 100%" :src="pictureLink" alt="" />
     <div
+      contenteditable="true"
       class="wrapper"
       style="
         position: absolute;
