@@ -7,6 +7,7 @@
   >
     <div
       class="box-card-about-us"
+      contenteditable="true"
       style="
         width: 50%;
         text-align: center;

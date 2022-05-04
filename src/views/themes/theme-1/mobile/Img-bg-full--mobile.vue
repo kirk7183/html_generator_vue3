@@ -8,6 +8,7 @@
   >
     <div
       class="wrapper-of-card"
+      contenteditable="true"
       style="
         position: relative;
         width: 70%;
