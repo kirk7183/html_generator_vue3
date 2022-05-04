@@ -53,7 +53,7 @@
       <!--BUTTON WITH SELECTED COLOR-->
     </div>
 
-    <!-- FONT SELECT -->
+    <!-- FONT 1 SELECT -->
     <div class="fontSelect groupWrapper div2">
       <label>Font 1</label>
       <br />
@@ -68,7 +68,41 @@
         </option>
       </select>
     </div>
-    <!-- /FONT SELECT -->
+    <!-- /FONT 1 SELECT -->
+
+    <!-- FONT 2 SELECT -->
+    <div class="fontSelect groupWrapper div2">
+      <label>Font 2</label>
+      <br />
+      <select name="FontSelect" v-model="fontSelected">
+        <option disabled selected>-- Select Font 2 --</option>
+        <option
+          v-for="(singleFont, i) in fontList"
+          :key="i"
+          :value="singleFont"
+        >
+          {{ singleFont }}
+        </option>
+      </select>
+    </div>
+    <!-- /FONT 2 SELECT -->
+
+    <!-- FONT 3 SELECT -->
+    <div class="fontSelect groupWrapper div2">
+      <label>Font 3</label>
+      <br />
+      <select name="FontSelect" v-model="fontSelected">
+        <option disabled selected>-- Select Font 3 --</option>
+        <option
+          v-for="(singleFont, i) in fontList"
+          :key="i"
+          :value="singleFont"
+        >
+          {{ singleFont }}
+        </option>
+      </select>
+    </div>
+    <!-- /FONT 3 SELECT -->
 
     <div class="pictureLinks groupWrapper div3">
       <!--PICTURE LINK DESKTOP-->

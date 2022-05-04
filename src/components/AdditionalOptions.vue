@@ -12,12 +12,10 @@
     <button @click="applyItalic" class="buttonClass">
       <font-awesome-icon :icon="['fas', 'italic']" />
     </button>
-    <button @click="applyHeading" class="buttonClass">
-      <font-awesome-icon :icon="['fas', 'heading']" />
-    </button>
     <button @click="applyUnderline" class="buttonClass">
       <font-awesome-icon :icon="['fa', 'underline']" />
     </button>
+
     <!-- BRUSH -TEXT COLOR -->
     <div class="wrapperIcon">
       <button
@@ -50,6 +48,43 @@
     </div>
     <!-- /BRUSH -TEXT COLOR -->
 
+    <!-- LETTER SPACING -->
+    <div class="wrapperIcon flexRow">
+      <button
+        disabled
+        class="buttonClass buttonDisabled"
+        style="display: inline-block; vertical-align: middle"
+      >
+        <font-awesome-icon :icon="['fa-solid', 'text-width']" />
+      </button>
+      <!-- RightArrow -->
+      <button class="arrowRight" @click="ArrowMethod('letterSpacingArrow')">
+        <font-awesome-icon :icon="['fa-solid', letterSpacingArrow]" />
+      </button>
+      <!-- /RightArrow -->
+      <!-- DIV for MINUS and PLUS of LETTER SPACING-->
+      <div
+        class="minusAndPlus flexRow"
+        :style="[
+          dynamicShowLetterSpacing
+            ? 'width:57px; padding: 0 5px;'
+            : 'width:0px; padding:0;',
+        ]"
+      >
+        <button class="fs16" @click="applyLetterSpacing('plus')">
+          <font-awesome-icon :icon="['fa-solid', 'plus']" />
+        </button>
+        <button class="fs16" @click="applyLetterSpacing('minus')">
+          <font-awesome-icon :icon="['fa-solid', 'minus']" />
+        </button>
+        <button class="fs16" @click="applyLetterSpacing('reset')">
+          <font-awesome-icon :icon="['fa-solid', 'r']" />
+        </button>
+      </div>
+      <!-- /Input HEX code or color name -->
+    </div>
+    <!-- /LETTER SPACING -->
+
     <!-- LINE HEIGHT -->
     <div class="wrapperIcon flexRow">
       <button
@@ -57,7 +92,6 @@
         class="buttonClass buttonDisabled"
         style="display: inline-block; vertical-align: middle"
       >
-        <!-- @click="applyLineHeight()" -->
         <font-awesome-icon :icon="['fa-solid', 'arrow-down-up-across-line']" />
       </button>
       <!-- RightArrow -->
@@ -70,8 +104,8 @@
         class="minusAndPlus flexRow"
         :style="[
           dynamicShowLineHeight
-            ? 'width:35px; padding: 0 5px; '
-            : 'width:2px; padding:0; ',
+            ? 'width:57px; padding: 0 5px;'
+            : 'width:0px; padding:0; ',
         ]"
       >
         <button class="fs16" @click="applyLineHeight('plus')">
@@ -80,10 +114,14 @@
         <button class="fs16" @click="applyLineHeight('minus')">
           <font-awesome-icon :icon="['fa-solid', 'minus']" />
         </button>
+        <button class="fs16" @click="applyLineHeight('reset')">
+          <font-awesome-icon :icon="['fa-solid', 'r']" />
+        </button>
       </div>
       <!-- /Input HEX code or color name -->
     </div>
     <!-- /LINE HEIGHT -->
+
     <button @click="undo" class="buttonClass">
       <font-awesome-icon :icon="['fas', 'undo']" />
     </button>
@@ -102,6 +140,8 @@ export default {
       custLineHeight: "",
       brushArrow: "caret-left",
       lineHeightArrow: "caret-left",
+      letterSpacingArrow: "caret-left",
+      dynamicShowLetterSpacing: false,
       dynamicShowBrush: false,
       dynamicShowLineHeight: false,
     };
@@ -123,54 +163,67 @@ export default {
       document.execCommand("styleWithCSS", false, true);
       document.execCommand("foreColor", false, this.custColorText);
     },
-    applyLineHeight() {
-      //   function changeFont(plusMinus) {
-      var sel = window.getSelection(); // Gets selection
 
-      if (sel.rangeCount) {
-        // Creates a new element, and insert the selected text with the chosen font inside
-        var e = document.createElement("span");
-        e.innerHTML = sel.toString();
-        // console.log(e.childNodes);
-        // console.log(sel);
-        // console.log(e.innerHTML);
-        // https://developer.mozilla.org/en-US/docs/Web/API/Selection/getRangeAt
-        var range = sel.getRangeAt(0);
-        console.log(e.style.letterSpacing);
-        // e.style.letterSpacing = "1px;";
-        range.deleteContents(); // Deletes selected text…
-        range.insertNode(e); // … and inserts the new element at its place
-        console.log(this.$el.querySelector("span"));
+    applyLetterSpacing(plusMinus) {
+      let curElementStyle = window.getSelection().focusNode.parentElement.style;
+      let number = parseInt(curElementStyle.letterSpacing, 10);
 
-        // let selectedTxT = window.getSelection().focusNode.parentNode.style;
-        // let selectedTxT = window.getSelection().focusNode.parentNode.style;
-        // let getStyle = selectedTxT.letterSpacing;
-        // console.log(selectedTxT);
-        // console.log(e.style.letterSpacing);
-        // if (plusMinus === "plus") {
-        //   let parseLetterSpacing = parseInt(e.style.letterSpacing, 10);
-        //   //   console.log(parseLetterSpacing);
-        //   e.style.letterSpacing = 1 + parseLetterSpacing + "px;";
-        // } else {
-        //   e.style = "letter-spacing:unset;";
-        // }
-        // console.log(e.style.letterSpacing);
+      //if its PLUS
+      if (plusMinus === "plus") {
+        if (Number.isInteger(number)) {
+          number = number + 1;
+        } else {
+          number = 1;
+        }
+        //then set to style
+        curElementStyle.letterSpacing = number + "px";
       }
+      //if its MINUS
+      if (plusMinus === "minus") {
+        if (Number.isInteger(number)) {
+          number = number - 1;
+        } else {
+          number = 1;
+        }
+        //then set to style
+        curElementStyle.letterSpacing = number + "px";
+      }
+      //if its RESET
+      if (plusMinus === "reset") {
+        //then set to style
+        curElementStyle.letterSpacing = "unset";
+      }
+    },
+    applyLineHeight(plusMinus) {
+      let curElementStyle = window.getSelection().focusNode.parentElement.style;
+      let number = parseFloat(curElementStyle.lineHeight);
 
-      //   let selectedTxT = window.getSelection().focusNode.parentNode.style;
-      //   let selectedTxT = window.getSelection().focusNode.parentElement.style;
-      //   const getSelectedText = () => window.getSelection();
-      //   console.log(getSelectedText());
-      //   var parentNode = document.getElementById("textTitle").parentElement;
-      //   console.log(parentNode);
-      //   var e = document.createElement("span");
-      //   e.innerHTML = getSelection();
-      //   var numberOnly = parseInt(selectedTxT.letterSpacing, 10);
-      //   if (plusMinus === "plus") {
-      //     selectedTxT.letterSpacing = numberOnly + 1 + "px"; //when click on +
-      //   } else {
-      //     selectedTxT.letterSpacing = numberOnly - 1 + "px"; //when click on -
-      //   }
+      console.log(number + 0.1);
+      //if its PLUS
+      if (plusMinus === "plus") {
+        if (Number.isFinite(number)) {
+          number = number + 0.1;
+        } else {
+          number = 1;
+        }
+        //then set to style
+        curElementStyle.lineHeight = number;
+      }
+      //if its MINUS
+      if (plusMinus === "minus") {
+        if (Number.isFinite(number)) {
+          number = number - 0.1;
+        } else {
+          number = 1;
+        }
+        //then set to style
+        curElementStyle.lineHeight = number;
+      }
+      //if its RESET
+      if (plusMinus === "reset") {
+        //then set to style
+        curElementStyle.lineHeight = "unset";
+      }
     },
     undo() {
       document.execCommand("undo");
@@ -186,6 +239,15 @@ export default {
         } else {
           this.brushArrow = "caret-right";
           this.dynamicShowBrush = true; //input is NOT showed
+        }
+      }
+      if (arrow === "letterSpacingArrow") {
+        if (this.letterSpacingArrow === "caret-right") {
+          this.letterSpacingArrow = "caret-left";
+          this.dynamicShowLetterSpacing = false; //input is showed
+        } else {
+          this.letterSpacingArrow = "caret-right";
+          this.dynamicShowLetterSpacing = true; //input is NOT showed
         }
       }
       if (arrow === "lineHeightArrow") {
@@ -272,10 +334,17 @@ body,
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2px;
 }
 .buttonDisabled:hover {
   border: unset;
   cursor: unset;
+}
+.minusAndPlus > button {
+  cursor: pointer;
+}
+.minusAndPlus > button > svg {
+  width: 15px;
 }
 .fs16 {
   font-size: 16px;

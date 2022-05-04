@@ -33,7 +33,7 @@
       type="text"
       name="textTitle"
       minlength="3"
-      maxlength="99"
+      maxlength="140"
       size="40"
       v-model="textTitle"
     />
@@ -57,7 +57,7 @@
       type="text"
       name="textSubtitle"
       minlength="3"
-      maxlength="1999"
+      maxlength="2999"
       size="40"
       v-model="textSubtitle"
       style="display: inline-block"
