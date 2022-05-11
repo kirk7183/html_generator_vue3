@@ -19,6 +19,7 @@
       </div>
       <div
         class="box-card-right"
+        contenteditable="true"
         style="
           width: 60%;
           display: flex;

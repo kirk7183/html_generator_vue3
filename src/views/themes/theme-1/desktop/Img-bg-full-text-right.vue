@@ -24,6 +24,7 @@
 
     <div
       class="wrapper-of-card"
+      contenteditable="true"
       style="
         position: absolute;
         top: 50%;

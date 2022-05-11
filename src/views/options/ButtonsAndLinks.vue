@@ -1,5 +1,5 @@
 <template>
-  <div class="groupWrapper div2">
+  <div class="groupWrapper">
     <!--BUTTON TEXT-->
     <div class="inline">
       <label class="font14">Enter button text:</label>

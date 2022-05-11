@@ -17,7 +17,10 @@
       <div class="checkerFinished" style="padding: 0 10px">
         <!--DISABLE INPUT if bannerSelected is not selected OR pictureLink is empty-->
         <input
-          :disabled="!bannerSelected || pictureLink === '' && bannerSelected != 'Mini_banner_1'"
+          :disabled="
+            !bannerSelected ||
+            (pictureLink === '' && bannerSelected != 'Mini_banner_1')
+          "
           class="checkbox"
           type="checkbox"
           id="finishedBanner"
@@ -42,7 +45,7 @@
       </button>
     </div>
   </div>
-  
+
   <!-- <keep-alive :include="['/', 'SingleBanner', 'BannersAndPictures']"> -->
   <router-view v-slot="{ Component }">
     <keep-alive>
@@ -67,7 +70,7 @@ export default {
     };
   },
   mounted() {
-    document.title = "Web Generator 2.0";
+    document.title = "Web Generator 2.02";
   },
   methods: {
     checkFinished(MainPageobject) {

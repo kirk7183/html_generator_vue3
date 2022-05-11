@@ -28,12 +28,12 @@
           <banner-options
             :tab_type="tab_type"
             :bannerList="bannerList"
-            :fontList="fontList"
             :disabledInputs="disabledInputs"
             :colorBackgroundButton="colorBackgroundButton"
             @componentDataChanged="dataLS"
             @completeReset="resetData"
           />
+          <!-- :fontList="fontList" -->
 
           <!--TEXTAREA-->
           <textarea
@@ -109,7 +109,7 @@ import dynamicComponentDesktop from "@/components/DynamicComponentDesktop.vue";
 import dynamicComponentMob from "@/components/DynamicComponentMob.vue";
 import bannerOptions from "@/components/BannerOptions.vue";
 import additionalOptions from "@/components/AdditionalOptions.vue";
-import { BANNERS, FONTS } from "@/functions/lists.js";
+import { BANNERS } from "@/functions/lists.js";
 // import { FONTS } from "@/functions/lists.js";
 import { TABS } from "@/functions/lists.js";
 export default {
@@ -128,7 +128,7 @@ export default {
       // disabledPictureLinkMob: true,
       finishedBannerCheck: false,
       disabledInputs: [], //inputs that are disabled when select specific banner
-      fontList: [],
+      // fontList: [],
       bannerList: [],
       bannerSelected: "",
       bannerSelectedMob: "",
@@ -156,7 +156,7 @@ export default {
   },
   mounted() {
     this.fillBannerList(); //fill up select banner dropdown menu
-    this.fillFontList(); //fill up select font1st dropdown menu
+    // this.fillFontList(); //fill up select font1st dropdown menu
     let readLS = JSON.parse(localStorage.getItem("webGenerator"));
     // this.finishedBannerCheck = this.finishChecker;
 
@@ -167,7 +167,7 @@ export default {
     this.$watch(
       (vm) => [
         vm.bannerSelected,
-        vm.fontSelected,
+        // vm.fontSelected,
         // vm.bannerSelected,
         // vm.picturePositionSelected,
         vm.pictureLink,
@@ -246,11 +246,11 @@ export default {
         this.bannerList.push(item.name);
       });
     },
-    fillFontList() {
-      FONTS.forEach((item) => {
-        this.fontList.push(item.font1st);
-      });
-    },
+    // fillFontList() {
+    //   FONTS.forEach((item) => {
+    //     this.fontList.push(item.fontName);
+    //   });
+    // },
     updateTextArea() {
       //get by id, then set to String in textArea for desktop
       var htmlPreview = document.getElementsByClassName("gpm-hfm")[0];
@@ -271,7 +271,7 @@ export default {
     resetData() {
       Object.assign(this.$data, this.$options.data());
       this.fillBannerList();
-      this.fillFontList();
+      // this.fillFontList();
     },
   },
 };

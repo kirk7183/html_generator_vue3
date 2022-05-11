@@ -16,6 +16,7 @@
       </div>
       <div
         class="box-card-right"
+        contenteditable="true"
         style="
           width: 60%;
           display: flex;
@@ -26,7 +27,7 @@
       >
         <div class="box-card-right-one" style="width: 90%; text-align: right">
           <div
-          id="boxCardTitle"
+            id="boxCardTitle"
             class="box-card-title"
             style="
               font-size: calc(28px + 1vw);
@@ -103,7 +104,7 @@ export default {
     "lineCheck",
     "colorLine",
   ],
-  watch:{
+  watch: {
     // textTitleFontSize($value){
     //   console.log(this.textTitleFontSize);
     //   var vw = document.getElementById('theme').offsetWidth;
@@ -113,7 +114,6 @@ export default {
     //   var calcu = this.textTitleFontSize + ((1*vw)/100);
     //   console.log(calcu);
     //   console.log('value ' + $value)
-
     // }
   },
   computed: {
@@ -128,7 +128,6 @@ export default {
     },
     TitleFontSize() {
       return "font-size: calc(" + this.textTitleFontSize + "px + 1vw)";
-      
     },
     SubtitleFontSize() {
       return "font-size: calc(" + this.textSubtitleFontSize + "px + 1vw)";

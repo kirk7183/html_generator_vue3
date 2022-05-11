@@ -2,6 +2,7 @@
   <!--DESKTOP-->
   <div class="gpm-hfm">
     <div
+      contenteditable="true"
       style="background-position: center center; background-size: cover"
       :style="{ background: colorBackgroundBanner }"
     >
