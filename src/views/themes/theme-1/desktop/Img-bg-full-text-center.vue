@@ -22,6 +22,7 @@
       />
     </div>
     <div
+      contenteditable="true"
       class="box-card-about-us"
       style="
         position: absolute;

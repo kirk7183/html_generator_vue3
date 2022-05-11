@@ -38,7 +38,7 @@
         </select>
       </div>
 
-      <div class="groupWrapper div2">
+      <div class="groupWrapper">
         <!--WELCOME TEXT-->
         <label for="textWelcome">Please enter welcome text:</label>
         <br />

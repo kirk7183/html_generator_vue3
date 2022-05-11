@@ -198,7 +198,6 @@ export default {
       let curElementStyle = window.getSelection().focusNode.parentElement.style;
       let number = parseFloat(curElementStyle.lineHeight);
 
-      console.log(number + 0.1);
       //if its PLUS
       if (plusMinus === "plus") {
         if (Number.isFinite(number)) {

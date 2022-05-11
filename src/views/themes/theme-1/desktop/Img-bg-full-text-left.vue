@@ -34,6 +34,7 @@
     >
       <div
         class="box-card-left"
+        contenteditable="true"
         style="
           display: flex;
           justify-content: space-between;

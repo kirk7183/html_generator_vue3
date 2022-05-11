@@ -14,6 +14,7 @@
   >
     <!--left box-->
     <div
+      contenteditable="true"
       class="box-card-left"
       style="
         width: 40%;

@@ -11,6 +11,7 @@
   >
     <div class="wrapper-of-card" style="display: flex; gap: 3vw">
       <div
+        contenteditable="true"
         class="box-card-left"
         style="
           width: 60%;

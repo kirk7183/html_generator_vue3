@@ -1,5 +1,5 @@
 <template>
-  <div class="groupWrapper div2">
+  <div class="groupWrapper">
     <button @click="showModal = true">Complete Reset</button>
     <Teleport to="body">
       <!-- use the modal component, pass in the prop -->
